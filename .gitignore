@@ -1,0 +1,13 @@
+# Server / cPanel artifacts
+error_log
+.ftpquota
+.htaccess.lock-*
+.htaccess.phpupgrader.*
+cgi-bin/
+.well-known/
+
+# OS / local tooling
+Thumbs.db
+desktop.ini
+.claude/
+memory.md

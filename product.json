@@ -1,0 +1,12 @@
+{"categories": 
+  {"Chemicals For Fragrances & Flavours": 
+    [
+      {"product" : "Alum"},
+	  {"product" : "Acetic Acid"}
+    ],
+   "Chemicals For Cosmetic & Healthcare, Aresol Ind.":
+    [
+      {"product" : "Acetone"},
+	  {"product" : "Acetophenone"}
+    ] 
+  }
