@@ -502,7 +502,6 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .prin-head{margin-bottom:34px}
 .gal{padding:clamp(56px,6.5vw,96px) 0}
 .gal-head{margin-bottom:40px}
-.hs-head{padding-top:clamp(52px,6vw,88px)}
 .closer{padding:clamp(72px,9vw,130px) 0 clamp(64px,8vw,110px)}
 .phead{padding:clamp(130px,13vw,180px) 0 clamp(36px,4.5vw,64px)}
 .catblock{padding-top:48px}
