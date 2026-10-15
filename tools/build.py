@@ -138,15 +138,42 @@ def write(name, content):
 
 
 # ---------------- HOME ----------------
-panels = ''
+acc_items = ''
 for i, (cid, title, _long, desc, img, short) in enumerate(CATS, 1):
-    chips = ''.join(f'<span>{E(c)}</span>' for c in cats[cid][:5])
-    btn_cls = 'btn--cream' if i in (3, 4) else 'btn--dark'
-    panels += f'''<article class="panel p{i}" id="ind-{cid}"><div class="num" aria-hidden="true">0{i}</div>
-<div class="inner"><div class="txt"><p class="label">{short}</p><h3>{title}</h3><p class="desc">{desc}</p>
-<div class="meta"><div class="count">{len(cats[cid])}<small>chemicals listed</small></div><a class="btn {btn_cls}" href="products.html#{cid}">View the list {ARROW}</a></div>
-<div class="chips">{chips}</div></div>
-<div class="art"><div class="ring"></div><div class="hx"><img src="images/industries/{img}" alt="" loading="lazy"></div></div></div></article>'''
+    chips = ''.join(f'<span>{E(c)}</span>' for c in cats[cid][:6])
+    acc_items += f"""<details{' open' if i == 1 else ''} data-i="{i-1}"><summary><span class="no">00{i}</span><span class="tt">{title}</span><span class="pl" aria-hidden="true"></span></summary>
+<div class="bd"><div class="bd-in"><p>{desc}</p><div class="chips">{chips}<span>+ {len(cats[cid]) - 6} more</span></div><a class="btn btn--dark" href="products.html#{cid}">View all {len(cats[cid])} chemicals {ARROW}</a></div></div></details>"""
+acc_art = ''.join(f'<img src="images/industries/{c[4]}" alt="" loading="lazy">' for c in CATS)
+
+FAM = [('Solvents', 'Ketones, esters, ethers, chlorinated and hydrocarbon solvents for every process.', ['Acetone', 'MEK', 'Toluene', 'Ethyl Acetate'], 'acetone'),
+       ('Acids', 'Organic and inorganic acids, from commodity grades to speciality intermediates.', ['Acetic', 'Citric', 'Formic', 'Phosphoric'], 'acid'),
+       ('Alcohols &amp; glycols', 'Mono and poly alcohols, glycols and ether alcohols for formulation and synthesis.', ['IPA', 'Butanol', 'MEG', 'Propylene Glycol'], 'glycol'),
+       ('Monomers &amp; resins', 'Acrylics, vinyls, epoxies and resins for paints, adhesives, coatings and plastics.', ['Acrylates', 'VAM', 'Styrene', 'Epoxy'], 'acrylate'),
+       ('Aroma chemicals', 'Aldehydes, esters and specialities for fragrance and flavour houses.', ['Aldehyde C-11', 'Benzyl Acetate', 'Vanillin'], 'aldehyde'),
+       ('Surfactants &amp; actives', 'Cleansing, conditioning and preservative actives for personal and home care.', ['SLES', 'CAPB', 'PEG grades', 'Parabens'], 'betaine')]
+FAM_ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg>'
+fam_cards = ''.join(f'<a href="products.html?q={q}" data-r><span class="hxbg"></span><span class="k">0{i}</span><h3>{t}</h3><p>{d}</p><div class="go"><span>{" · ".join(x)}</span><i>{FAM_ARROW}</i></div></a>' for i, (t, d, x, q) in enumerate(FAM, 1))
+
+SECT = ['Pharmaceutical, API &amp; formulation', 'Personal care, cosmetics &amp; homecare', 'Fragrance &amp; flavours', 'Speciality chemicals &amp; Grignard reagents', 'Water treatment', 'Paint, resin, adhesives &amp; polyol', 'Construction chemicals', 'Lubricants', 'Textile auxiliaries', 'Rubber &amp; PVC']
+sect_html = ''.join(f'<li data-r>{x}</li>' for x in SECT)
+CHK = '<svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg>'
+CRS = '<svg viewBox="0 0 12 12"><path d="M3 3l6 6M9 3l-6 6"/></svg>'
+NO = ['Stock-outs and uncertain availability', 'Unverified grades, no paperwork', 'Material packed in whatever is to hand', 'Small trial quantities refused', 'One supplier for one chemical at a time', 'Logistics left for you to arrange']
+YES = ['Regular stock held at Bhiwandi', 'Lab analysis report with each dispatch', 'Quality drums, tanker, FCL or bags', 'Small packs available on request', f'{TOTAL}+ chemicals from one supplier', 'Pan-India logistics support']
+vs_html = '<div class="vs"><div class="no" data-r><h3>Without a dependable supplier</h3><ul>' + ''.join(f'<li><i>{CRS}</i>{x}</li>' for x in NO) + '</ul></div><div class="yes" data-r><h3>With A T Solvochem</h3><ul>' + ''.join(f'<li><i>{CHK}</i>{x}</li>' for x in YES) + '</ul></div></div>'
+
+BUY = [('Ready stock', 'Material held at our Bhiwandi warehouse for quick dispatch.', ['Barrels and bags', 'Small packs on request', 'Lab analysis report with each dispatch'], False),
+       ('Indent deals', 'Bulk requirements sourced to order, planned around your schedule.', ['Tanker or FCL loads', 'Supplied via Kandla, Mundra, Hazira, JNPT, Aegis', 'Pan-India delivery'], True),
+       ('High-seas sales', 'Cargo bought while in transit — ask for current offers.', ['Imported grades', 'Bulk quantities', 'Quoted per shipment'], False)]
+buy_html = '<div class="buy">' + ''.join(f'<div class="bcard{" hot" if h else ""}" data-r><span class="k">0{i}</span><h3>{t}</h3><p>{d}</p><ul>' + ''.join(f'<li>{x}</li>' for x in li) + f'</ul><a class="btn {"btn--cream" if h else "btn--dark"}" href="contact.html">Request a quote {ARROW}</a></div>' for i, (t, d, li, h) in enumerate(BUY, 1)) + '</div>'
+
+FAQ = [('How do I place an order or get a quote?', 'Send us the chemical name, grade and quantity through the enquiry form, WhatsApp or phone. We confirm availability and pricing from current stock, or source it for you.'),
+       ('What packing do you offer?', 'Tanker, FCL, barrels and bags, packed in quality drums to protect the material. Small packs are available on request.'),
+       ('Can I order small quantities?', 'Yes — small packs are available on request alongside bulk and indent deals.'),
+       ('Do you provide a lab analysis report?', 'Yes. Our quality controllers provide a lab analysis report with each dispatch to assure quality.'),
+       ('Where does bulk material ship from?', 'Bulk orders are supplied from Kandla, Mundra, Hazira, JNPT and Aegis ports. Warehouse stock is held in Bhiwandi.'),
+       ('Can you source a chemical that is not on your list?', 'Very likely. We import and source on request through our network of leading manufacturers — send us the name and grade.')]
+faq_html = '<div class="acc faq">' + ''.join(f'<details><summary><span class="tt">{q}</span><span class="pl" aria-hidden="true"></span></summary><div class="bd"><div class="bd-in"><p>{a}</p></div></div></details>' for q, a in FAQ) + '</div>'
 
 STEPS = [
     ('s1', 'Enquire', 'Tell us the chemical, grade and quantity. We reply with availability and pricing from live stock — or source it for you.', ['Phone', 'WhatsApp', 'Email']),
@@ -184,12 +211,21 @@ home = f'''
 <div class="trust" data-r><span class="hx"><img src="images/principals/basf.webp" alt=""></span><span class="hx"><img src="images/principals/clariant.webp" alt=""></span><span class="hx"><img src="images/principals/arkema.webp" alt=""></span><span class="hx"><img src="images/principals/godrej-industries.webp" alt=""></span><span style="margin-left:18px">Backed by 20+ leading principals</span></div>
 </div></section>
 
-<section class="stack" aria-label="Industries we supply">{panels}</section>
+<section class="sec" id="industries"><div class="wrap">
+<div class="sec-head"><div><p class="label" data-r>What we do</p><h2 data-r>Five ways we <em>supply.</em></h2></div><p data-r>Open an industry to see what sits behind it. Most customers draw on two or three &mdash; and we source beyond the lists on request.</p></div>
+<div class="ind-grid"><div class="acc" id="ind-acc">{acc_items}</div><div class="ind-art" aria-hidden="true">{acc_art}</div></div>
+</div></section>
+
+<section class="sec sec--w"><div class="wrap">
+<div class="sec-head"><div><p class="label" data-r>Product families</p><h2 data-r>The chemistry we <em>move.</em></h2></div><p data-r>Six families cover most of what manufacturers ask us for. Pick one to search the full list.</p></div>
+<div class="fam">{fam_cards}</div>
+</div></section>
 
 <div class="emerge-wrap"><section class="emerge on-dark"><div class="emerge-in">
 <p class="label">Why A T Solvochem</p>
 <h2 style="margin-top:26px">Built on <em>stock,</em> storage and straight dealing.</h2>
 <p class="lead">Our network of leading manufacturers across the country lets us serve every industry on the spectrum &mdash; on time, at the right price.</p>
+<div class="tick"><span>Lab analysis report with each dispatch</span><span>Regular stock</span><span>Indent deals for bulk</span><span>Small packs on request</span></div>
 <div class="stats">
 <div class="stat"><b data-count="20">0<i>+</i></b><span>Years supplying chemicals &amp; solvents</span></div>
 <div class="stat"><b data-count="{TOTAL}">0<i>+</i></b><span>Chemicals across five product lists</span></div>
@@ -199,10 +235,25 @@ home = f'''
 {str_grid()}
 </div></section></div>
 
+<section class="sec"><div class="wrap">
+<div class="sec-head"><div><p class="label" data-r>Where we work</p><h2 data-r>The industries we <em>know.</em></h2></div><p data-r>Ten sectors where long experience lets us contribute from the first call.</p></div>
+<ul class="sect">{sect_html}</ul>
+</div></section>
+
 <section class="hs" aria-label="How we supply">
 <div class="hs-head"><div><p class="label">How we supply</p><h2 style="margin-top:22px">From enquiry to <em>your plant.</em></h2></div><p>Five steps, one accountable partner &mdash; scroll sideways through how an order moves.</p></div>
 <div class="hs-track">{steps}</div>
 </section>
+
+<section class="sec sec--w"><div class="wrap">
+<div class="sec-head"><div><p class="label" data-r>The difference</p><h2 data-r>The same order, <em>handled twice.</em></h2></div><p data-r>Six things that go wrong with an unreliable supplier &mdash; and what we do instead.</p></div>
+{vs_html}
+</div></section>
+
+<section class="sec"><div class="wrap">
+<div class="sec-head"><div><p class="label" data-r>Ways to buy</p><h2 data-r>Supplied to <em>suit the order.</em></h2></div><p data-r>Three routes, one sales desk. Tell us the quantity and timeline and we&rsquo;ll recommend the right one.</p></div>
+{buy_html}
+</div></section>
 
 <section class="prin">
 <div class="prin-head"><p class="label" data-r>Our principals</p><h2 data-r>Sourced from <em>respected</em> manufacturers.</h2></div>
@@ -216,6 +267,11 @@ home = f'''
 <div class="gal-cols">{galcols}</div>
 <dialog class="lb" aria-label="Photo viewer"><figure><img alt=""></figure><button aria-label="Close">&times;</button></dialog>
 </section>
+
+<section class="sec"><div class="wrap faq-grid">
+<div><p class="label" data-r>Questions</p><h2 data-r>Asked before <em>you ask.</em></h2><p data-r>Still not answered? Ask the sales desk &mdash; a straight answer either way.</p><a class="btn btn--dark" href="contact.html" data-r>Ask a question {ARROW}</a></div>
+{faq_html}
+</div></section>
 
 {closer()}
 </div>

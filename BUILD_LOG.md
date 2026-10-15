@@ -12,3 +12,8 @@
 - Generator moved into repo: tools/build.py + tools/cats.json. Vendored GSAP/ScrollTrigger/Lenis.
 - Verified in browser: hero curtain, stacked panels, emerge, horizontal pin, footer reveal, product search; no console errors; no horizontal overflow at 390px on all 6 pages.
 - Not done: real hero footage; per-section reference matching (awaiting references).
+
+## 2026-10-15 — v3 sections from Palladio + Bailey Hart references
+- Added: industries accordion (native details, GSAP height, hex image crossfade), product-family cards (?q= prefilled product search), sectors list, with/without comparison, ways-to-buy cards, FAQ accordion, tick chips in dark section. Removed stacked panels.
+- Fixed: scroll-reveal items staying hidden when page loaded/jumped past them (whenIn helper).
+- Verified with real scroll harness: all new sections render; accordion open/close + image swap; no console errors.
