@@ -19,3 +19,5 @@
 - Verified with real scroll harness: all new sections render; accordion open/close + image swap; no console errors.
 
 - 2026-10-15: type scale reduced (~25-30% on display sizes), trust-row hex logos enlarged (96px).
+
+- 2026-10-15: fixed pinned horizontal section cropping on short viewports (min-height removed, compact head/steps).
