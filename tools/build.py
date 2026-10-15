@@ -246,7 +246,7 @@ home = f'''
 </section>
 
 <section class="sec"><div class="wrap vs2">
-<div class="vs-l"><div><p class="label" data-r>The difference</p><h2 data-r>The same order, <em>handled twice.</em></h2></div><div><p data-r>Six things that go wrong with an unreliable supplier &mdash; and what we do instead. One of these costs less by the end.</p><a class="btn btn--dark" href="contact.html" data-r>Work with us {ARROW}</a></div></div>
+<div class="vs-l"><div><p class="label" data-r>The difference</p><h2 data-r>The same order, <em>handled twice.</em></h2></div><div><p data-r>Six things that go wrong with an unreliable supplier &mdash; and what we do instead.</p><a class="btn btn--dark" href="contact.html" data-r>Work with us {ARROW}</a></div></div>
 <div class="vs-r">{vs_html}</div>
 </div></section>
 
