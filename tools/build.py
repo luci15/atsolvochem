@@ -83,7 +83,7 @@ def page(fname, title, desc, body, og='images/industries/plant.jpg'):
 <li><a href="mailto:{MAIL1}">{MAIL1}</a></li>
 <li><a href="mailto:{MAIL2}">{MAIL2}</a></li></ul></div>
 </div>
-<div class="foot-mega" aria-hidden="true">Solvochem</div>
+<div class="foot-mega" aria-hidden="true">A T Solvochem</div>
 <div class="foot-bottom"><div class="wrap"><span>&copy; <span id="year">2026</span> A.T. Solvochem. All rights reserved.</span><span>Thane, Maharashtra, India</span></div></div>
 </footer>
 <a class="wa" href="https://wa.me/{WA}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">{WAICON}</a>

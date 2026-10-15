@@ -335,7 +335,7 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
   .tab{flex:none}
   .emerge{clip-path:inset(6% 4% round 28px)}
   .gal-cols{grid-template-columns:1fr}.gal-col:nth-child(2){display:none}
-  .foot-mega{font-size:19vw}
+  .foot-mega{font-size:15vw}
 }
 @media (prefers-reduced-motion:reduce){
   .scroll-cue i{animation:none}
