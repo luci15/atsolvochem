@@ -160,7 +160,7 @@ CHK = '<svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg>'
 CRS = '<svg viewBox="0 0 12 12"><path d="M3 3l6 6M9 3l-6 6"/></svg>'
 NO = ['Stock-outs and uncertain availability', 'Unverified grades, no paperwork', 'Material packed in whatever is to hand', 'Small trial quantities refused', 'One supplier for one chemical at a time', 'Logistics left for you to arrange']
 YES = ['Regular stock held at Bhiwandi', 'Lab analysis report with each dispatch', 'Quality drums, tanker, FCL or bags', 'Small packs available on request', f'{TOTAL}+ chemicals from one supplier', 'Pan-India logistics support']
-vs_html = '<div class="vs"><div class="no" data-r><h3>Without a dependable supplier</h3><ul>' + ''.join(f'<li><i>{CRS}</i>{x}</li>' for x in NO) + '</ul></div><div class="yes" data-r><h3>With A T Solvochem</h3><ul>' + ''.join(f'<li><i>{CHK}</i>{x}</li>' for x in YES) + '</ul></div></div>'
+vs_html = '<div class="vsp no" data-r><h3>Without a dependable supplier</h3><ul>' + ''.join(f'<li><i>{CRS}</i>{x}</li>' for x in NO) + '</ul></div><div class="vsp yes" data-r><h3>With A T Solvochem</h3><ul>' + ''.join(f'<li><i>{CHK}</i>{x}</li>' for x in YES) + '</ul></div>'
 
 BUY = [('Ready stock', 'Material held at our Bhiwandi warehouse for quick dispatch.', ['Barrels and bags', 'Small packs on request', 'Lab analysis report with each dispatch'], False),
        ('Indent deals', 'Bulk requirements sourced to order, planned around your schedule.', ['Tanker or FCL loads', 'Supplied via Kandla, Mundra, Hazira, JNPT, Aegis', 'Pan-India delivery'], True),
@@ -245,9 +245,9 @@ home = f'''
 <div class="hs-track">{steps}</div>
 </section>
 
-<section class="sec sec--w"><div class="wrap">
-<div class="sec-head"><div><p class="label" data-r>The difference</p><h2 data-r>The same order, <em>handled twice.</em></h2></div><p data-r>Six things that go wrong with an unreliable supplier &mdash; and what we do instead.</p></div>
-{vs_html}
+<section class="sec"><div class="wrap vs2">
+<div class="vs-l"><div><p class="label" data-r>The difference</p><h2 data-r>The same order, <em>handled twice.</em></h2></div><div><p data-r>Six things that go wrong with an unreliable supplier &mdash; and what we do instead. One of these costs less by the end.</p><a class="btn btn--dark" href="contact.html" data-r>Work with us {ARROW}</a></div></div>
+<div class="vs-r">{vs_html}</div>
 </div></section>
 
 <section class="sec"><div class="wrap">

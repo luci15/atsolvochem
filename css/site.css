@@ -505,3 +505,25 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .closer{padding:clamp(72px,9vw,130px) 0 clamp(64px,8vw,110px)}
 .phead{padding:clamp(130px,13vw,180px) 0 clamp(36px,4.5vw,64px)}
 .catblock{padding-top:48px}
+
+/* with / without — two stacked panels beside a sticky heading (Palladio reference) */
+.vs2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,100px);align-items:start}
+.vs-l{position:sticky;top:110px;min-height:min(560px,70vh);display:flex;flex-direction:column;justify-content:space-between;gap:40px}
+.vs-l h2{font-size:clamp(40px,5vw,76px);margin-top:22px;line-height:.95}
+.vs-l p{color:var(--mute);max-width:38ch;margin-bottom:26px}
+.vs-r{display:grid;gap:12px}
+.vsp{border-radius:28px;padding:10px}
+.vsp h3{font:400 clamp(22px,2.1vw,30px)/1.1 var(--fd);text-align:center;padding:18px 16px;border-radius:20px;letter-spacing:-.01em}
+.vsp ul{margin-top:4px}
+.vsp li{display:flex;align-items:center;gap:14px;padding:15px 20px;border-radius:16px;font-size:15.5px;line-height:1.35}
+.vsp li i{flex:none;width:16px;height:16px;display:grid;place-items:center}
+.vsp li i svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vsp.no{background:var(--cream-2);color:var(--ink-2)}
+.vsp.no h3{background:rgba(255,255,255,.75);color:var(--ink)}
+.vsp.no li:nth-child(even){background:rgba(255,255,255,.6)}
+.vsp.no li i{color:var(--mute)}
+.vsp.yes{background:var(--ink);color:#fff}
+.vsp.yes h3{background:rgba(255,255,255,.1)}
+.vsp.yes li:nth-child(even){background:rgba(255,255,255,.07)}
+.vsp.yes li i{color:var(--red)}
+@media (max-width:1020px){.vs2{grid-template-columns:1fr}.vs-l{position:static;min-height:0}}
