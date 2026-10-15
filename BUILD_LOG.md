@@ -17,3 +17,5 @@
 - Added: industries accordion (native details, GSAP height, hex image crossfade), product-family cards (?q= prefilled product search), sectors list, with/without comparison, ways-to-buy cards, FAQ accordion, tick chips in dark section. Removed stacked panels.
 - Fixed: scroll-reveal items staying hidden when page loaded/jumped past them (whenIn helper).
 - Verified with real scroll harness: all new sections render; accordion open/close + image swap; no console errors.
+
+- 2026-10-15: type scale reduced (~25-30% on display sizes), trust-row hex logos enlarged (96px).
