@@ -193,6 +193,28 @@
         open(d); show(i);
       });
     });
+
+    // industries: hovering a row opens it and swaps the picture (mouse devices only)
+    if (acc.id === 'ind-acc' && window.matchMedia('(hover: hover) and (min-width: 1021px)').matches) {
+      var timer = null, locked = false, mx = 0, my = 0;
+      var activate = function (d) {
+        if (d.open || locked) return;
+        locked = true;
+        items.forEach(function (o) { if (o !== d && o.open) close(o); });
+        open(d); show(items.indexOf(d));
+        setTimeout(function () {
+          locked = false;
+          var el = document.elementFromPoint(mx, my), sm = el && el.closest && el.closest('summary');
+          if (sm && sm.parentNode !== d && acc.contains(sm)) activate(sm.parentNode);
+        }, 750);
+      };
+      document.addEventListener('mousemove', function (e) { mx = e.clientX; my = e.clientY; }, { passive: true });
+      items.forEach(function (d) {
+        var sm = $('summary', d);
+        sm.addEventListener('mouseenter', function () { clearTimeout(timer); timer = setTimeout(function () { activate(d); }, 140); });
+        sm.addEventListener('mouseleave', function () { clearTimeout(timer); });
+      });
+    }
   });
 
   /* ---------- counters ---------- */

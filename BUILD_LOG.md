@@ -21,3 +21,5 @@
 - 2026-10-15: type scale reduced (~25-30% on display sizes), trust-row hex logos enlarged (96px).
 
 - 2026-10-15: fixed pinned horizontal section cropping on short viewports (min-height removed, compact head/steps).
+
+- 2026-10-15: industries accordion opens on hover (desktop mouse) with picture swap; click still works; touch/mobile click only.
