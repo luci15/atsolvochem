@@ -474,3 +474,16 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
   .step{padding:22px}
   .step p{font-size:14px;line-height:1.5}
 }
+
+/* v3.1: smaller supply cards */
+@media (min-width:1021px){
+  .hs-head{padding:88px 28px 8px}
+  .hs-head h2{font-size:clamp(30px,3.2vw,48px)}
+  .hs-track{align-items:center;gap:16px}
+  .step{width:min(360px,30vw);height:clamp(280px,46vh,380px);padding:22px;border-radius:22px}
+  .step h3{font-size:clamp(28px,2.6vw,38px);margin:8px 0 6px}
+  .step p{font-size:14px;line-height:1.5}
+  .step .n{font-size:16px}
+  .step .tags span{padding:5px 11px;font-size:12px}
+  .step .hxbg{width:200px;right:-50px;top:-40px}
+}
