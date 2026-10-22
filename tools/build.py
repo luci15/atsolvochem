@@ -32,7 +32,7 @@ MAIL1, MAIL2 = 'sales.atsolvochem@gmail.com', 'atsolvochem@gmail.com'
 ADDR = '412, 4th Floor, Jaydeep Emphasis, Plot No. A-9, MIDC, Wagle Ind. Estate, near Mulund Checknaka Toll Plaza, Thane (W) 400604'
 ARROW = '<i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i>'
 WAICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.48-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.04 21.5a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.55.93.95-3.46-.22-.36a9.4 9.4 0 0 1-1.44-5.01c0-5.2 4.24-9.44 9.45-9.44 2.52 0 4.9.98 6.68 2.77a9.37 9.37 0 0 1 2.76 6.68c0 5.2-4.24 9.4-9.45 9.4M20.5 3.5A11.3 11.3 0 0 0 12.04.1C5.8.1.73 5.17.73 11.4c0 2 .52 3.94 1.52 5.66L.62 23.4l6.5-1.7a11.3 11.3 0 0 0 5.4 1.38h.01c6.24 0 11.3-5.07 11.3-11.3 0-3.02-1.18-5.86-3.33-8"/></svg>'
-NAV = [('index.html', 'Home'), ('aboutus.html', 'About'), ('products.html', 'Products'), ('principals.html', 'Principals'), ('gallery.html', 'Gallery'), ('contact.html', 'Contact')]
+NAV = [('index.html', 'Home'), ('aboutus.html', 'About'), ('products.html', 'Products'), ('principals.html', 'Principals'), ('gallery.html', 'Gallery'), ('careers.html', 'Careers')]
 
 
 def tel(s):
@@ -41,7 +41,7 @@ def tel(s):
 
 def page(fname, title, desc, body, og='images/industries/plant.jpg'):
     links = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if h == fname else ""}>{l}</a>' for h, l in NAV)
-    foot_links = ''.join(f'<li><a href="{h}">{l}</a></li>' for h, l in NAV)
+    foot_links = ''.join(f'<li><a href="{h}">{l}</a></li>' for h, l in NAV + [('contact.html', 'Contact')])
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +58,7 @@ def page(fname, title, desc, body, og='images/industries/plant.jpg'):
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
@@ -145,14 +145,22 @@ for i, (cid, title, _long, desc, img, short) in enumerate(CATS, 1):
 <div class="bd"><div class="bd-in"><p>{desc}</p><div class="chips">{chips}<span>+ {len(cats[cid]) - 6} more</span></div><a class="btn btn--dark" href="products.html#{cid}">View all {len(cats[cid])} chemicals {ARROW}</a></div></div></details>"""
 acc_art = ''.join(f'<img src="images/industries/{c[4]}" alt="" loading="lazy">' for c in CATS)
 
-FAM = [('Solvents', 'Ketones, esters, ethers, chlorinated and hydrocarbon solvents for every process.', ['Acetone', 'MEK', 'Toluene', 'Ethyl Acetate'], 'acetone'),
-       ('Acids', 'Organic and inorganic acids, from commodity grades to speciality intermediates.', ['Acetic', 'Citric', 'Formic', 'Phosphoric'], 'acid'),
-       ('Alcohols &amp; glycols', 'Mono and poly alcohols, glycols and ether alcohols for formulation and synthesis.', ['IPA', 'Butanol', 'MEG', 'Propylene Glycol'], 'glycol'),
-       ('Monomers &amp; resins', 'Acrylics, vinyls, epoxies and resins for paints, adhesives, coatings and plastics.', ['Acrylates', 'VAM', 'Styrene', 'Epoxy'], 'acrylate'),
-       ('Aroma chemicals', 'Aldehydes, esters and specialities for fragrance and flavour houses.', ['Aldehyde C-11', 'Benzyl Acetate', 'Vanillin'], 'aldehyde'),
-       ('Surfactants &amp; actives', 'Cleansing, conditioning and preservative actives for personal and home care.', ['SLES', 'CAPB', 'PEG grades', 'Parabens'], 'betaine')]
-FAM_ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg>'
-fam_cards = ''.join(f'<a href="products.html?q={q}" data-r><span class="hxbg"></span><span class="k">0{i}</span><h3>{t}</h3><p>{d}</p><div class="go"><span>{" · ".join(x)}</span><i>{FAM_ARROW}</i></div></a>' for i, (t, d, x, q) in enumerate(FAM, 1))
+# 12 product categories shown as a tile table (from the original site). Each tile links to the closest
+# category on products.html (#id), or to the full searchable list where there is no dedicated category.
+PT = [('Ff', 'Fragrances &amp; flavours', 'products.html#fragrance'),
+      ('Ch', 'Cosmetic, healthcare &amp; aerosol', 'products.html#care'),
+      ('Ap', 'API, formulation &amp; speciality chemicals', 'products.html#pharma'),
+      ('Pr', 'Paints, polymers, resins &amp; dyestuff', 'products.html#paint'),
+      ('Fd', 'Food &amp; fertilizer', 'products.html'),
+      ('Tx', 'Textile auxiliaries, monomers &amp; adhesives', 'products.html#paint'),
+      ('Mt', 'Plant &amp; machine maintenance', 'products.html'),
+      ('Wt', 'Water treatment', 'products.html'),
+      ('Mc', 'Miscellaneous chemicals', 'products.html'),
+      ('Rb', 'PVC &amp; rubber', 'products.html#paint'),
+      ('Eo', 'Essential oils', 'products.html#fragrance'),
+      ('Gl', 'General imported &amp; Indian product list', 'products.html')]
+PT_ARROW = '<svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg>'
+pt_tiles = ''.join(f'<a class="pt" href="{h}" data-r><span class="n">{i:02d}</span><span class="s">{s}</span><span class="t">{t}</span>{PT_ARROW}</a>' for i, (s, t, h) in enumerate(PT, 1))
 
 SECT = ['Pharmaceutical, API &amp; formulation', 'Personal care, cosmetics &amp; homecare', 'Fragrance &amp; flavours', 'Speciality chemicals &amp; Grignard reagents', 'Water treatment', 'Paint, resin, adhesives &amp; polyol', 'Construction chemicals', 'Lubricants', 'Textile auxiliaries', 'Rubber &amp; PVC']
 sect_html = ''.join(f'<li data-r>{x}</li>' for x in SECT)
@@ -201,13 +209,13 @@ home = f'''
 <div class="hero-side"><p>For over two decades A T Solvochem has supplied imported and Indian chemicals to fragrance, cosmetic, pharma, paint and resin manufacturers — large stock, safe storage, pan-India delivery.</p>
 <div class="hero-cta"><a class="btn btn--red" href="products.html">Browse {TOTAL}+ chemicals {ARROW}</a><a class="btn btn--text" href="contact.html">Request a quote &rarr;</a></div></div>
 </div>
-<div class="hero-foot"><span>Est. 20+ years<br>Thane, Mumbai</span><span class="scroll-cue"><i></i>Scroll</span><span>Chemicals &amp; solvents<br>Pan-India supply</span></div>
+<div class="hero-foot"><span>Est. 20+ years<br>Mumbai</span><span class="scroll-cue"><i></i>Scroll</span><span>Chemicals &amp; solvents<br>Pan-India supply</span></div>
 </section>
 
 <div class="rise">
 <section class="phil"><div class="wrap">
 <p class="label" data-r>Who we are</p>
-<p class="big scrub">A.T. Solvochem isn&rsquo;t just a trading house &mdash; it&rsquo;s two decades of <em>reliable supply.</em> We help manufacturers across India source the right chemicals and solvents, with honest pricing, large stock and logistics that simply work.</p>
+<p class="big scrub">For over two decades, A T Solvochem has been a dependable partner to manufacturers across India &mdash; supplying the right chemicals and solvents with <em>transparent pricing,</em> ready stock and logistics you can rely on.</p>
 <div class="trust" data-r><span class="hx"><img src="images/principals/basf.webp" alt=""></span><span class="hx"><img src="images/principals/clariant.webp" alt=""></span><span class="hx"><img src="images/principals/arkema.webp" alt=""></span><span class="hx"><img src="images/principals/godrej-industries.webp" alt=""></span><span style="margin-left:18px">Backed by 20+ leading principals</span></div>
 </div></section>
 
@@ -217,8 +225,8 @@ home = f'''
 </div></section>
 
 <section class="sec sec--w"><div class="wrap">
-<div class="sec-head"><div><p class="label" data-r>Product families</p><h2 data-r>The chemistry we <em>move.</em></h2></div><p data-r>Six families cover most of what manufacturers ask us for. Pick one to search the full list.</p></div>
-<div class="fam">{fam_cards}</div>
+<div class="sec-head"><div><p class="label" data-r>Product categories</p><h2 data-r>Twelve categories, <em>one supplier.</em></h2></div><p data-r>Pick the industry you work in to see the full product list. Can&rsquo;t find a grade? Ask the sales desk &mdash; we source imported and Indian material on request.</p></div>
+<div class="ptable">{pt_tiles}</div>
 </div></section>
 
 <div class="emerge-wrap"><section class="emerge on-dark"><div class="emerge-in">
@@ -308,7 +316,7 @@ about = phead('About us', ['Two decades of', '<em>chemicals</em> &amp; solvents.
 write('aboutus.html', page('aboutus.html', 'About A T Solvochem | Chemical & solvent supplier, Thane', 'Two decades of supplying chemicals and solvents across India. Mission, vision and strengths of A T Solvochem, led by Mr. Parag Shah.', about))
 
 # ---------------- PRODUCTS ----------------
-tabs = f'<button class="tab" data-cat="all" aria-pressed="true">All<span>{TOTAL}</span></button>' + ''.join(f'<button class="tab" data-cat="{c[0]}" aria-pressed="false">{c[5]}<span>{len(cats[c[0]])}</span></button>' for c in CATS)
+tabs = ''.join(f'<button class="tab" data-cat="{c[0]}" aria-pressed="{"true" if i == 0 else "false"}">{c[5]}<span>{len(cats[c[0]])}</span></button>' for i, c in enumerate(CATS))
 blocks = ''
 for cid, _t, long, desc, img, short in CATS:
     lis = ''.join(f'<li><a href="contact.html?chem={E(re.sub(r"[^A-Za-z0-9]+", "+", n).strip("+"))}">{E(n)}</a></li>' for n in cats[cid])
@@ -338,6 +346,28 @@ gal = phead('Gallery', ['Out and about with', '<em>our customers.</em>'], 'Momen
 {closer()}</div>
 '''
 write('gallery.html', page('gallery.html', 'Gallery | A T Solvochem', 'Photos from A T Solvochem’s exhibition stall — meeting customers, principals and partners.', gal, 'images/gallery/expo-1.webp'))
+
+# ---------------- CAREERS ----------------
+CAREER_MAIL = MAIL2
+car = phead('Careers', ['Build your career', 'in <em>chemicals.</em>'], 'A T Solvochem has supplied chemicals and solvents across India for over two decades. If you want to grow with a supply business that values straight dealing, we would like to hear from you.') + f"""
+<div class="page-body">
+<section class="section"><div class="wrap">
+<div class="shead"><div><p class="label" data-r>Why join us</p><h2 data-r>Work that keeps <em>industry moving.</em></h2></div></div>
+<ul class="feat feat--2">
+<li data-r>Two decades in the chemical and solvent trade</li>
+<li data-r>{TOTAL}+ chemicals supplied to fragrance, cosmetic, pharma, paint and resin makers</li>
+<li data-r>Partnerships with leading principals such as BASF, Clariant, Arkema and Godrej</li>
+<li data-r>Head office in Thane, warehouse at Bhiwandi, pan-India logistics</li>
+</ul>
+</div></section>
+<section class="section section--w"><div class="wrap">
+<div class="mv">
+<div data-r><p class="label">How to apply</p><h3>Send us your <em>CV</em></h3><p>We do not list fixed openings online. Email your CV with the role you are interested in, and we will get back to you when a position matches your profile.</p><p style="margin-top:22px"><a class="btn btn--dark" href="mailto:{CAREER_MAIL}?subject=Career%20enquiry%20%E2%80%94%20A%20T%20Solvochem">Email your CV {ARROW}</a></p></div>
+<div data-r><p class="label">Prefer to talk?</p><h3>Call or <em>WhatsApp</em></h3><p>Reach the office on <a href="tel:{tel(PHONE_O2)}">{PHONE_O2}</a>, or message us on WhatsApp and we will point you to the right person.</p><p style="margin-top:22px"><a class="btn btn--text" href="https://wa.me/{WA}" target="_blank" rel="noopener">WhatsApp us &rarr;</a></p></div>
+</div></div></section>
+</div>
+"""
+write('careers.html', page('careers.html', 'Careers | A T Solvochem, Thane', 'Careers at A T Solvochem — a chemical and solvent importer and distributor in Thane, Mumbai. Send your CV to join our team.', car))
 
 # ---------------- CONTACT ----------------
 con = phead('Contact', ['Talk to the', '<em>sales desk.</em>'], 'Share the chemical, grade and quantity &mdash; we will respond with availability and pricing.') + f'''
@@ -369,6 +399,6 @@ write('contact.html', page('contact.html', 'Contact A T Solvochem | Thane, Mumba
 
 write('404.html', page('404.html', 'Page not found | A T Solvochem', 'Page not found.', phead('404', ['Page', '<em>not found.</em>'], 'The page you are looking for has moved or does not exist.') + f'<div class="page-body"><section class="section" style="padding-top:0"><div class="wrap"><a class="btn btn--red" href="index.html">Back to home {ARROW}</a></div></section></div>'))
 write('robots.txt', 'User-agent: *\nAllow: /\nSitemap: https://www.atsolvochem.com/sitemap.xml\n')
-urls = ['', 'aboutus.html', 'products.html', 'principals.html', 'gallery.html', 'contact.html']
+urls = ['', 'aboutus.html', 'products.html', 'principals.html', 'gallery.html', 'careers.html', 'contact.html']
 write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'<url><loc>https://www.atsolvochem.com/{u}</loc></url>\n' for u in urls) + '</urlset>\n')
 print('built', TOTAL)

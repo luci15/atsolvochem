@@ -20,11 +20,11 @@
   // product search + category filter
   var blocks = $$('.catblock');
   if (blocks.length) {
-    var q = $('#q'), tabs = $$('.tab'), empty = $('.empty'), cat = 'all';
+    var q = $('#q'), tabs = $$('.tab'), empty = $('.empty'), cat = tabs.length ? tabs[0].dataset.cat : blocks[0].id;
     var apply = function () {
       var term = q.value.trim().toLowerCase(), shown = 0;
       blocks.forEach(function (b) {
-        var inCat = cat === 'all' || b.id === cat, n = 0;
+        var inCat = term || b.id === cat, n = 0;
         $$('li', b).forEach(function (li) {
           var hit = !term || li.textContent.toLowerCase().indexOf(term) > -1;
           li.hidden = !hit; if (hit) n++;
@@ -42,7 +42,7 @@
       apply();
     };
     tabs.forEach(function (t) { t.addEventListener('click', function () {
-      setCat(t.dataset.cat); history.replaceState(null, '', t.dataset.cat === 'all' ? location.pathname : '#' + t.dataset.cat);
+      setCat(t.dataset.cat); history.replaceState(null, '', '#' + t.dataset.cat);
     }); });
     q.addEventListener('input', apply);
     var qp = new URLSearchParams(location.search).get('q'); if (qp) q.value = qp;
@@ -174,45 +174,48 @@
 
   /* ---------- accordions (native <details>; one open at a time, animated height) ---------- */
   $$('.acc').forEach(function (acc) {
-    var items = $$('details', acc), art = $$('.ind-art img');
-    var show = function (i) { if (!art.length) return; art.forEach(function (im, k) { gsap.to(im, { opacity: k === i ? 1 : 0, scale: k === i ? 1 : 1.08, duration: 0.8, ease: 'power2.out', overwrite: true }); }); };
+    var items = $$('details', acc), art = $$('.ind-art img'), pinSt = null;
+    var show = function (i) { if (!art.length) return; art.forEach(function (im, k) { gsap.to(im, { opacity: k === i ? 1 : 0, duration: 0.9, ease: 'power1.inOut', overwrite: true }); }); };
     var close = function (d) {
       var bd = $('.bd', d);
       if (reduce) { d.open = false; return; }
-      gsap.to(bd, { height: 0, duration: 0.55, ease: 'power3.inOut', onComplete: function () { d.open = false; bd.style.height = ''; } });
+      gsap.to(bd, { height: 0, duration: 0.55, ease: 'power3.inOut', overwrite: true, onComplete: function () { d.open = false; bd.style.height = ''; } });
     };
     var open = function (d) {
       d.open = true; var bd = $('.bd', d);
-      if (!reduce) gsap.fromTo(bd, { height: 0 }, { height: 'auto', duration: 0.7, ease: 'power3.out', onComplete: function () { ScrollTrigger.refresh(); } });
+      if (!reduce) gsap.fromTo(bd, { height: 0 }, { height: 'auto', duration: 0.7, ease: 'power3.out', overwrite: true, onComplete: function () { ScrollTrigger.refresh(); } });
     };
     items.forEach(function (d, i) {
       $('summary', d).addEventListener('click', function (e) {
         e.preventDefault();
+        if (pinSt) { // scroll-driven mode: jump to this item's place in the scroll
+          var y = pinSt.start + (i + 0.5) / items.length * (pinSt.end - pinSt.start);
+          if (lenis) lenis.scrollTo(y); else window.scrollTo({ top: y, behavior: 'smooth' });
+          return;
+        }
         if (d.open) { close(d); return; }
         items.forEach(function (o) { if (o !== d && o.open) close(o); });
         open(d); show(i);
       });
     });
 
-    // industries: hovering a row opens it and swaps the picture (mouse devices only)
-    if (acc.id === 'ind-acc' && window.matchMedia('(hover: hover) and (min-width: 1021px)').matches) {
-      var timer = null, locked = false, mx = 0, my = 0;
-      var activate = function (d) {
-        if (d.open || locked) return;
-        locked = true;
-        items.forEach(function (o) { if (o !== d && o.open) close(o); });
-        open(d); show(items.indexOf(d));
-        setTimeout(function () {
-          locked = false;
-          var el = document.elementFromPoint(mx, my), sm = el && el.closest && el.closest('summary');
-          if (sm && sm.parentNode !== d && acc.contains(sm)) activate(sm.parentNode);
-        }, 750);
-      };
-      document.addEventListener('mousemove', function (e) { mx = e.clientX; my = e.clientY; }, { passive: true });
-      items.forEach(function (d) {
-        var sm = $('summary', d);
-        sm.addEventListener('mouseenter', function () { clearTimeout(timer); timer = setTimeout(function () { activate(d); }, 140); });
-        sm.addEventListener('mouseleave', function () { clearTimeout(timer); });
+    // industries (desktop): the section pins; scrolling closes the open item, opens the next and cross-fades the picture
+    if (acc.id === 'ind-acc' && !reduce) {
+      mm.add('(min-width: 1021px)', function () {
+        var sec = acc.closest('.sec'), grid = acc.closest('.ind-grid'), n = items.length, cur = 0;
+        sec.classList.add('ind-pin');
+        var go = function (i) {
+          if (i === cur) return; cur = i;
+          items.forEach(function (o, k) { if (k !== i && o.open) close(o); });
+          if (!items[i].open) open(items[i]);
+          show(i);
+        };
+        pinSt = ScrollTrigger.create({
+          trigger: grid, start: 'top 96', pin: true, anticipatePin: 1, invalidateOnRefresh: true,
+          end: function () { return '+=' + Math.round(window.innerHeight * 0.6 * n); },
+          onUpdate: function (st) { go(Math.min(n - 1, Math.floor(st.progress * n))); }
+        });
+        return function () { sec.classList.remove('ind-pin'); if (pinSt) pinSt.kill(); pinSt = null; };
       });
     }
   });

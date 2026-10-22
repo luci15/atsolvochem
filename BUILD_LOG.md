@@ -23,3 +23,11 @@
 - 2026-10-15: fixed pinned horizontal section cropping on short viewports (min-height removed, compact head/steps).
 
 - 2026-10-15: industries accordion opens on hover (desktop mouse) with picture swap; click still works; touch/mobile click only.
+
+- 2026-10-21: Home page 'Product families' (6 cards) replaced with the 12-tile product category table (Ff, Ch, Ap...). Source of truth: tools/build.py (PT list); styles in css/site.css (.ptable/.pt). Tiles link to closest products.html#category (fragrance/care/pharma/paint) or the full searchable list. Archivo + IBM Plex Mono fonts loaded on index.html only. Pulled 12 newer commits (Vercel build) from origin/main first. Not pushed.
+
+- 2026-10-21: Removed 'All' tab on Products (first category shows by default; searching still spans all categories). Calibri (Carlito fallback) site-wide incl. headings, bold headings, body 18px; old fonts removed. Navbar: Careers page added (careers.html, in build.py + sitemap), Contact removed from navbar (kept in footer; 'Get a quote' button -> contact.html). Not pushed.
+- 2026-10-21: 'Ways to buy' cards: Request a quote pills sized to content and centred at card bottom (css .bcard .btn). Not pushed.
+- 2026-10-21: Home hero footer 'Thane, Mumbai' -> 'Mumbai'; rewrote the philosophy paragraph (build.py, .phil). Not pushed.
+- 2026-10-21: Industries ('What we do') accordion is now scroll-driven on desktop: section pins, each scroll step closes the open item, opens the next, picture cross-fades (js/site.js accordion block + .ind-pin css). Click on a row scrolls to its step. Mobile/tablet/reduced-motion keep plain click accordion. Not pushed.
+- 2026-10-21: Closer 'or WhatsApp us' link: hover no longer turns red-on-red (stays white + underline). Click opens wa.me in a new tab (verified). Not pushed.
