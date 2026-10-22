@@ -697,3 +697,16 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .ask__cardBody{font:400 .98rem/1.6 var(--ask-font);color:#35302a;margin:.7rem 0 0}
 @media (max-width:899px){.ask{min-height:0;display:block}.ask__mega{max-width:none}.ask__track{gap:clamp(1rem,3vw,1.6rem);margin-top:clamp(2rem,6vw,3rem);display:grid;position:static;transform:none}.ask__card{filter:none;opacity:1;flex:none;transform:none}.ask__card:before,.ask__card:after{display:none}}
 @media (prefers-reduced-motion:reduce){.ask{min-height:0;display:block}.ask__track{gap:1.4rem;margin-top:2rem;display:grid;position:static;transform:none}.ask__card{filter:none;opacity:1;flex:none;transform:none}.ask__card:before,.ask__card:after{display:none}}
+
+/* "ask" section recoloured to match the rest of the site (cream paper, ink type, brand red accents) */
+.ask{background:var(--cream);color:var(--ink)}
+.ask__bloom{background:radial-gradient(48% 42% at 64% 60%,rgba(227,32,43,.07) 0%,rgba(241,238,228,0) 70%),radial-gradient(40% 46% at 18% 24%,rgba(22,20,15,.05) 0%,rgba(241,238,228,0) 72%)}
+.ask__eyebrow{color:var(--ink-2)}
+.ask__eyebrow:before{background:rgba(22,20,15,.4)}
+.ask__mega{color:rgba(22,20,15,.62)}
+.ask__mega em{color:var(--red)}
+.ask__lead{color:var(--red)}
+.ask__card{background:linear-gradient(138deg,#ffffff 0%,#fbfaf6 55%,#f3f0e7 100%);border:1px solid rgba(22,20,15,.09);box-shadow:inset 0 1px #fff,inset 0 -1px rgba(22,20,15,.06),0 5px 0 -2px rgba(22,20,15,.08),0 2px 6px rgba(22,20,15,.14),0 24px 50px rgba(22,20,15,.2),0 56px 100px rgba(22,20,15,.12)}
+.ask__card:before{background:linear-gradient(90deg,rgba(22,20,15,.18),rgba(255,255,255,.9))}
+.ask__card:after{background:linear-gradient(270deg,rgba(22,20,15,.18),rgba(255,255,255,.9))}
+.ask__cardNum{color:var(--red)}
