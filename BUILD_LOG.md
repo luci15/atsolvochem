@@ -50,9 +50,10 @@ Downloaded (Unsplash licence: free to use, attribution not required) and process
 - care       — https://unsplash.com/photos/ae84f705fc2e (photo-1636740599648-ae84f705fc2e, cosmetic bottles)
 - pharma     — https://unsplash.com/photos/24d5c474f2ae (photo-1584308666744-24d5c474f2ae, blister packs)
 - paint      — https://unsplash.com/photos/cdc6777db8cc (photo-1670689334799-cdc6777db8cc, industrial plant at night)
-- lube       — https://unsplash.com/photos/a0da1146eb15 (photo-1513257805917-a0da1146eb15, aerial industrial pipework; replaced the engine-oil photo because it showed a visible brand)
 - uv         — https://unsplash.com/photos/7871176f1a7e (photo-1594055103006-7871176f1a7e, sunscreen tube)
 - default    — https://unsplash.com/photos/30ae33e2def0 (photo-1704130092069-30ae33e2def0, refinery at night)
 Placeholders until the client supplies real photos.
 
 - 2026-10-22: focus blur softened (max 2.2px, others fade to 40% and stay readable) to match the reference.
+
+- 2026-10-22: Who we work with trimmed to the five product tabs only (Fragrance & flavours, Personal care, UV filters, Pharma & API, Paints & resins); lubricants photo/entry removed.

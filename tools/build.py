@@ -204,12 +204,11 @@ CAT_TABLE_SECTION = (f'''<section class="sec sec--w"><div class="wrap">
 <div class="ptable">{pt_tiles}</div>
 </div></section>''' if SHOW_CATEGORY_TABLE else '')
 
-WWO = [('fragrance', 'Fragrance &amp; Flavours', 'products.html#fragrance'),
-       ('care', 'Personal Care &amp; Cosmetics', 'products.html#care'),
+WWO = [('fragrance', 'Fragrance &amp; flavours', 'products.html#fragrance'),
+       ('care', 'Personal care', 'products.html#care'),
+       ('uv', 'UV filters', 'products.html#uv'),
        ('pharma', 'Pharma &amp; API', 'products.html#pharma'),
-       ('paint', 'Paints, Resins &amp; Adhesives', 'products.html#paint'),
-       ('lube', 'Lubricants &amp; Speciality', 'products.html'),
-       ('uv', 'Sun Care &amp; UV Filters', 'products.html#uv')]
+       ('paint', 'Paints &amp; resins', 'products.html#paint')]
 wwo_imgs = '<img class="on" data-k="default" src="images/who/default.jpg" alt="" loading="lazy">' + ''.join(f'<img data-k="{k}" src="images/who/{k}.jpg" alt="" loading="lazy">' for k, _t, _h in WWO)
 wwo_items = ''.join(f'<li data-r><a href="{h}" data-k="{k}">{t}</a></li>' for k, t, h in WWO)
 
@@ -240,7 +239,7 @@ home = f'''
 <div class="wwo-bg" aria-hidden="true">{wwo_imgs}<span class="wwo-shade"></span></div>
 <div class="wwo-in"><p class="label l" data-r>Who we work with</p>
 <ul class="wwo-list">{wwo_items}</ul>
-<p class="wwo-note" data-r>Six industries, one dependable supplier &mdash; and we source beyond the lists on request.</p></div>
+<p class="wwo-note" data-r>Five industries, one dependable supplier &mdash; and we source beyond the lists on request.</p></div>
 </section>
 
 {CAT_TABLE_SECTION}
