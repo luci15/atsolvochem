@@ -57,3 +57,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-22: focus blur softened (max 2.2px, others fade to 40% and stay readable) to match the reference.
 
 - 2026-10-22: Who we work with trimmed to the five product tabs only (Fragrance & flavours, Personal care, UV filters, Pharma & API, Paints & resins); lubricants photo/entry removed.
+
+- 2026-10-22: card redesign. Supply steps: uniform white cards with red step number + line icon (replaces random red/black/white blocks). Strengths: ruled columns with outlined circle icons instead of boxed hex-icon cards. Stat "Pan-India" no longer wraps.

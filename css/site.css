@@ -601,3 +601,28 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .wwo-list.hov a.act{filter:none;opacity:1;transform:scale(1.04)}
 @media (hover:none){.wwo-list.hov a{filter:none;opacity:1}}
 .wwo-shade{background:radial-gradient(100% 80% at 50% 45%,rgba(13,12,10,.18),rgba(13,12,10,.7)),rgba(13,12,10,.2)}
+
+/* v4 cards: calmer, consistent step cards and ruled strength columns */
+.step,.step.s1,.step.s2,.step.s3,.step.s4,.step.s5{background:var(--white);color:var(--ink);border:1px solid var(--line);transition:transform .5s var(--ease),box-shadow .5s,border-color .4s}
+.step:hover{transform:translateY(-6px);box-shadow:0 22px 44px -26px rgba(22,20,15,.45);border-color:#c9c2b0}
+.step .hxbg{display:none}
+.st-top{display:flex;justify-content:space-between;align-items:center}
+.st-n{font:700 15px/1 var(--fb);letter-spacing:.14em;color:var(--red)}
+.st-ic{width:46px;height:46px;border-radius:50%;background:var(--cream-2);display:grid;place-items:center;transition:background-color .4s,color .4s}
+.st-ic svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.step:hover .st-ic{background:var(--ink);color:#fff}
+.step p{opacity:1;color:var(--mute)}
+.step .tags span{background:var(--cream);border-color:var(--line);color:var(--ink-2);opacity:1}
+.str-grid{gap:0;margin-top:clamp(40px,5vw,64px)}
+.str{background:none;border:0;border-top:1px solid rgba(255,255,255,.2);border-radius:0;padding:26px 28px 0 0}
+.str+.str{padding-left:28px;border-left:1px solid rgba(255,255,255,.1)}
+.str .hx{width:46px;height:46px;aspect-ratio:auto;clip-path:none;border-radius:50%;background:transparent;border:1.5px solid var(--red);margin-bottom:30px}
+.str .hx svg{width:20px;height:20px;stroke:var(--red)}
+.str h3{font-size:24px;margin-bottom:8px}
+.stat b.sm{font-size:clamp(30px,3.4vw,54px);white-space:nowrap;letter-spacing:-.02em;padding-top:.35em}
+.section--w .str,.on-light .str{border-top-color:var(--line)}
+@media (max-width:1020px){.str-grid{grid-template-columns:1fr 1fr}.str:nth-child(odd){padding-left:0;border-left:0}.str{padding-bottom:26px}}
+@media (max-width:700px){.str-grid{grid-template-columns:1fr}.str+.str{padding-left:0;border-left:0}}
+.step{justify-content:flex-start}
+.step>div:nth-child(2){margin-top:clamp(24px,5vh,52px)}
+.step .tags{margin-top:auto;padding-top:18px}

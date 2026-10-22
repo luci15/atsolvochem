@@ -190,7 +190,13 @@ STEPS = [
     ('s4', 'Pack', 'Supplied your way, with a lab analysis report with each dispatch and quality drums to protect the material.', ['Tanker', 'FCL', 'Barrels', 'Bags', 'Small packs']),
     ('s5', 'Deliver', 'Bulk orders move through major ports, then on by road with pan-India logistics support.', ['Kandla', 'Mundra', 'Hazira', 'JNPT', 'Aegis']),
 ]
-steps = ''.join(f'<div class="step {c}"><div class="hxbg"></div><div><span class="n">0{i}</span><h3>{t}</h3><p>{d}</p></div><div class="tags">{"".join(f"<span>{x}</span>" for x in tg)}</div></div>' for i, (c, t, d, tg) in enumerate(STEPS, 1))
+STEP_IC = {
+    1: '<svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg>',
+    2: '<svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.5"/><circle cx="5.5" cy="18" r="2.5"/><circle cx="18.5" cy="18" r="2.5"/><path d="M11 8.3L6.6 15.7M13 8.3l4.4 7.4M8 18h8"/></svg>',
+    3: '<svg viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5M3 9v11h18V9M3 9h18M9 20v-6h6v6"/></svg>',
+    4: '<svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/></svg>',
+    5: '<svg viewBox="0 0 24 24"><path d="M1 6h13v10H1zM14 10h5l3 3v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>'}
+steps = ''.join(f'<div class="step"><div class="st-top"><span class="st-n">0{i}</span><span class="st-ic">{STEP_IC[i]}</span></div><div><h3>{t}</h3><p>{d}</p></div><div class="tags">{"".join(f"<span>{x}</span>" for x in tg)}</div></div>' for i, (c, t, d, tg) in enumerate(STEPS, 1))
 
 mq = ''.join(logo(s, n) for s, n in PR)
 mq2 = ''.join(logo(s, n) for s, n in reversed(PR))
@@ -253,7 +259,7 @@ home = f'''
 <div class="stat"><b data-count="20">0<i>+</i></b><span>Years supplying chemicals &amp; solvents</span></div>
 <div class="stat"><b data-count="{TOTAL}">0<i>+</i></b><span>Chemicals across five product lists</span></div>
 <div class="stat"><b data-count="5">0</b><span>Ports serving bulk orders</span></div>
-<div class="stat"><b>Pan<i>-</i>India</b><span>Logistics from our Bhiwandi warehouse</span></div>
+<div class="stat"><b class="sm">Pan<i>-</i>India</b><span>Logistics from our Bhiwandi warehouse</span></div>
 </div>
 {str_grid()}
 </div></section></div>
