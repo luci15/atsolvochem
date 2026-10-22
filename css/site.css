@@ -589,3 +589,15 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .wwo-note{margin:clamp(28px,4vw,48px) auto 0;max-width:46ch;color:#d8d3c6;font-size:16px}
 @media (hover:none){.wwo-list:hover a{opacity:1}}
 @media (max-width:700px){.wwo-list a{font-size:clamp(30px,9vw,44px)}}
+
+/* v2 who-we-work-with: shorter section, focus blur on the other names */
+.wwo{min-height:0}
+.wwo-in{padding:clamp(72px,7vw,100px) 24px clamp(44px,5vw,64px)}
+.wwo-in .label{margin-bottom:clamp(14px,2vw,26px)}
+.wwo-list a{font-size:clamp(30px,4vw,62px);padding:.05em 0;transition:filter .55s var(--ease),opacity .55s var(--ease),transform .7s var(--ease)}
+.wwo-note{margin-top:clamp(20px,2.6vw,34px);font-size:15px}
+.wwo-list:hover a{opacity:1}
+.wwo-list.hov a{filter:blur(calc(var(--dist,1) * 1.7px));opacity:calc(.62 - var(--dist,1) * .09)}
+.wwo-list.hov a.act{filter:none;opacity:1;transform:scale(1.04)}
+@media (hover:none){.wwo-list.hov a{filter:none;opacity:1}}
+.wwo-shade{background:radial-gradient(100% 80% at 50% 45%,rgba(13,12,10,.18),rgba(13,12,10,.7)),rgba(13,12,10,.2)}

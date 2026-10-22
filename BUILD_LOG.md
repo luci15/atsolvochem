@@ -41,3 +41,5 @@
 - 2026-10-22: navbar rebuilt after Evermind: full-width bar (32px margins, 60px high, radius 16, solid cream) at top; compresses to a centred 900px pill with shadow after 40px scroll, expands again at top (width transition .75s). Links centred in a 3-column grid; no more hide-on-scroll. Below 1021px: hamburger + dropdown.
 
 - 2026-10-22: industries accordion replaced by "Who we work with" (Bailey Hart reference): full-bleed photo (images/who, upscaled+softened from low-res brochure crops), big centred white names, hover swaps photo + dims others, mouseleave returns to default. Needs real high-res photos to look sharp.
+
+- 2026-10-22: Who we work with: focus blur (others blur by distance + fade, hovered name sharp and scaled), section height cut ~1069px -> ~700px, photos re-processed (denoise halftone, two-step upscale, unsharp, grain; 1920x1000). Source crops are still ~400px: real/stock photos needed for true sharpness.
