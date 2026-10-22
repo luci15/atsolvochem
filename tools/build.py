@@ -58,7 +58,7 @@ def page(fname, title, desc, body, og='images/industries/plant.jpg'):
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&amp;family=Jost:ital,wght@0,300;0,400;1,300&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
@@ -223,6 +223,12 @@ SECTORS_SECTION = (f'''<section class="sec"><div class="wrap">
 <div class="sec-head"><div><p class="label" data-r>Where we work</p><h2 data-r>The industries we <em>know.</em></h2></div><p data-r>Ten sectors where long experience lets us contribute from the first call.</p></div>
 <ul class="sect">{sect_html}</ul>
 </div></section>''' if SHOW_SECTORS else '')
+ASK = [('Enquire', 'Tell us what you need.', 'Share the chemical, grade and quantity. We reply with availability and pricing from live stock — or source it for you.'),
+       ('Source', 'From names you can trust.', 'Long-standing links with leading manufacturers in India and overseas.'),
+       ('Store', 'Ready when you are.', 'Material held at our Bhiwandi warehouse in barrels and bags, ready for quick dispatch and indent deals.'),
+       ('Pack', 'Supplied your way.', 'Tanker, FCL, barrels, bags or small packs — with a lab analysis report with each dispatch.'),
+       ('Deliver', 'Right to your gate.', 'Bulk via Kandla, Mundra, Hazira, JNPT and Aegis ports, then pan-India logistics support.')]
+ask_cards = ''.join(f'<article class="ask__card" style="--i:{i}"><span class="ask__cardNum">0{i + 1}<em>{l}</em></span><h3 class="ask__cardTitle">{t}</h3><p class="ask__cardBody">{b}</p></article>' for i, (l, t, b) in enumerate(ASK))
 hz_steps = ''.join(f'<li class="hz-step"><span class="hz-node" aria-hidden="true"></span><div class="hz-body"><span class="hz-n">0{i}</span><h3>{t}</h3><p>{d}</p><div class="tags">{"".join(f"<span>{x}</span>" for x in tg)}</div>' + (f'<a class="btn btn--red hz-cta" href="contact.html">Start an enquiry {ARROW}</a>' if i == len(STEPS) else '') + '</div></li>' for i, (c, t, d, tg) in enumerate(STEPS, 1))
 tl_steps = ''.join(f'<li class="tl-step"><span class="tl-node" aria-hidden="true"></span><span class="tl-n">0{i}</span><div class="tl-body"><h3>{t}</h3><p>{d}</p><div class="tags">{"".join(f"<span>{x}</span>" for x in tg)}</div></div></li>' for i, (c, t, d, tg) in enumerate(STEPS, 1))
 
@@ -274,13 +280,9 @@ home = f'''
 
 {SECTORS_SECTION}
 
-<section class="hz" id="supply" aria-label="How we supply"><div class="hz-pin">
-<div class="hz-bg" aria-hidden="true"><span class="hz-word">Enquire &middot; Source &middot; Store &middot; Pack &middot; Deliver &middot;</span></div>
-<div class="hz-head"><p class="label l">How we supply</p><h2>From enquiry to <em>your plant.</em></h2><p class="hz-sub">Five steps, one accountable partner. Keep scrolling &mdash; the truck follows your order all the way to your gate.</p></div>
-<div class="hz-track"><div class="hz-road" aria-hidden="true"><i class="hz-red"></i></div><ol class="hz-steps">{hz_steps}</ol></div>
-<div class="hz-truck" aria-hidden="true">{STEP_IC[5]}</div>
-<div class="hz-hud" aria-hidden="true"><span class="hz-cur">01</span><span class="hz-tot"> / 05</span></div>
-</div></section>
+<section class="ask" id="supply" data-nav-tone="dark" aria-label="How we supply"><div class="ask__bloom" aria-hidden="true"></div><div class="ask__stage">
+<div class="ask__fixed"><p class="ask__eyebrow">How we supply</p><h2 class="ask__mega">From enquiry to <em>your plant.</em></h2><p class="ask__lead">Five steps, one accountable partner.</p></div>
+<div class="ask__track">{ask_cards}</div></div></section>
 
 <section class="sec"><div class="wrap vs2">
 <div class="vs-l"><div><p class="label" data-r>The difference</p><h2 data-r>The same order, <em>handled twice.</em></h2></div><div><p data-r>Six things that go wrong with an unreliable supplier &mdash; and what we do instead.</p><a class="btn btn--dark" href="contact.html" data-r>Work with us {ARROW}</a></div></div>

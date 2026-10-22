@@ -261,36 +261,24 @@
     if (lenis) lenis.on('scroll', function (e) { t.timeScale(1 + Math.min(Math.abs(e.velocity) * 0.35, 5)); gsap.to(t, { timeScale: 1, duration: 1.2, overwrite: true }); });
   });
 
-  mm.add('(min-width: 1021px) and (prefers-reduced-motion: no-preference)', function () {
-    // supply journey: pinned, scrolls sideways; background word, step numbers and heading move at different speeds
-    var hz = $('.hz'), hzTrack = hz && $('.hz-track', hz);
-    if (hz && hzTrack) {
-      hz.classList.add('hz-on');
-      var hzSteps = $$('.hz-step', hz), hzRed = $('.hz-red', hz), hzWord = $('.hz-word', hz), hzHead = $('.hz-head', hz),
-          hzNums = $$('.hz-n', hz), hzCur = $('.hz-cur', hz), nodeX = [], dist = 1, truckX0 = 0;
-      var measure = function () {
-        gsap.set(hzTrack, { x: 0 });
-        truckX0 = window.innerWidth * 0.2;
-        nodeX = hzSteps.map(function (s) { return s.getBoundingClientRect().left - hzTrack.getBoundingClientRect().left; });
-        dist = Math.max(1, nodeX[nodeX.length - 1] - truckX0);
-      };
-      measure();
-      var paint = function (p) {
-        var x = -p * dist, truckX = truckX0 + p * dist;
-        gsap.set(hzTrack, { x: x });
-        gsap.set(hzRed, { width: truckX });
-        gsap.set(hzWord, { x: x * 0.35 });
-        gsap.set(hzNums, { x: -x * 0.2 });
-        gsap.set(hzHead, { opacity: Math.max(0, 1 - Math.max(0, p - 0.05) / 0.12), y: -p * 160 });
-        var n = 0;
-        hzSteps.forEach(function (s, i) { var on = truckX >= nodeX[i] - 3; s.classList.toggle('on', on); if (on) n = i + 1; });
-        hzCur.textContent = ('0' + Math.max(1, n)).slice(-2);
-      };
-      paint(0);
-      ScrollTrigger.create({ trigger: hz, start: 'top top', end: function () { return '+=' + dist; }, pin: true, scrub: 0.6, anticipatePin: 1,
-        invalidateOnRefresh: true, onRefreshInit: measure, onUpdate: function (st) { paint(st.progress); } });
-      return function () { hz.classList.remove('hz-on'); gsap.set([hzTrack, hzRed, hzWord, hzHead, hzNums], { clearProps: 'all' }); hzSteps.forEach(function (s) { s.classList.remove('on'); }); };
-    }
+  // "ask" section (as on sarom.co.in/about): pin the section, sweep the tilted cards across with scroll via --xn
+  mm.add('(min-width: 900px) and (prefers-reduced-motion: no-preference)', function () {
+    var sec = $('.ask'), track = sec && $('.ask__track', sec);
+    if (!sec || !track) return;
+    var total = function () { return track.scrollWidth + 0.9 * window.innerWidth; };
+    var measure = function () {
+      var card = track.querySelector('.ask__card'), cw = card ? card.offsetWidth : 320;
+      var gap = parseFloat(getComputedStyle(track).columnGap || '0') || 0;
+      track.style.setProperty('--cwn', String(cw));
+      track.style.setProperty('--stepn', String(cw + gap));
+      track.style.setProperty('--vwn', String(window.innerWidth));
+    };
+    measure();
+    var st = ScrollTrigger.create({ trigger: sec, start: 'top top', end: function () { return '+=' + 0.85 * total(); }, pin: true, anticipatePin: 1, scrub: 0.7,
+      invalidateOnRefresh: true, onRefresh: measure,
+      onUpdate: function (self) { track.style.setProperty('--xn', String(0.9 * window.innerWidth - total() * self.progress)); } });
+    track.style.setProperty('--xn', String(0.9 * window.innerWidth));
+    return function () { ['--xn', '--cwn', '--stepn', '--vwn'].forEach(function (k) { track.style.removeProperty(k); }); st.kill(); };
   });
 
   /* ---------- desktop-only pinned / stacked experiences ---------- */
