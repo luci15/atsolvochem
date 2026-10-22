@@ -626,3 +626,13 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .step{justify-content:flex-start}
 .step>div:nth-child(2){margin-top:clamp(24px,5vh,52px)}
 .step .tags{margin-top:auto;padding-top:18px}
+
+/* with / without: heading row on top, the two panels side by side */
+.vs2{grid-template-columns:1fr;gap:0}
+.vs-l{position:static;min-height:0;flex-direction:row;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:clamp(28px,3.4vw,48px)}
+.vs-l p{margin-bottom:22px}
+.vs-r{grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+.vsp{display:flex;flex-direction:column}
+.vsp ul{flex:1}
+@media (max-width:1020px){.vs-l{flex-direction:column;align-items:flex-start;gap:20px}}
+@media (max-width:760px){.vs-r{grid-template-columns:1fr}}
