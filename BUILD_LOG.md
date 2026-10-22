@@ -63,3 +63,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-22: with/without section: heading row on top, the two panels side by side (stack on <=760px).
 
 - 2026-10-22: gallery photos are display-only: removed lightbox/click, zoom cursor and hover zoom.
+
+- 2026-10-23: navbar button "Get a quote" -> "Contact us".

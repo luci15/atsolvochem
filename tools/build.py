@@ -66,7 +66,7 @@ def page(fname, title, desc, body, og='images/industries/plant.jpg'):
 <header class="nav-pill">
 <a class="brand" href="index.html" aria-label="A T Solvochem — home"><img src="images/mark.png" alt="" width="38" height="34"><span><b>A T Solvochem</b><small>A Chemicals &amp; Solvents Hub</small></span></a>
 <nav class="nav-links" aria-label="Main">{links}</nav>
-<div class="nav-right"><a class="nav-cta" href="contact.html">Get a quote</a><button class="nav-toggle" aria-expanded="false" aria-label="Open menu"><span></span><span></span><span></span></button></div>
+<div class="nav-right"><a class="nav-cta" href="contact.html">Contact us</a><button class="nav-toggle" aria-expanded="false" aria-label="Open menu"><span></span><span></span><span></span></button></div>
 </header>
 <main id="main">
 {body}
