@@ -11,6 +11,11 @@
   var yr = $('#year'); if (yr) yr.textContent = new Date().getFullYear();
 
   var pill = $('.nav-pill'), toggle = $('.nav-toggle');
+  // navbar: full-width bar at the top, compresses into a centred pill once the page scrolls (and expands again at the top)
+  if (pill) {
+    var setCompact = function () { pill.classList.toggle('compact', window.scrollY > 40); };
+    setCompact(); window.addEventListener('scroll', setCompact, { passive: true });
+  }
   if (toggle) toggle.addEventListener('click', function () {
     var open = pill.classList.toggle('open');
     toggle.setAttribute('aria-expanded', open);
@@ -88,16 +93,7 @@
     });
   }
 
-  /* nav hides on scroll down, returns on scroll up */
-  if (pill) {
-    var last = 0;
-    ScrollTrigger.create({ start: 0, end: 'max', onUpdate: function (s) {
-      var y = s.scroll();
-      pill.classList.toggle('hide', y > 240 && y > last + 2 && !pill.classList.contains('open'));
-      if (y < last - 2 || y < 120) pill.classList.remove('hide');
-      last = y;
-    } });
-  }
+
 
   /* ---------- helpers ---------- */
   function splitWords(el) {

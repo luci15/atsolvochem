@@ -553,3 +553,22 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .cathead .cat-img{width:150px;aspect-ratio:4/3;border-radius:12px;overflow:hidden;flex:none;background:var(--cream-2)}
 .cathead .cat-img img{width:100%;height:100%;object-fit:cover}
 @media (max-width:700px){.cathead .cat-img{width:96px}.trust .tl{width:92px;height:56px}}
+
+/* ===== Evermind-style navbar: full-width bar at the top, compresses to a centred pill on scroll ===== */
+.nav-pill{width:calc(100% - 64px);max-width:none;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:8px 12px 8px 16px;border-radius:16px;background:var(--cream-2);-webkit-backdrop-filter:none;backdrop-filter:none;border:0;box-shadow:none;transition:width .75s cubic-bezier(.22,.9,.28,1),box-shadow .5s,background-color .4s}
+.nav-pill.compact{width:min(900px,calc(100% - 32px));box-shadow:0 14px 38px -16px rgba(0,0,0,.4)}
+.nav-pill .brand{justify-self:start}
+.nav-pill .nav-right{justify-self:end}
+.nav-pill .brand img{width:34px}
+.nav-pill .brand small{max-height:12px;overflow:hidden;transition:max-height .5s,opacity .4s,margin .5s}
+.nav-pill.compact .brand small{max-height:0;opacity:0;margin-top:0}
+.nav-links{justify-self:center;gap:0}
+.nav-links a{padding:12px 16px;line-height:20px;border-radius:32px;font-size:15px;font-weight:500;color:var(--ink)}
+.nav-links a:hover,.nav-links a[aria-current=page]{background:var(--white)}
+.nav-cta{padding:12px 20px;line-height:20px;border-radius:32px}
+@media (max-width:1020px){
+  .nav-pill,.nav-pill.compact{width:calc(100% - 32px);grid-template-columns:1fr auto}
+  .nav-pill.open{border-radius:22px}
+  .nav-pill.open .nav-links{grid-column:1/-1;order:5;width:100%;justify-self:stretch}
+  .nav-pill .nav-toggle{background:rgba(22,20,15,.08)}
+}

@@ -37,3 +37,5 @@
 - 2026-10-22: tagline "A Chemicals & Solvents Hub" under brand (nav+footer); hero/footer location -> Mumbai, India; removed "Five ways we supply" heading; polished Who we are (statement + sub paragraph + About button). "The chemistry we move" section was already replaced by the 12-category table.
 
 - 2026-10-22: no hexagon pictures anywhere (trust logos, About image, Products category thumbnails now rounded rectangles; industries already). Twelve-category tile section hidden via SHOW_CATEGORY_TABLE=False in tools/build.py.
+
+- 2026-10-22: navbar rebuilt after Evermind: full-width bar (32px margins, 60px high, radius 16, solid cream) at top; compresses to a centred 900px pill with shadow after 40px scroll, expands again at top (width transition .75s). Links centred in a 3-column grid; no more hide-on-scroll. Below 1021px: hamburger + dropdown.
