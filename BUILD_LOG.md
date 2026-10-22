@@ -61,3 +61,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-22: card redesign. Supply steps: uniform white cards with red step number + line icon (replaces random red/black/white blocks). Strengths: ruled columns with outlined circle icons instead of boxed hex-icon cards. Stat "Pan-India" no longer wraps.
 
 - 2026-10-22: with/without section: heading row on top, the two panels side by side (stack on <=760px).
+
+- 2026-10-22: gallery photos are display-only: removed lightbox/click, zoom cursor and hover zoom.

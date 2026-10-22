@@ -65,16 +65,6 @@
     else if (p.get('sent') === '0') { al.className = 'alert err'; al.textContent = 'We could not send your enquiry. Please try again or email sales.atsolvochem@gmail.com.'; }
   }
 
-  // gallery lightbox
-  var lb = $('dialog.lb');
-  if (lb) {
-    var big = $('img', lb);
-    $$('.shot').forEach(function (b) { b.addEventListener('click', function () {
-      big.src = b.dataset.full; big.alt = b.querySelector('img').alt; lb.showModal();
-    }); });
-    lb.addEventListener('click', function (e) { if (e.target === lb || e.target.tagName === 'FIGURE' || e.target.tagName === 'BUTTON') lb.close(); });
-  }
-
   if (!hasGsap) return;
   gsap.registerPlugin(ScrollTrigger);
 

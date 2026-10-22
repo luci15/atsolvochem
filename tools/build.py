@@ -202,7 +202,7 @@ mq = ''.join(logo(s, n) for s, n in PR)
 mq2 = ''.join(logo(s, n) for s, n in reversed(PR))
 cols = [[1, 4], [2, 5], [3, 6]]
 alts = {1: 'Team members at the A T Solvochem exhibition stall', 2: 'Visitors at the stall beside the product lists', 3: 'Meeting customers at the exhibition', 4: 'Team and visitor at the stall', 5: 'A T Solvochem at the exhibition', 6: 'A T Solvochem at the exhibition'}
-galcols = ''.join('<div class="gal-col">' + ''.join(f'<button class="shot" data-full="images/gallery/expo-{n}.webp"><img src="images/gallery/expo-{n}.webp" alt="{E(alts[n])}" loading="lazy"></button>' for n in c) + '</div>' for c in cols)
+galcols = ''.join('<div class="gal-col">' + ''.join(f'<div class="shot"><img src="images/gallery/expo-{n}.webp" alt="{E(alts[n])}" loading="lazy"></div>' for n in c) + '</div>' for c in cols)
 
 SHOW_CATEGORY_TABLE = False  # the twelve-category tile table is hidden for now
 CAT_TABLE_SECTION = (f'''<section class="sec sec--w"><div class="wrap">
@@ -294,7 +294,7 @@ home = f'''
 <section class="gal on-dark">
 <div class="gal-head"><div><p class="label">On the ground</p><h2 style="margin-top:22px">Meeting our <em>customers</em> &amp; partners.</h2></div><a class="btn btn--cream" href="gallery.html">View gallery {ARROW}</a></div>
 <div class="gal-cols">{galcols}</div>
-<dialog class="lb" aria-label="Photo viewer"><figure><img alt=""></figure><button aria-label="Close">&times;</button></dialog>
+
 </section>
 
 <section class="sec"><div class="wrap faq-grid">
@@ -360,10 +360,10 @@ pr = phead('Principals', ['Partners behind', '<em>our supply.</em>'], 'We work w
 write('principals.html', page('principals.html', 'Our Principals | A T Solvochem', 'Manufacturers and principals associated with A T Solvochem — BASF, Clariant, Godrej, Arkema, Galaxy Surfactants, Deepak Phenolics and more.', pr))
 
 # ---------------- GALLERY ----------------
-shots = ''.join(f'<button class="shot" data-full="images/gallery/expo-{n}.webp"><img src="images/gallery/expo-{n}.webp" alt="{E(alts[n])}" loading="lazy"></button>' for n in range(1, 7))
+shots = ''.join(f'<div class="shot"><img src="images/gallery/expo-{n}.webp" alt="{E(alts[n])}" loading="lazy"></div>' for n in range(1, 7))
 gal = phead('Gallery', ['Out and about with', '<em>our customers.</em>'], 'Moments from our exhibition stall &mdash; meeting customers, principals and partners from across the industry.') + f'''
 <div class="page-body"><section class="section"><div class="wrap"><div class="masonry">{shots}</div></div>
-<dialog class="lb" aria-label="Photo viewer"><figure><img alt=""></figure><button aria-label="Close">&times;</button></dialog></section>
+</section>
 {closer()}</div>
 '''
 write('gallery.html', page('gallery.html', 'Gallery | A T Solvochem', 'Photos from A T Solvochem’s exhibition stall — meeting customers, principals and partners.', gal, 'images/gallery/expo-1.webp'))

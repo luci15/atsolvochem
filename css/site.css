@@ -636,3 +636,7 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .vsp ul{flex:1}
 @media (max-width:1020px){.vs-l{flex-direction:column;align-items:flex-start;gap:20px}}
 @media (max-width:760px){.vs-r{grid-template-columns:1fr}}
+
+/* gallery photos are display-only (no click / zoom) */
+.shot{cursor:default}
+.shot:hover img{transform:none}
