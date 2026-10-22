@@ -47,7 +47,7 @@ ul{margin:0;padding:0;list-style:none}
 .brand{display:flex;align-items:center;gap:11px}
 .brand img{width:38px;height:auto}
 .brand b{display:block;font:700 23px/1 var(--fd);letter-spacing:-.01em}
-.brand small{display:none}
+.brand small{display:block;font:600 9.5px/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-top:4px;white-space:nowrap}
 .nav-links{display:flex;align-items:center;gap:2px}
 .nav-links a{padding:9px 15px;font-weight:500;font-size:15px;border-radius:999px;transition:background-color .25s,color .25s}
 .nav-links a:hover{background:rgba(22,20,15,.07)}
@@ -538,3 +538,8 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 /* red closer: keep the text link visible on hover (the default red hover vanished on the red background) */
 .closer .btn--text{padding:10px 8px;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:6px;text-decoration-thickness:2px;transition:text-decoration-color .25s,transform .25s}
 .closer .btn--text:hover,.closer .btn--text:focus-visible{color:#fff;text-decoration-color:#fff;transform:translateX(4px)}
+
+.phil-sub{max-width:54ch;margin:26px auto 0;color:var(--mute);font-size:17px}
+.phil-btn{margin-top:34px}
+.site-footer .brand small{color:#8d8778}
+@media (max-width:700px){.nav-pill .brand small{display:none}}

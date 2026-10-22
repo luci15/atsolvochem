@@ -64,7 +64,7 @@ def page(fname, title, desc, body, og='images/industries/plant.jpg'):
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav-pill">
-<a class="brand" href="index.html" aria-label="A T Solvochem — home"><img src="images/mark.png" alt="" width="38" height="34"><b>A T Solvochem</b></a>
+<a class="brand" href="index.html" aria-label="A T Solvochem — home"><img src="images/mark.png" alt="" width="38" height="34"><span><b>A T Solvochem</b><small>A Chemicals &amp; Solvents Hub</small></span></a>
 <nav class="nav-links" aria-label="Main">{links}</nav>
 <div class="nav-right"><a class="nav-cta" href="contact.html">Get a quote</a><button class="nav-toggle" aria-expanded="false" aria-label="Open menu"><span></span><span></span><span></span></button></div>
 </header>
@@ -73,7 +73,7 @@ def page(fname, title, desc, body, og='images/industries/plant.jpg'):
 </main>
 <footer class="site-footer">
 <div class="wrap fgrid4">
-<div class="foot-brand"><a class="brand" href="index.html"><img src="images/mark.png" alt="" width="38" height="34"><b>A T Solvochem</b></a><p>A chemical &amp; solvent hub — one stop spot for all your chemical and solvent requirements, for over two decades.</p></div>
+<div class="foot-brand"><a class="brand" href="index.html"><img src="images/mark.png" alt="" width="38" height="34"><span><b>A T Solvochem</b><small>A Chemicals &amp; Solvents Hub</small></span></a><p>A chemical &amp; solvent hub — one stop spot for all your chemical and solvent requirements, for over two decades.</p></div>
 <div><h4>Explore</h4><ul>{foot_links}</ul></div>
 <div><h4>Visit</h4><address>{E(ADDR)}</address></div>
 <div><h4>Contact</h4><ul>
@@ -84,7 +84,7 @@ def page(fname, title, desc, body, og='images/industries/plant.jpg'):
 <li><a href="mailto:{MAIL2}">{MAIL2}</a></li></ul></div>
 </div>
 <div class="foot-mega" aria-hidden="true">A T Solvochem</div>
-<div class="foot-bottom"><div class="wrap"><span>&copy; <span id="year">2026</span> A.T. Solvochem. All rights reserved.</span><span>Thane, Maharashtra, India</span></div></div>
+<div class="foot-bottom"><div class="wrap"><span>&copy; <span id="year">2026</span> A.T. Solvochem. All rights reserved.</span><span>Mumbai, India</span></div></div>
 </footer>
 <a class="wa" href="https://wa.me/{WA}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">{WAICON}</a>
 <script src="js/vendor/gsap.min.js"></script>
@@ -209,18 +209,19 @@ home = f'''
 <div class="hero-side"><p>For over two decades A T Solvochem has supplied imported and Indian chemicals to fragrance, cosmetic, pharma, paint and resin manufacturers — large stock, safe storage, pan-India delivery.</p>
 <div class="hero-cta"><a class="btn btn--red" href="products.html">Browse {TOTAL}+ chemicals {ARROW}</a><a class="btn btn--text" href="contact.html">Request a quote &rarr;</a></div></div>
 </div>
-<div class="hero-foot"><span>Est. 20+ years<br>Mumbai</span><span class="scroll-cue"><i></i>Scroll</span><span>Chemicals &amp; solvents<br>Pan-India supply</span></div>
+<div class="hero-foot"><span>Est. 20+ years<br>Mumbai, India</span><span class="scroll-cue"><i></i>Scroll</span><span>Chemicals &amp; solvents<br>Pan-India supply</span></div>
 </section>
 
 <div class="rise">
 <section class="phil"><div class="wrap">
 <p class="label" data-r>Who we are</p>
-<p class="big scrub">For over two decades, A T Solvochem has been a dependable partner to manufacturers across India &mdash; supplying the right chemicals and solvents with <em>transparent pricing,</em> ready stock and logistics you can rely on.</p>
+<p class="big scrub">For over two decades, A T Solvochem has been the dependable chemicals &amp; solvents partner behind manufacturers across India &mdash; <em>ready stock, transparent pricing</em> and logistics you can rely on.</p>
+<p class="phil-sub" data-r>Led by Mr. Parag Shah, we import, distribute and supply chemicals, petrochemicals and industrial polymers &mdash; from a single enquiry to a drum, tanker or container at your gate.</p>
 <div class="trust" data-r><span class="hx"><img src="images/principals/basf.webp" alt=""></span><span class="hx"><img src="images/principals/clariant.webp" alt=""></span><span class="hx"><img src="images/principals/arkema.webp" alt=""></span><span class="hx"><img src="images/principals/godrej-industries.webp" alt=""></span><span style="margin-left:18px">Backed by 20+ leading principals</span></div>
+<a class="btn btn--out phil-btn" href="aboutus.html" data-r>About us {ARROW}</a>
 </div></section>
 
 <section class="sec" id="industries"><div class="wrap">
-<div class="sec-head"><div><p class="label" data-r>What we do</p><h2 data-r>Five ways we <em>supply.</em></h2></div><p data-r>Open an industry to see what sits behind it. Most customers draw on two or three &mdash; and we source beyond the lists on request.</p></div>
 <div class="ind-grid"><div class="acc" id="ind-acc">{acc_items}</div><div class="ind-art" aria-hidden="true">{acc_art}</div></div>
 </div></section>
 
