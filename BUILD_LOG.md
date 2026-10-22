@@ -82,3 +82,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-23: fixed principal logo tiles under "Who we are" stretching tall (class clash with the old .tl timeline CSS): renamed to .tlogo, removed leftover timeline CSS, tiles 150x88.
 
 - 2026-10-23: removed every trace of the inspiration site from the code: supply section classes/variables/comments renamed to our own (.sup, --sup-*), no reference-site naming left in HTML, CSS, JS or generator. Behaviour unchanged.
+
+- 2026-10-23: supply sweeping cards now carry the original step content (number, line icon, title, description, tag pills) and the original intro line; only the animation is the borrowed one.
