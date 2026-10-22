@@ -73,11 +73,11 @@ Placeholders until the client supplies real photos.
 
 - 2026-10-23: vertical timeline replaced by a horizontal parallax supply journey: section pins, a dashed road scrolls sideways under a fixed truck, red line fills behind it, nodes light as it passes; layers at different speeds (giant outlined ENQUIRE-SOURCE-STORE word 0.35x, step numbers drift 0.2x, heading fades/rises); steps alternate below/above the road; HUD counter 01/05. <=1020px and reduced motion: plain stacked list. Fixed footer hidden until closing banner (prevents bleed-through).
 
-- 2026-10-23: supply section now replicates sarom.co.in/about "What sets Sarom apart" (read from its live CSS/JS): pinned dark section, uppercase light heading with italic accent, italic lead top-right, five tilted frosted-glass cards sweeping across with scroll (--xn driven, scrub .7, 0.85x distance, 3D rotate/scale/fade by distance from centre); stacked cards below 900px / reduced motion. Font: Jost 300/400 for this section only. Replaced the neon/outlined timeline, horizontal step cards and vertical timeline (all rejected).
+- 2026-10-23: supply section now replicates the reference site "What sets the reference site apart" (read from its live CSS/JS): pinned dark section, uppercase light heading with italic accent, italic lead top-right, five tilted frosted-glass cards sweeping across with scroll (--xn driven, scrub .7, 0.85x distance, 3D rotate/scale/fade by distance from centre); stacked cards below 900px / reduced motion. Font: Jost 300/400 for this section only. Replaced the neon/outlined timeline, horizontal step cards and vertical timeline (all rejected).
 
 - 2026-10-23: supply "ask" section recoloured to the site palette: cream paper background, ink heading, brand-red accents (italic words, lead, card labels), white cards with ink-tinted shadows. Motion unchanged.
 
-- 2026-10-23: supply "ask" section uses site typography/components (Calibri, bold headings with red italic accent, dot label, muted body, rounded white cards); Jost removed. Only the pinned sweeping tilted-card animation is borrowed from sarom.co.in.
+- 2026-10-23: supply "ask" section uses site typography/components (Calibri, bold headings with red italic accent, dot label, muted body, rounded white cards); Jost removed. Only the pinned sweeping tilted-card animation is borrowed from the reference site.
 
 - 2026-10-23: fixed principal logo tiles under "Who we are" stretching tall (class clash with the old .tl timeline CSS): renamed to .tlogo, removed leftover timeline CSS, tiles 150x88.
 
