@@ -233,8 +233,9 @@
       links.forEach(function (l, j) { l.style.setProperty('--dist', Math.abs(j - idx)); l.classList.toggle('act', j === idx); });
     };
     var focusOn = function (a) { showImg(a.dataset.k); setFocus(links.indexOf(a)); };
-    var focusOff = function () { showImg('default'); setFocus(0); };
-    setFocus(0);
+    var firstKey = links[0].dataset.k;
+    var focusOff = function () { showImg(firstKey); setFocus(0); };
+    cur = firstKey; setFocus(0);
     links.forEach(function (a) {
       a.addEventListener('mouseenter', function () { focusOn(a); });
       a.addEventListener('focus', function () { focusOn(a); });

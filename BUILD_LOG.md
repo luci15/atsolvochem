@@ -51,7 +51,6 @@ Downloaded (Unsplash licence: free to use, attribution not required) and process
 - pharma     — https://unsplash.com/photos/24d5c474f2ae (photo-1584308666744-24d5c474f2ae, blister packs)
 - paint      — https://unsplash.com/photos/cdc6777db8cc (photo-1670689334799-cdc6777db8cc, industrial plant at night)
 - uv         — https://unsplash.com/photos/7871176f1a7e (photo-1594055103006-7871176f1a7e, sunscreen tube)
-- default    — https://unsplash.com/photos/30ae33e2def0 (photo-1704130092069-30ae33e2def0, refinery at night)
 Placeholders until the client supplies real photos.
 
 - 2026-10-22: focus blur softened (max 2.2px, others fade to 40% and stay readable) to match the reference.
@@ -69,3 +68,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-23: Who we work with: focus blur is the resting state (first name sharp, others blur/fade by distance); hover moves the focus and swaps the photo; leaving returns to the first name + default photo.
 
 - 2026-10-23: hid "The industries we know" (SHOW_SECTORS=False in tools/build.py). Replaced the horizontal step cards with a scroll-driven supply timeline: sticky intro on the left, rail on the right that fills red as you scroll, a truck rides it, each step lights up (node glows, big outlined number turns red, text fades in) when the truck reaches it. Falls back to a plain readable list without JS / reduced motion.
+
+- 2026-10-23: Who we work with background always matches the sharp (focused) name: fragrance photo at rest, follows hover, returns to fragrance. Removed the separate default refinery photo.

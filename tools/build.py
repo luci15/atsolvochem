@@ -215,7 +215,7 @@ WWO = [('fragrance', 'Fragrance &amp; flavours', 'products.html#fragrance'),
        ('uv', 'UV filters', 'products.html#uv'),
        ('pharma', 'Pharma &amp; API', 'products.html#pharma'),
        ('paint', 'Paints &amp; resins', 'products.html#paint')]
-wwo_imgs = '<img class="on" data-k="default" src="images/who/default.jpg" alt="" loading="lazy">' + ''.join(f'<img data-k="{k}" src="images/who/{k}.jpg" alt="" loading="lazy">' for k, _t, _h in WWO)
+wwo_imgs = ''.join(f'<img{" class=\"on\"" if n == 0 else ""} data-k="{k}" src="images/who/{k}.jpg" alt="" loading="lazy">' for n, (k, _t, _h) in enumerate(WWO))
 wwo_items = ''.join(f'<li data-r><a href="{h}" data-k="{k}">{t}</a></li>' for k, t, h in WWO)
 
 SHOW_SECTORS = False  # "The industries we know" list is hidden for now
