@@ -244,36 +244,6 @@
     list.addEventListener('mouseleave', focusOff);
   }
 
-  /* ---------- supply timeline: rail fills, truck rides it, steps light up in turn ---------- */
-  var tlist = $('.tl-list');
-  if (tlist && !reduce) {
-    var tsteps = $$('.tl-step', tlist), prog = $('.tl-prog', tlist), truck = $('.tl-truck', tlist), rail = $('.tl-rail', tlist);
-    var nodes = tsteps.map(function (s) { return $('.tl-node', s); });
-    var railH = 0, rel = [];
-    var layout = function () {
-      var top0 = nodes[0].offsetTop + tsteps[0].offsetTop + 9;
-      var last = nodes[nodes.length - 1].offsetTop + tsteps[tsteps.length - 1].offsetTop + 9;
-      railH = last - top0;
-      rail.style.top = top0 + 'px'; rail.style.height = railH + 'px';
-      truck.style.top = top0 + 'px';
-      rel = tsteps.map(function (s, i) { return nodes[i].offsetTop + s.offsetTop + 9 - top0; });
-    };
-    layout();
-    tlist.classList.add('tl-js');
-    var paint = function (p) {
-      var y = p * railH;
-      gsap.set(prog, { scaleY: p });
-      gsap.set(truck, { y: y });
-      tsteps.forEach(function (s, i) { s.classList.toggle('on', p > 0 && y >= rel[i] - 2); });
-    };
-    ScrollTrigger.create({
-      trigger: nodes[0], start: 'center 58%', end: function () { return '+=' + railH; }, scrub: 0.5, invalidateOnRefresh: true,
-      onRefresh: layout, onUpdate: function (st) { paint(st.progress); },
-      onToggle: function () { }
-    });
-    window.addEventListener('resize', function () { layout(); });
-  }
-
   /* ---------- counters ---------- */
   $$('[data-count]').forEach(function (el) {
     var to = parseFloat(el.dataset.count), obj = { v: 0 };
@@ -291,6 +261,38 @@
     if (lenis) lenis.on('scroll', function (e) { t.timeScale(1 + Math.min(Math.abs(e.velocity) * 0.35, 5)); gsap.to(t, { timeScale: 1, duration: 1.2, overwrite: true }); });
   });
 
+  mm.add('(min-width: 1021px) and (prefers-reduced-motion: no-preference)', function () {
+    // supply journey: pinned, scrolls sideways; background word, step numbers and heading move at different speeds
+    var hz = $('.hz'), hzTrack = hz && $('.hz-track', hz);
+    if (hz && hzTrack) {
+      hz.classList.add('hz-on');
+      var hzSteps = $$('.hz-step', hz), hzRed = $('.hz-red', hz), hzWord = $('.hz-word', hz), hzHead = $('.hz-head', hz),
+          hzNums = $$('.hz-n', hz), hzCur = $('.hz-cur', hz), nodeX = [], dist = 1, truckX0 = 0;
+      var measure = function () {
+        gsap.set(hzTrack, { x: 0 });
+        truckX0 = window.innerWidth * 0.2;
+        nodeX = hzSteps.map(function (s) { return s.getBoundingClientRect().left - hzTrack.getBoundingClientRect().left; });
+        dist = Math.max(1, nodeX[nodeX.length - 1] - truckX0);
+      };
+      measure();
+      var paint = function (p) {
+        var x = -p * dist, truckX = truckX0 + p * dist;
+        gsap.set(hzTrack, { x: x });
+        gsap.set(hzRed, { width: truckX });
+        gsap.set(hzWord, { x: x * 0.35 });
+        gsap.set(hzNums, { x: -x * 0.2 });
+        gsap.set(hzHead, { opacity: Math.max(0, 1 - Math.max(0, p - 0.05) / 0.12), y: -p * 160 });
+        var n = 0;
+        hzSteps.forEach(function (s, i) { var on = truckX >= nodeX[i] - 3; s.classList.toggle('on', on); if (on) n = i + 1; });
+        hzCur.textContent = ('0' + Math.max(1, n)).slice(-2);
+      };
+      paint(0);
+      ScrollTrigger.create({ trigger: hz, start: 'top top', end: function () { return '+=' + dist; }, pin: true, scrub: 0.6, anticipatePin: 1,
+        invalidateOnRefresh: true, onRefreshInit: measure, onUpdate: function (st) { paint(st.progress); } });
+      return function () { hz.classList.remove('hz-on'); gsap.set([hzTrack, hzRed, hzWord, hzHead, hzNums], { clearProps: 'all' }); hzSteps.forEach(function (s) { s.classList.remove('on'); }); };
+    }
+  });
+
   /* ---------- desktop-only pinned / stacked experiences ---------- */
   mm.add('(min-width: 1021px) and (prefers-reduced-motion: no-preference)', function () {
     // parallax gallery columns
@@ -304,7 +306,12 @@
       document.documentElement.classList.add('fx-footer');
       var m = $('main'); var setH = function () { m.style.marginBottom = ft.offsetHeight + 'px'; };
       setH(); window.addEventListener('resize', setH);
-      return function () { document.documentElement.classList.remove('fx-footer'); m.style.marginBottom = ''; window.removeEventListener('resize', setH); };
+      // keep the fixed footer hidden until the closing banner is on screen (nothing can bleed through pinned sections)
+      ft.style.visibility = 'hidden';
+      var ftSt = ScrollTrigger.create({ trigger: '.closer', start: 'top bottom', end: 'max',
+        onEnter: function () { ft.style.visibility = ''; }, onLeaveBack: function () { ft.style.visibility = 'hidden'; },
+        onRefresh: function (self) { ft.style.visibility = self.scroll() >= self.start ? '' : 'hidden'; } });
+      return function () { document.documentElement.classList.remove('fx-footer'); m.style.marginBottom = ''; ft.style.visibility = ''; ftSt.kill(); window.removeEventListener('resize', setH); };
     }
   });
 

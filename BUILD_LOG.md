@@ -70,3 +70,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-23: hid "The industries we know" (SHOW_SECTORS=False in tools/build.py). Replaced the horizontal step cards with a scroll-driven supply timeline: sticky intro on the left, rail on the right that fills red as you scroll, a truck rides it, each step lights up (node glows, big outlined number turns red, text fades in) when the truck reaches it. Falls back to a plain readable list without JS / reduced motion.
 
 - 2026-10-23: Who we work with background always matches the sharp (focused) name: fragrance photo at rest, follows hover, returns to fragrance. Removed the separate default refinery photo.
+
+- 2026-10-23: vertical timeline replaced by a horizontal parallax supply journey: section pins, a dashed road scrolls sideways under a fixed truck, red line fills behind it, nodes light as it passes; layers at different speeds (giant outlined ENQUIRE-SOURCE-STORE word 0.35x, step numbers drift 0.2x, heading fades/rises); steps alternate below/above the road; HUD counter 01/05. <=1020px and reduced motion: plain stacked list. Fixed footer hidden until closing banner (prevents bleed-through).

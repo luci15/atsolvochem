@@ -223,6 +223,7 @@ SECTORS_SECTION = (f'''<section class="sec"><div class="wrap">
 <div class="sec-head"><div><p class="label" data-r>Where we work</p><h2 data-r>The industries we <em>know.</em></h2></div><p data-r>Ten sectors where long experience lets us contribute from the first call.</p></div>
 <ul class="sect">{sect_html}</ul>
 </div></section>''' if SHOW_SECTORS else '')
+hz_steps = ''.join(f'<li class="hz-step"><span class="hz-node" aria-hidden="true"></span><div class="hz-body"><span class="hz-n">0{i}</span><h3>{t}</h3><p>{d}</p><div class="tags">{"".join(f"<span>{x}</span>" for x in tg)}</div>' + (f'<a class="btn btn--red hz-cta" href="contact.html">Start an enquiry {ARROW}</a>' if i == len(STEPS) else '') + '</div></li>' for i, (c, t, d, tg) in enumerate(STEPS, 1))
 tl_steps = ''.join(f'<li class="tl-step"><span class="tl-node" aria-hidden="true"></span><span class="tl-n">0{i}</span><div class="tl-body"><h3>{t}</h3><p>{d}</p><div class="tags">{"".join(f"<span>{x}</span>" for x in tg)}</div></div></li>' for i, (c, t, d, tg) in enumerate(STEPS, 1))
 
 home = f'''
@@ -273,9 +274,12 @@ home = f'''
 
 {SECTORS_SECTION}
 
-<section class="tl" id="supply" aria-label="How we supply"><div class="wrap tl-grid">
-<div class="tl-intro"><p class="label l" data-r>How we supply</p><h2 data-r>From enquiry to <em>your plant.</em></h2><p data-r>Five steps, one accountable partner. Scroll &mdash; the truck follows the order from your first message to your gate.</p><a class="btn btn--red" href="contact.html" data-r>Start an enquiry {ARROW}</a></div>
-<ol class="tl-list"><span class="tl-rail" aria-hidden="true"><i class="tl-prog"></i></span><span class="tl-truck" aria-hidden="true">{STEP_IC[5]}</span>{tl_steps}</ol>
+<section class="hz" id="supply" aria-label="How we supply"><div class="hz-pin">
+<div class="hz-bg" aria-hidden="true"><span class="hz-word">Enquire &middot; Source &middot; Store &middot; Pack &middot; Deliver &middot;</span></div>
+<div class="hz-head"><p class="label l">How we supply</p><h2>From enquiry to <em>your plant.</em></h2><p class="hz-sub">Five steps, one accountable partner. Keep scrolling &mdash; the truck follows your order all the way to your gate.</p></div>
+<div class="hz-track"><div class="hz-road" aria-hidden="true"><i class="hz-red"></i></div><ol class="hz-steps">{hz_steps}</ol></div>
+<div class="hz-truck" aria-hidden="true">{STEP_IC[5]}</div>
+<div class="hz-hud" aria-hidden="true"><span class="hz-cur">01</span><span class="hz-tot"> / 05</span></div>
 </div></section>
 
 <section class="sec"><div class="wrap vs2">
