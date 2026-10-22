@@ -67,3 +67,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-23: navbar button "Get a quote" -> "Contact us".
 
 - 2026-10-23: Who we work with: focus blur is the resting state (first name sharp, others blur/fade by distance); hover moves the focus and swaps the photo; leaving returns to the first name + default photo.
+
+- 2026-10-23: hid "The industries we know" (SHOW_SECTORS=False in tools/build.py). Replaced the horizontal step cards with a scroll-driven supply timeline: sticky intro on the left, rail on the right that fills red as you scroll, a truck rides it, each step lights up (node glows, big outlined number turns red, text fades in) when the truck reaches it. Falls back to a plain readable list without JS / reduced motion.

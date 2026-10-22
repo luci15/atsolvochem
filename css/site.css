@@ -639,3 +639,37 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 /* gallery photos are display-only (no click / zoom) */
 .shot{cursor:default}
 .shot:hover img{transform:none}
+
+/* ===== Supply timeline: rail draws as you scroll, a truck rides it, steps light up in turn ===== */
+.tl{background:var(--dark);color:#fff;padding:clamp(72px,8vw,120px) 0;position:relative;z-index:2}
+.tl-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(40px,7vw,110px);align-items:start}
+.tl-intro{position:sticky;top:120px}
+.tl-intro h2{font-size:clamp(40px,5vw,76px);margin:22px 0 22px;line-height:.95}
+.tl-intro h2 em{color:var(--red)}
+.tl-intro p{color:#b9b3a4;max-width:36ch;margin-bottom:30px}
+.tl-list{position:relative;padding-left:96px;margin:0;list-style:none}
+.tl-rail{position:absolute;left:28px;top:30px;width:2px;height:calc(100% - 60px);background:rgba(255,255,255,.14);border-radius:2px}
+.tl-prog{position:absolute;inset:0;background:linear-gradient(var(--red),#ff6a70);transform-origin:top;transform:scaleY(0);border-radius:2px;box-shadow:0 0 18px rgba(227,32,43,.65)}
+.tl-truck{position:absolute;left:29px;top:30px;width:50px;height:50px;margin:-25px 0 0 -25px;border-radius:50%;background:var(--red);display:grid;place-items:center;z-index:3;box-shadow:0 0 0 7px rgba(227,32,43,.2),0 10px 28px rgba(227,32,43,.5)}
+.tl-truck svg{width:23px;height:23px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tl-step{position:relative;padding:0 0 clamp(64px,11vh,120px)}
+.tl-step:last-child{padding-bottom:0}
+.tl-node{position:absolute;left:-68px;top:22px;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:var(--dark);border:2px solid rgba(255,255,255,.3);transition:background-color .4s,border-color .4s,box-shadow .5s,transform .5s var(--ease)}
+.tl-n{display:block;font:700 clamp(64px,8.5vw,128px)/.85 var(--fd);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.22);transition:color .6s,-webkit-text-stroke-color .6s}
+.tl-body{margin-top:-.2em;max-width:50ch}
+.tl-body h3{font-size:clamp(30px,3.2vw,46px);margin:14px 0 10px;line-height:1}
+.tl-body p{color:#b9b3a4;font-size:17px}
+.tl-body .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.tl-body .tags span{padding:7px 14px;border:1px solid rgba(255,255,255,.2);border-radius:999px;font-size:13.5px;color:#d8d3c6}
+/* progressive enhancement: dim steps until the truck reaches them */
+.tl-list.tl-js .tl-body{opacity:.28;transform:translateX(18px);transition:opacity .7s var(--ease),transform .8s var(--ease)}
+.tl-list.tl-js .tl-step.on .tl-body{opacity:1;transform:none}
+.tl-step.on .tl-node{background:var(--red);border-color:var(--red);box-shadow:0 0 0 6px rgba(227,32,43,.22),0 0 22px rgba(227,32,43,.7);transform:scale(1.15)}
+.tl-step.on .tl-n{color:var(--red);-webkit-text-stroke-color:var(--red)}
+@media (max-width:1020px){
+  .tl-grid{grid-template-columns:1fr}
+  .tl-intro{position:static}
+  .tl-list{padding-left:64px}
+  .tl-rail{left:18px}.tl-truck{left:19px;width:42px;height:42px;margin:-21px 0 0 -21px}
+  .tl-node{left:-46px}
+}

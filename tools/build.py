@@ -218,6 +218,13 @@ WWO = [('fragrance', 'Fragrance &amp; flavours', 'products.html#fragrance'),
 wwo_imgs = '<img class="on" data-k="default" src="images/who/default.jpg" alt="" loading="lazy">' + ''.join(f'<img data-k="{k}" src="images/who/{k}.jpg" alt="" loading="lazy">' for k, _t, _h in WWO)
 wwo_items = ''.join(f'<li data-r><a href="{h}" data-k="{k}">{t}</a></li>' for k, t, h in WWO)
 
+SHOW_SECTORS = False  # "The industries we know" list is hidden for now
+SECTORS_SECTION = (f'''<section class="sec"><div class="wrap">
+<div class="sec-head"><div><p class="label" data-r>Where we work</p><h2 data-r>The industries we <em>know.</em></h2></div><p data-r>Ten sectors where long experience lets us contribute from the first call.</p></div>
+<ul class="sect">{sect_html}</ul>
+</div></section>''' if SHOW_SECTORS else '')
+tl_steps = ''.join(f'<li class="tl-step"><span class="tl-node" aria-hidden="true"></span><span class="tl-n">0{i}</span><div class="tl-body"><h3>{t}</h3><p>{d}</p><div class="tags">{"".join(f"<span>{x}</span>" for x in tg)}</div></div></li>' for i, (c, t, d, tg) in enumerate(STEPS, 1))
+
 home = f'''
 <section class="hero" id="top">
 <div class="hero-media"><canvas aria-hidden="true"></canvas></div>
@@ -264,15 +271,12 @@ home = f'''
 {str_grid()}
 </div></section></div>
 
-<section class="sec"><div class="wrap">
-<div class="sec-head"><div><p class="label" data-r>Where we work</p><h2 data-r>The industries we <em>know.</em></h2></div><p data-r>Ten sectors where long experience lets us contribute from the first call.</p></div>
-<ul class="sect">{sect_html}</ul>
-</div></section>
+{SECTORS_SECTION}
 
-<section class="hs" aria-label="How we supply">
-<div class="hs-head"><div><p class="label">How we supply</p><h2 style="margin-top:22px">From enquiry to <em>your plant.</em></h2></div><p>Five steps, one accountable partner &mdash; scroll sideways through how an order moves.</p></div>
-<div class="hs-track">{steps}</div>
-</section>
+<section class="tl" id="supply" aria-label="How we supply"><div class="wrap tl-grid">
+<div class="tl-intro"><p class="label l" data-r>How we supply</p><h2 data-r>From enquiry to <em>your plant.</em></h2><p data-r>Five steps, one accountable partner. Scroll &mdash; the truck follows the order from your first message to your gate.</p><a class="btn btn--red" href="contact.html" data-r>Start an enquiry {ARROW}</a></div>
+<ol class="tl-list"><span class="tl-rail" aria-hidden="true"><i class="tl-prog"></i></span><span class="tl-truck" aria-hidden="true">{STEP_IC[5]}</span>{tl_steps}</ol>
+</div></section>
 
 <section class="sec"><div class="wrap vs2">
 <div class="vs-l"><div><p class="label" data-r>The difference</p><h2 data-r>The same order, <em>handled twice.</em></h2></div><div><p data-r>Six things that go wrong with an unreliable supplier &mdash; and what we do instead.</p><a class="btn btn--dark" href="contact.html" data-r>Work with us {ARROW}</a></div></div>

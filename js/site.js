@@ -243,6 +243,36 @@
     list.addEventListener('mouseleave', focusOff);
   }
 
+  /* ---------- supply timeline: rail fills, truck rides it, steps light up in turn ---------- */
+  var tlist = $('.tl-list');
+  if (tlist && !reduce) {
+    var tsteps = $$('.tl-step', tlist), prog = $('.tl-prog', tlist), truck = $('.tl-truck', tlist), rail = $('.tl-rail', tlist);
+    var nodes = tsteps.map(function (s) { return $('.tl-node', s); });
+    var railH = 0, rel = [];
+    var layout = function () {
+      var top0 = nodes[0].offsetTop + tsteps[0].offsetTop + 9;
+      var last = nodes[nodes.length - 1].offsetTop + tsteps[tsteps.length - 1].offsetTop + 9;
+      railH = last - top0;
+      rail.style.top = top0 + 'px'; rail.style.height = railH + 'px';
+      truck.style.top = top0 + 'px';
+      rel = tsteps.map(function (s, i) { return nodes[i].offsetTop + s.offsetTop + 9 - top0; });
+    };
+    layout();
+    tlist.classList.add('tl-js');
+    var paint = function (p) {
+      var y = p * railH;
+      gsap.set(prog, { scaleY: p });
+      gsap.set(truck, { y: y });
+      tsteps.forEach(function (s, i) { s.classList.toggle('on', p > 0 && y >= rel[i] - 2); });
+    };
+    ScrollTrigger.create({
+      trigger: nodes[0], start: 'center 58%', end: function () { return '+=' + railH; }, scrub: 0.5, invalidateOnRefresh: true,
+      onRefresh: layout, onUpdate: function (st) { paint(st.progress); },
+      onToggle: function () { }
+    });
+    window.addEventListener('resize', function () { layout(); });
+  }
+
   /* ---------- counters ---------- */
   $$('[data-count]').forEach(function (el) {
     var to = parseFloat(el.dataset.count), obj = { v: 0 };
@@ -262,14 +292,6 @@
 
   /* ---------- desktop-only pinned / stacked experiences ---------- */
   mm.add('(min-width: 1021px) and (prefers-reduced-motion: no-preference)', function () {
-    // horizontal "how we supply"
-    var hs = $('.hs'), tr = hs && $('.hs-track');
-    if (hs && tr) {
-      var dist = function () { return Math.max(0, tr.scrollWidth - window.innerWidth); };
-      gsap.to(tr, { x: function () { return -dist(); }, ease: 'none',
-        scrollTrigger: { trigger: hs, start: 'top top', end: function () { return '+=' + dist(); }, pin: true, scrub: 0.8, invalidateOnRefresh: true, anticipatePin: 1 } });
-    }
-
     // parallax gallery columns
     $$('.gal-col').forEach(function (c, i) {
       gsap.to(c, { y: [-90, 70, -150][i] || -60, ease: 'none', scrollTrigger: { trigger: '.gal', start: 'top bottom', end: 'bottom top', scrub: true } });
