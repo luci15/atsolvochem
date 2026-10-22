@@ -202,7 +202,7 @@
     // industries (desktop): the section pins; scrolling closes the open item, opens the next and cross-fades the picture
     if (acc.id === 'ind-acc' && !reduce) {
       mm.add('(min-width: 1021px)', function () {
-        var sec = acc.closest('.sec'), grid = acc.closest('.ind-grid'), n = items.length, cur = 0;
+        var sec = acc.closest('.sec'), grid = acc.closest('.ind-grid'), n = items.length, cur = 0, lastP = 0;
         sec.classList.add('ind-pin');
         var go = function (i) {
           if (i === cur) return; cur = i;
@@ -213,9 +213,21 @@
         pinSt = ScrollTrigger.create({
           trigger: grid, start: 'top 96', pin: true, anticipatePin: 1, invalidateOnRefresh: true,
           end: function () { return '+=' + Math.round(window.innerHeight * 0.6 * n); },
-          onUpdate: function (st) { go(Math.min(n - 1, Math.floor(st.progress * n))); }
+          onUpdate: function (st) { if (Math.abs(st.progress - lastP) < 0.0005) return; lastP = st.progress; go(Math.min(n - 1, Math.floor(st.progress * n))); }
         });
-        return function () { sec.classList.remove('ind-pin'); if (pinSt) pinSt.kill(); pinSt = null; };
+        // hovering a row also opens it and swaps the picture (mouse devices)
+        var timer = null, hovers = [];
+        if (window.matchMedia('(any-hover: hover)').matches) items.forEach(function (d, i) {
+          var sm = $('summary', d);
+          var enter = function () { clearTimeout(timer); timer = setTimeout(function () { go(i); }, 120); };
+          var leave = function () { clearTimeout(timer); };
+          sm.addEventListener('mouseenter', enter); sm.addEventListener('mouseleave', leave);
+          hovers.push([sm, enter, leave]);
+        });
+        return function () {
+          hovers.forEach(function (h) { h[0].removeEventListener('mouseenter', h[1]); h[0].removeEventListener('mouseleave', h[2]); });
+          sec.classList.remove('ind-pin'); if (pinSt) pinSt.kill(); pinSt = null;
+        };
       });
     }
   });

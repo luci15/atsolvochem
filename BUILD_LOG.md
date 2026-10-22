@@ -31,3 +31,5 @@
 - 2026-10-21: Home hero footer 'Thane, Mumbai' -> 'Mumbai'; rewrote the philosophy paragraph (build.py, .phil). Not pushed.
 - 2026-10-21: Industries ('What we do') accordion is now scroll-driven on desktop: section pins, each scroll step closes the open item, opens the next, picture cross-fades (js/site.js accordion block + .ind-pin css). Click on a row scrolls to its step. Mobile/tablet/reduced-motion keep plain click accordion. Not pushed.
 - 2026-10-21: Closer 'or WhatsApp us' link: hover no longer turns red-on-red (stays white + underline). Click opens wa.me in a new tab (verified). Not pushed.
+
+- 2026-10-22: industries preview is a plain rounded rectangle (no hexagon); hovering a row opens it + swaps picture on top of the scroll-driven pin (scroll updates ignored unless progress actually changes, so hover and refresh do not fight).
