@@ -228,6 +228,22 @@
     }
   });
 
+  /* ---------- who we work with: hovering a name swaps the background photo ---------- */
+  var wwo = $('.wwo');
+  if (wwo) {
+    var imgs = $$('.wwo-bg img'), links = $$('.wwo-list a'), cur = null;
+    var showImg = function (k) {
+      if (k === cur) return; cur = k;
+      imgs.forEach(function (im) { im.classList.toggle('on', im.dataset.k === k); });
+    };
+    links.forEach(function (a) {
+      a.addEventListener('mouseenter', function () { showImg(a.dataset.k); });
+      a.addEventListener('focus', function () { showImg(a.dataset.k); });
+    });
+    $('.wwo-list').addEventListener('mouseleave', function () { showImg('default'); });
+    links.forEach(function (a) { a.addEventListener('blur', function () { showImg('default'); }); });
+  }
+
   /* ---------- counters ---------- */
   $$('[data-count]').forEach(function (el) {
     var to = parseFloat(el.dataset.count), obj = { v: 0 };
