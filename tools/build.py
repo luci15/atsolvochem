@@ -251,7 +251,7 @@ home = f'''
 <p class="label" data-r>Who we are</p>
 <p class="big scrub">For over two decades, A T Solvochem has been the dependable chemicals &amp; solvents partner behind manufacturers across India &mdash; <em>ready stock, transparent pricing</em> and logistics you can rely on.</p>
 <p class="phil-sub" data-r>Led by Mr. Parag Shah, we import, distribute and supply chemicals, petrochemicals and industrial polymers &mdash; from a single enquiry to a drum, tanker or container at your gate.</p>
-<div class="trust" data-r><span class="tl"><img src="images/principals/basf.webp" alt=""></span><span class="tl"><img src="images/principals/clariant.webp" alt=""></span><span class="tl"><img src="images/principals/arkema.webp" alt=""></span><span class="tl"><img src="images/principals/godrej-industries.webp" alt=""></span><span style="margin-left:18px">Backed by 20+ leading principals</span></div>
+<div class="trust" data-r><span class="tlogo"><img src="images/principals/basf.webp" alt=""></span><span class="tlogo"><img src="images/principals/clariant.webp" alt=""></span><span class="tlogo"><img src="images/principals/arkema.webp" alt=""></span><span class="tlogo"><img src="images/principals/godrej-industries.webp" alt=""></span><span style="margin-left:18px">Backed by 20+ leading principals</span></div>
 <a class="btn btn--out phil-btn" href="aboutus.html" data-r>About us {ARROW}</a>
 </div></section>
 

@@ -78,3 +78,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-23: supply "ask" section recoloured to the site palette: cream paper background, ink heading, brand-red accents (italic words, lead, card labels), white cards with ink-tinted shadows. Motion unchanged.
 
 - 2026-10-23: supply "ask" section uses site typography/components (Calibri, bold headings with red italic accent, dot label, muted body, rounded white cards); Jost removed. Only the pinned sweeping tilted-card animation is borrowed from sarom.co.in.
+
+- 2026-10-23: fixed principal logo tiles under "Who we are" stretching tall (class clash with the old .tl timeline CSS): renamed to .tlogo, removed leftover timeline CSS, tiles 150x88.
