@@ -261,24 +261,24 @@
     if (lenis) lenis.on('scroll', function (e) { t.timeScale(1 + Math.min(Math.abs(e.velocity) * 0.35, 5)); gsap.to(t, { timeScale: 1, duration: 1.2, overwrite: true }); });
   });
 
-  // "ask" section (as on sarom.co.in/about): pin the section, sweep the tilted cards across with scroll via --xn
+  // supply section: pin it and sweep the tilted cards across with scroll (driven by --sup-x)
   mm.add('(min-width: 900px) and (prefers-reduced-motion: no-preference)', function () {
-    var sec = $('.ask'), track = sec && $('.ask__track', sec);
+    var sec = $('.sup'), track = sec && $('.sup__track', sec);
     if (!sec || !track) return;
     var total = function () { return track.scrollWidth + 0.9 * window.innerWidth; };
     var measure = function () {
-      var card = track.querySelector('.ask__card'), cw = card ? card.offsetWidth : 320;
+      var card = track.querySelector('.sup__card'), cw = card ? card.offsetWidth : 320;
       var gap = parseFloat(getComputedStyle(track).columnGap || '0') || 0;
-      track.style.setProperty('--cwn', String(cw));
-      track.style.setProperty('--stepn', String(cw + gap));
-      track.style.setProperty('--vwn', String(window.innerWidth));
+      track.style.setProperty('--sup-cw', String(cw));
+      track.style.setProperty('--sup-step', String(cw + gap));
+      track.style.setProperty('--sup-vw', String(window.innerWidth));
     };
     measure();
     var st = ScrollTrigger.create({ trigger: sec, start: 'top top', end: function () { return '+=' + 0.85 * total(); }, pin: true, anticipatePin: 1, scrub: 0.7,
       invalidateOnRefresh: true, onRefresh: measure,
-      onUpdate: function (self) { track.style.setProperty('--xn', String(0.9 * window.innerWidth - total() * self.progress)); } });
-    track.style.setProperty('--xn', String(0.9 * window.innerWidth));
-    return function () { ['--xn', '--cwn', '--stepn', '--vwn'].forEach(function (k) { track.style.removeProperty(k); }); st.kill(); };
+      onUpdate: function (self) { track.style.setProperty('--sup-x', String(0.9 * window.innerWidth - total() * self.progress)); } });
+    track.style.setProperty('--sup-x', String(0.9 * window.innerWidth));
+    return function () { ['--sup-x', '--sup-cw', '--sup-step', '--sup-vw'].forEach(function (k) { track.style.removeProperty(k); }); st.kill(); };
   });
 
   /* ---------- desktop-only pinned / stacked experiences ---------- */

@@ -223,12 +223,12 @@ SECTORS_SECTION = (f'''<section class="sec"><div class="wrap">
 <div class="sec-head"><div><p class="label" data-r>Where we work</p><h2 data-r>The industries we <em>know.</em></h2></div><p data-r>Ten sectors where long experience lets us contribute from the first call.</p></div>
 <ul class="sect">{sect_html}</ul>
 </div></section>''' if SHOW_SECTORS else '')
-ASK = [('Enquire', 'Tell us what you need.', 'Share the chemical, grade and quantity. We reply with availability and pricing from live stock — or source it for you.'),
+SUPPLY_STEPS = [('Enquire', 'Tell us what you need.', 'Share the chemical, grade and quantity. We reply with availability and pricing from live stock — or source it for you.'),
        ('Source', 'From names you can trust.', 'Long-standing links with leading manufacturers in India and overseas.'),
        ('Store', 'Ready when you are.', 'Material held at our Bhiwandi warehouse in barrels and bags, ready for quick dispatch and indent deals.'),
        ('Pack', 'Supplied your way.', 'Tanker, FCL, barrels, bags or small packs — with a lab analysis report with each dispatch.'),
        ('Deliver', 'Right to your gate.', 'Bulk via Kandla, Mundra, Hazira, JNPT and Aegis ports, then pan-India logistics support.')]
-ask_cards = ''.join(f'<article class="ask__card" style="--i:{i}"><span class="ask__cardNum">0{i + 1}<em>{l}</em></span><h3 class="ask__cardTitle">{t}</h3><p class="ask__cardBody">{b}</p></article>' for i, (l, t, b) in enumerate(ASK))
+sup_cards = ''.join(f'<article class="sup__card" style="--sup-i:{i}"><span class="sup__cardNum">0{i + 1}<em>{l}</em></span><h3 class="sup__cardTitle">{t}</h3><p class="sup__cardBody">{b}</p></article>' for i, (l, t, b) in enumerate(SUPPLY_STEPS))
 hz_steps = ''.join(f'<li class="hz-step"><span class="hz-node" aria-hidden="true"></span><div class="hz-body"><span class="hz-n">0{i}</span><h3>{t}</h3><p>{d}</p><div class="tags">{"".join(f"<span>{x}</span>" for x in tg)}</div>' + (f'<a class="btn btn--red hz-cta" href="contact.html">Start an enquiry {ARROW}</a>' if i == len(STEPS) else '') + '</div></li>' for i, (c, t, d, tg) in enumerate(STEPS, 1))
 tl_steps = ''.join(f'<li class="tl-step"><span class="tl-node" aria-hidden="true"></span><span class="tl-n">0{i}</span><div class="tl-body"><h3>{t}</h3><p>{d}</p><div class="tags">{"".join(f"<span>{x}</span>" for x in tg)}</div></div></li>' for i, (c, t, d, tg) in enumerate(STEPS, 1))
 
@@ -280,9 +280,9 @@ home = f'''
 
 {SECTORS_SECTION}
 
-<section class="ask" id="supply" data-nav-tone="dark" aria-label="How we supply"><div class="ask__bloom" aria-hidden="true"></div><div class="ask__stage">
-<div class="ask__fixed"><p class="ask__eyebrow">How we supply</p><h2 class="ask__mega">From enquiry to <em>your plant.</em></h2><p class="ask__lead">Five steps, one accountable partner.</p></div>
-<div class="ask__track">{ask_cards}</div></div></section>
+<section class="sup" id="supply" aria-label="How we supply"><div class="sup__bloom" aria-hidden="true"></div><div class="sup__stage">
+<div class="sup__fixed"><p class="sup__eyebrow">How we supply</p><h2 class="sup__mega">From enquiry to <em>your plant.</em></h2><p class="sup__lead">Five steps, one accountable partner.</p></div>
+<div class="sup__track">{sup_cards}</div></div></section>
 
 <section class="sec"><div class="wrap vs2">
 <div class="vs-l"><div><p class="label" data-r>The difference</p><h2 data-r>The same order, <em>handled twice.</em></h2></div><div><p data-r>Six things that go wrong with an unreliable supplier &mdash; and what we do instead.</p><a class="btn btn--dark" href="contact.html" data-r>Work with us {ARROW}</a></div></div>
