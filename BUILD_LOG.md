@@ -35,3 +35,5 @@
 - 2026-10-22: industries preview is a plain rounded rectangle (no hexagon); hovering a row opens it + swaps picture on top of the scroll-driven pin (scroll updates ignored unless progress actually changes, so hover and refresh do not fight).
 
 - 2026-10-22: tagline "A Chemicals & Solvents Hub" under brand (nav+footer); hero/footer location -> Mumbai, India; removed "Five ways we supply" heading; polished Who we are (statement + sub paragraph + About button). "The chemistry we move" section was already replaced by the 12-category table.
+
+- 2026-10-22: no hexagon pictures anywhere (trust logos, About image, Products category thumbnails now rounded rectangles; industries already). Twelve-category tile section hidden via SHOW_CATEGORY_TABLE=False in tools/build.py.

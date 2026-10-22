@@ -543,3 +543,13 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .phil-btn{margin-top:34px}
 .site-footer .brand small{color:#8d8778}
 @media (max-width:700px){.nav-pill .brand small{display:none}}
+
+/* no hexagon pictures: plain rounded rectangles */
+.trust .tl{width:118px;height:70px;background:#fff;border-radius:12px;display:grid;place-items:center;flex:none;box-shadow:0 1px 0 rgba(22,20,15,.06)}
+.trust .tl img{max-width:74%;max-height:54%;width:auto;height:auto;object-fit:contain}
+.trust{gap:12px}
+.figure-rect{width:min(560px,100%);aspect-ratio:4/3;border-radius:14px;overflow:hidden;margin:0 auto;background:var(--cream-2)}
+.figure-rect img{width:100%;height:100%;object-fit:cover}
+.cathead .cat-img{width:150px;aspect-ratio:4/3;border-radius:12px;overflow:hidden;flex:none;background:var(--cream-2)}
+.cathead .cat-img img{width:100%;height:100%;object-fit:cover}
+@media (max-width:700px){.cathead .cat-img{width:96px}.trust .tl{width:92px;height:56px}}

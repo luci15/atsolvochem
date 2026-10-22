@@ -198,6 +198,12 @@ cols = [[1, 4], [2, 5], [3, 6]]
 alts = {1: 'Team members at the A T Solvochem exhibition stall', 2: 'Visitors at the stall beside the product lists', 3: 'Meeting customers at the exhibition', 4: 'Team and visitor at the stall', 5: 'A T Solvochem at the exhibition', 6: 'A T Solvochem at the exhibition'}
 galcols = ''.join('<div class="gal-col">' + ''.join(f'<button class="shot" data-full="images/gallery/expo-{n}.webp"><img src="images/gallery/expo-{n}.webp" alt="{E(alts[n])}" loading="lazy"></button>' for n in c) + '</div>' for c in cols)
 
+SHOW_CATEGORY_TABLE = False  # the twelve-category tile table is hidden for now
+CAT_TABLE_SECTION = (f'''<section class="sec sec--w"><div class="wrap">
+<div class="sec-head"><div><p class="label" data-r>Product categories</p><h2 data-r>Twelve categories, <em>one supplier.</em></h2></div><p data-r>Pick the industry you work in to see the full product list. Can&rsquo;t find a grade? Ask the sales desk &mdash; we source imported and Indian material on request.</p></div>
+<div class="ptable">{pt_tiles}</div>
+</div></section>''' if SHOW_CATEGORY_TABLE else '')
+
 home = f'''
 <section class="hero" id="top">
 <div class="hero-media"><canvas aria-hidden="true"></canvas></div>
@@ -217,7 +223,7 @@ home = f'''
 <p class="label" data-r>Who we are</p>
 <p class="big scrub">For over two decades, A T Solvochem has been the dependable chemicals &amp; solvents partner behind manufacturers across India &mdash; <em>ready stock, transparent pricing</em> and logistics you can rely on.</p>
 <p class="phil-sub" data-r>Led by Mr. Parag Shah, we import, distribute and supply chemicals, petrochemicals and industrial polymers &mdash; from a single enquiry to a drum, tanker or container at your gate.</p>
-<div class="trust" data-r><span class="hx"><img src="images/principals/basf.webp" alt=""></span><span class="hx"><img src="images/principals/clariant.webp" alt=""></span><span class="hx"><img src="images/principals/arkema.webp" alt=""></span><span class="hx"><img src="images/principals/godrej-industries.webp" alt=""></span><span style="margin-left:18px">Backed by 20+ leading principals</span></div>
+<div class="trust" data-r><span class="tl"><img src="images/principals/basf.webp" alt=""></span><span class="tl"><img src="images/principals/clariant.webp" alt=""></span><span class="tl"><img src="images/principals/arkema.webp" alt=""></span><span class="tl"><img src="images/principals/godrej-industries.webp" alt=""></span><span style="margin-left:18px">Backed by 20+ leading principals</span></div>
 <a class="btn btn--out phil-btn" href="aboutus.html" data-r>About us {ARROW}</a>
 </div></section>
 
@@ -225,10 +231,7 @@ home = f'''
 <div class="ind-grid"><div class="acc" id="ind-acc">{acc_items}</div><div class="ind-art" aria-hidden="true">{acc_art}</div></div>
 </div></section>
 
-<section class="sec sec--w"><div class="wrap">
-<div class="sec-head"><div><p class="label" data-r>Product categories</p><h2 data-r>Twelve categories, <em>one supplier.</em></h2></div><p data-r>Pick the industry you work in to see the full product list. Can&rsquo;t find a grade? Ask the sales desk &mdash; we source imported and Indian material on request.</p></div>
-<div class="ptable">{pt_tiles}</div>
-</div></section>
+{CAT_TABLE_SECTION}
 
 <div class="emerge-wrap"><section class="emerge on-dark"><div class="emerge-in">
 <p class="label">Why A T Solvochem</p>
@@ -296,7 +299,7 @@ about = phead('About us', ['Two decades of', '<em>chemicals</em> &amp; solvents.
 <p data-r>A.T. Solvochem is a leading importer, distributor and supplier of chemicals, petrochemicals and industrial polymers. Under the leadership of <strong>Mr. Parag Shah</strong>, the firm has completed two decades supplying chemicals and solvents &mdash; beginning by trading solvents and chemicals in a single market.</p>
 <p data-r>Years of dedication and hard work have made us a trusted supplier. We value our customer relationships and our work ethic: we strengthen old bonds and create new ones. Active networking has built relationships with leading manufacturers across the country, so we can be a one-stop shop for every industry.</p>
 <p data-r>We offer hydrocarbons, alcohols, glycols, ketones, esters, chlorinated solvents, fragrance chemicals, monomers and more.</p></div>
-<div data-r><div class="figure-hex"><img src="images/industries/plant.jpg" alt="Chemical plant at dusk" loading="lazy"></div></div>
+<div data-r><div class="figure-rect"><img src="images/industries/plant.jpg" alt="Chemical plant at dusk" loading="lazy"></div></div>
 </div></section>
 
 <section class="section section--w"><div class="wrap">
@@ -321,7 +324,7 @@ tabs = ''.join(f'<button class="tab" data-cat="{c[0]}" aria-pressed="{"true" if 
 blocks = ''
 for cid, _t, long, desc, img, short in CATS:
     lis = ''.join(f'<li><a href="contact.html?chem={E(re.sub(r"[^A-Za-z0-9]+", "+", n).strip("+"))}">{E(n)}</a></li>' for n in cats[cid])
-    blocks += f'<section class="catblock" id="{cid}"><div class="cathead"><div class="hx"><img src="images/industries/{img}" alt="" loading="lazy"></div><div><h2>{E(long)}</h2><p>{desc} <strong class="count">{len(cats[cid])}</strong> chemicals listed.</p></div></div><ul class="chem">{lis}</ul></section>'
+    blocks += f'<section class="catblock" id="{cid}"><div class="cathead"><div class="cat-img"><img src="images/industries/{img}" alt="" loading="lazy"></div><div><h2>{E(long)}</h2><p>{desc} <strong class="count">{len(cats[cid])}</strong> chemicals listed.</p></div></div><ul class="chem">{lis}</ul></section>'
 prod = phead('Products', [f'{TOTAL}+ chemicals,', '<em>ready to enquire.</em>'], 'Search the list or browse by industry. Select any chemical to send us an enquiry for it.') + f'''
 <div class="page-body">
 <div class="toolbar"><div class="wrap"><div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="Search chemicals…" aria-label="Search chemicals" autocomplete="off"></div><div class="tabs" role="group" aria-label="Filter by industry">{tabs}</div></div></div>
