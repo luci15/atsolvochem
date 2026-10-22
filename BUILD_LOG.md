@@ -76,3 +76,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-23: supply section now replicates sarom.co.in/about "What sets Sarom apart" (read from its live CSS/JS): pinned dark section, uppercase light heading with italic accent, italic lead top-right, five tilted frosted-glass cards sweeping across with scroll (--xn driven, scrub .7, 0.85x distance, 3D rotate/scale/fade by distance from centre); stacked cards below 900px / reduced motion. Font: Jost 300/400 for this section only. Replaced the neon/outlined timeline, horizontal step cards and vertical timeline (all rejected).
 
 - 2026-10-23: supply "ask" section recoloured to the site palette: cream paper background, ink heading, brand-red accents (italic words, lead, card labels), white cards with ink-tinted shadows. Motion unchanged.
+
+- 2026-10-23: supply "ask" section uses site typography/components (Calibri, bold headings with red italic accent, dot label, muted body, rounded white cards); Jost removed. Only the pinned sweeping tilted-card animation is borrowed from sarom.co.in.

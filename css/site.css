@@ -710,3 +710,16 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .ask__card:before{background:linear-gradient(90deg,rgba(22,20,15,.18),rgba(255,255,255,.9))}
 .ask__card:after{background:linear-gradient(270deg,rgba(22,20,15,.18),rgba(255,255,255,.9))}
 .ask__cardNum{color:var(--red)}
+
+/* "ask" section: site typography and component styling (only the sweeping-card animation is borrowed) */
+.ask{--ask-font:var(--fb);font-family:var(--fb)}
+.ask__eyebrow{font:600 12.5px/1 var(--fb);letter-spacing:.16em;color:var(--ink-2);gap:12px}
+.ask__eyebrow:before{width:8px;height:8px;border-radius:50%;background:var(--red)}
+.ask__mega{font-family:var(--fd);font-weight:700;text-transform:none;letter-spacing:-.025em;line-height:.98;color:var(--ink);max-width:11em;font-size:clamp(2.4rem,4.6vw,4.4rem);margin-top:clamp(1.1rem,2vw,1.6rem)}
+.ask__mega em{font-weight:700;font-style:italic;color:var(--red)}
+.ask__lead{font-family:var(--fb);font-style:normal;font-weight:400;color:var(--mute);font-size:1.05rem;line-height:1.55;max-width:30ch}
+.ask__card{border-radius:22px;border-color:var(--line)}
+.ask__cardNum{font:700 .8rem/1.2 var(--fb);letter-spacing:.14em;color:var(--red)}
+.ask__cardNum em{font-weight:600;color:var(--mute)}
+.ask__cardTitle{font-family:var(--fd);font-weight:700;letter-spacing:-.02em;font-size:clamp(1.3rem,1.9vw,1.75rem);line-height:1.08;margin-top:.9rem;color:var(--ink)}
+.ask__cardBody{font:400 .98rem/1.55 var(--fb);color:var(--mute);margin-top:.7rem}
