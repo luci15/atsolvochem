@@ -599,7 +599,6 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .wwo-list:hover a{opacity:1}
 .wwo-list.hov a{filter:blur(min(calc(var(--dist,1) * .55px),2.2px));opacity:max(.4,calc(.9 - var(--dist,1) * .14))}
 .wwo-list.hov a.act{filter:none;opacity:1;transform:scale(1.04)}
-@media (hover:none){.wwo-list.hov a{filter:none;opacity:1}}
 .wwo-shade{background:radial-gradient(100% 80% at 50% 45%,rgba(13,12,10,.18),rgba(13,12,10,.7)),rgba(13,12,10,.2)}
 
 /* v4 cards: calmer, consistent step cards and ruled strength columns */

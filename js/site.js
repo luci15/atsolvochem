@@ -227,16 +227,14 @@
       imgs.forEach(function (im) { im.classList.toggle('on', im.dataset.k === k); });
     };
     var list = $('.wwo-list');
-    var focusOn = function (a) {
-      showImg(a.dataset.k);
-      var idx = links.indexOf(a);
+    // focus = which name is sharp; the others blur and fade by distance. The first name is focused by default.
+    var setFocus = function (idx) {
       list.classList.add('hov');
       links.forEach(function (l, j) { l.style.setProperty('--dist', Math.abs(j - idx)); l.classList.toggle('act', j === idx); });
     };
-    var focusOff = function () {
-      showImg('default'); list.classList.remove('hov');
-      links.forEach(function (l) { l.classList.remove('act'); });
-    };
+    var focusOn = function (a) { showImg(a.dataset.k); setFocus(links.indexOf(a)); };
+    var focusOff = function () { showImg('default'); setFocus(0); };
+    setFocus(0);
     links.forEach(function (a) {
       a.addEventListener('mouseenter', function () { focusOn(a); });
       a.addEventListener('focus', function () { focusOn(a); });

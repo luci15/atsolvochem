@@ -65,3 +65,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-22: gallery photos are display-only: removed lightbox/click, zoom cursor and hover zoom.
 
 - 2026-10-23: navbar button "Get a quote" -> "Contact us".
+
+- 2026-10-23: Who we work with: focus blur is the resting state (first name sharp, others blur/fade by distance); hover moves the focus and swaps the photo; leaving returns to the first name + default photo.
