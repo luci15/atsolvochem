@@ -707,3 +707,7 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
   .sup__stage{position:static}
   .sup__track{top:clamp(230px,36%,360px)}
 }
+
+/* supply cards: no fake side/bottom "thickness" edges */
+.sup__card:before,.sup__card:after{display:none}
+.sup__card{box-shadow:0 2px 6px rgba(22,20,15,.1),0 22px 46px rgba(22,20,15,.16),0 50px 90px rgba(22,20,15,.1)}

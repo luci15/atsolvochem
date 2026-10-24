@@ -86,3 +86,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-23: supply sweeping cards now carry the original step content (number, line icon, title, description, tag pills) and the original intro line; only the animation is the borrowed one.
 
 - 2026-10-24: supply section no longer vertically centred: heading starts right under the nav, cards sit just below it (track positioned against the section, top ~36%), removing the empty band above.
+
+- 2026-10-24: supply cards: removed the skewed side edge strips and the ledge shadow; soft shadow only.
