@@ -130,7 +130,7 @@ STR = [('truck', 'Pan-India logistics', 'Excellent logistical support — materi
 
 
 def str_grid():
-    return '<div class="str-grid">' + ''.join(f'<div class="str" data-r><div class="hx">{ICONS[k]}</div><h3>{t}</h3><p>{d}</p></div>' for k, t, d in STR) + '</div>'
+    return '<div class="str-grid">' + ''.join(f'<div class="str" data-r><div class="str-top"><span class="str-n">0{i}</span><div class="hx">{ICONS[k]}</div></div><div class="str-txt"><h3>{t}</h3><p>{d}</p></div></div>' for i, (k, t, d) in enumerate(STR, 1)) + '</div>'
 
 
 def write(name, content):

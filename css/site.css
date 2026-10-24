@@ -711,3 +711,39 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 /* supply cards: no fake side/bottom "thickness" edges */
 .sup__card:before,.sup__card:after{display:none}
 .sup__card{box-shadow:0 2px 6px rgba(22,20,15,.1),0 22px 46px rgba(22,20,15,.16),0 50px 90px rgba(22,20,15,.1)}
+
+/* Buttons: on hover the round icon chip travels from the right end to the left end while the
+   label's side paddings swap by the same amount, so the button never changes size (500ms ease). */
+.btn:not(.btn--text){position:relative;height:56px;padding:0 66px 0 26px;overflow:hidden;
+  transition:padding .5s cubic-bezier(.4,0,.2,1),background-color .5s cubic-bezier(.4,0,.2,1),color .5s cubic-bezier(.4,0,.2,1),box-shadow .5s cubic-bezier(.4,0,.2,1),transform .15s}
+.btn:not(.btn--text) i{position:absolute;top:6px;right:6px;width:44px;height:44px;transition:right .5s cubic-bezier(.4,0,.2,1),background-color .5s,color .5s}
+.btn:not(.btn--text):hover,.btn:not(.btn--text):focus-visible{padding:0 26px 0 66px}
+.btn:not(.btn--text):hover i,.btn:not(.btn--text):focus-visible i{right:calc(100% - 50px);transform:none}
+.btn:not(.btn--text):active{transform:scale(.985)}
+.btn--out{height:56px}
+.btn--out i{top:4.5px;right:4.5px}
+.btn--out:hover i,.btn--out:focus-visible i{right:calc(100% - 48.5px)}
+.btn--red:hover{box-shadow:0 12px 28px rgba(227,32,43,.34)}
+.btn--dark:hover{box-shadow:0 12px 28px rgba(22,20,15,.32)}
+.btn--cream:hover{box-shadow:0 12px 28px rgba(22,20,15,.18)}
+.btn--out:hover{box-shadow:0 12px 28px rgba(22,20,15,.22)}
+@media (prefers-reduced-motion:reduce){.btn:not(.btn--text),.btn:not(.btn--text) i{transition:none}}
+
+/* Strength cards: tall dark tiles, index + icon on top, text at the bottom; on hover the tile fills red from the bottom */
+.str-grid{gap:16px;margin-top:clamp(44px,6vw,80px)}
+.str,.str+.str{position:relative;overflow:hidden;isolation:isolate;display:flex;flex-direction:column;justify-content:space-between;gap:48px;min-height:clamp(260px,24vw,320px);padding:28px;border:1px solid rgba(255,255,255,.1);border-radius:22px;background:var(--dark-2);transition:border-color .5s,transform .6s var(--ease)}
+.str:before{content:"";position:absolute;inset:0;z-index:-1;background:var(--red);transform:scaleY(0);transform-origin:bottom;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.str:hover{transform:translateY(-6px);border-color:var(--red)}
+.str:hover:before{transform:scaleY(1)}
+.str-top{display:flex;justify-content:space-between;align-items:center}
+.str-n{font:700 15px/1 var(--fb);letter-spacing:.14em;color:rgba(255,255,255,.45);transition:color .5s}
+.str .hx{width:52px;height:52px;margin:0;border:0;border-radius:14px;background:var(--red);display:grid;place-items:center;transition:background-color .5s}
+.str .hx svg{width:22px;height:22px;stroke:#fff;transition:stroke .5s}
+.str h3{font-size:clamp(22px,1.9vw,28px);margin:0 0 10px;line-height:1.05}
+.str p{font-size:15px;color:#b9b3a4;transition:color .5s}
+.str:hover .str-n,.str:hover p{color:rgba(255,255,255,.9)}
+.str:hover .hx{background:#fff}
+.str:hover .hx svg{stroke:var(--red)}
+@media (max-width:1020px){.str-grid{grid-template-columns:1fr 1fr}.str,.str+.str,.str:nth-child(odd){padding:24px;border-left:1px solid rgba(255,255,255,.1)}}
+@media (max-width:700px){.str-grid{grid-template-columns:1fr}.str,.str+.str{min-height:0}}
+@media (prefers-reduced-motion:reduce){.str,.str:before{transition:none}}
