@@ -816,3 +816,6 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .g3-scroll,.g3-scroll *{pointer-events:none}
 @media (min-width:1021px) and (prefers-reduced-motion:no-preference){.gal.g3-on .gal-foot{padding-top:0;margin-top:-6vh}}
 @media (min-width:1021px) and (prefers-reduced-motion:no-preference){.gal.g3-on{padding-bottom:clamp(60px,7vw,100px)}}
+
+/* closing banner meets the footer with square corners (no light gaps at the edges) */
+.closer{border-radius:0}

@@ -102,3 +102,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-24: "View gallery" button moved below the 3D gallery (centred) and made clickable: the 3D stage overlapped it, so the stage now ignores pointer events.
 
 - 2026-10-24: removed the letter scramble on "Pan-India"; only the numeric stats roll.
+
+- 2026-10-24: red closing banner: square bottom corners, removing the light gaps where it meets the footer.
