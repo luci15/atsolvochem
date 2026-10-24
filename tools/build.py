@@ -173,7 +173,7 @@ vs_html = '<div class="vsp no" data-r><h3>Without a dependable supplier</h3><ul>
 BUY = [('Ready stock', 'Material held at our Bhiwandi warehouse for quick dispatch.', ['Barrels and bags', 'Small packs on request', 'Lab analysis report with each dispatch'], False),
        ('Indent deals', 'Bulk requirements sourced to order, planned around your schedule.', ['Tanker or FCL loads', 'Supplied via Kandla, Mundra, Hazira, JNPT, Aegis', 'Pan-India delivery'], True),
        ('High-seas sales', 'Cargo bought while in transit — ask for current offers.', ['Imported grades', 'Bulk quantities', 'Quoted per shipment'], False)]
-buy_html = '<div class="buy">' + ''.join(f'<div class="bcard{" hot" if h else ""}" data-r><span class="k">0{i}</span><h3>{t}</h3><p>{d}</p><ul>' + ''.join(f'<li>{x}</li>' for x in li) + f'</ul><a class="btn {"btn--cream" if h else "btn--dark"}" href="contact.html">Request a quote {ARROW}</a></div>' for i, (t, d, li, h) in enumerate(BUY, 1)) + '</div>'
+buy_html = '<div class="buy2">' + ''.join(f'<div class="bp{" on" if n == 1 else ""}" tabindex="0"><div class="bp-head"><span class="bp-n">0{n}</span><h3>{t}</h3></div><div class="bp-more"><p>{d}</p><ul>' + ''.join(f'<li>{x}</li>' for x in li) + f'</ul><a class="btn btn--red" href="contact.html">Request a quote {ARROW}</a></div></div>' for n, (t, d, li, h) in enumerate(BUY, 1)) + '</div>'
 
 FAQ = [('How do I place an order or get a quote?', 'Send us the chemical name, grade and quantity through the enquiry form, WhatsApp or phone. We confirm availability and pricing from current stock, or source it for you.'),
        ('What packing do you offer?', 'Tanker, FCL, barrels and bags, packed in quality drums to protect the material. Small packs are available on request.'),
@@ -265,10 +265,10 @@ home = f'''
 <p class="lead">Our network of leading manufacturers across the country lets us serve every industry on the spectrum &mdash; on time, at the right price.</p>
 <div class="tick"><span>Lab analysis report with each dispatch</span><span>Regular stock</span><span>Indent deals for bulk</span><span>Small packs on request</span></div>
 <div class="stats">
-<div class="stat"><b data-count="20">0<i>+</i></b><span>Years supplying chemicals &amp; solvents</span></div>
-<div class="stat"><b data-count="{TOTAL}">0<i>+</i></b><span>Chemicals across five product lists</span></div>
-<div class="stat"><b data-count="5">0</b><span>Ports serving bulk orders</span></div>
-<div class="stat"><b class="sm">Pan<i>-</i>India</b><span>Logistics from our Bhiwandi warehouse</span></div>
+<div class="stat"><b data-count="20">20<i>+</i></b><span>Years supplying chemicals &amp; solvents</span></div>
+<div class="stat"><b data-count="{TOTAL}">{TOTAL}<i>+</i></b><span>Chemicals across five product lists</span></div>
+<div class="stat"><b data-count="5">5</b><span>Ports serving bulk orders</span></div>
+<div class="stat"><b class="sm" data-scramble>Pan<i>-</i>India</b><span>Logistics from our Bhiwandi warehouse</span></div>
 </div>
 {str_grid()}
 </div></section></div>

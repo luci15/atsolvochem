@@ -90,3 +90,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-24: supply cards: removed the skewed side edge strips and the ledge shadow; soft shadow only.
 
 - 2026-10-24: buttons: hover animation from the reference waitlist CTA (icon chip slides right-to-left across the button while label paddings swap, size constant, 500ms, darker bg + shadow). Strength cards ("Why A T Solvochem" + About): tall dark tiles with index 01-04, red rounded-square icon top-right, text at bottom; hover fills red from the bottom, icon turns white, card lifts.
+
+- 2026-10-24: stats: odometer counters (each digit wheel spins two full turns and settles, right digit last; replays every time the stats scroll into view); "Pan-India" letters scramble then settle. Final numbers are in the HTML for no-JS/reduced motion. Ways to buy: three panels in a row, hovered/focused/tapped one widens to show text, tags and button, others fold to number + title + plus icon; stacked and all open on <=900px.

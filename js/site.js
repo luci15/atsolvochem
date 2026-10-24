@@ -65,6 +65,17 @@
     else if (p.get('sent') === '0') { al.className = 'alert err'; al.textContent = 'We could not send your enquiry. Please try again or email sales.atsolvochem@gmail.com.'; }
   }
 
+  // ways to buy: hover / focus / tap a panel to open it
+  $$('.buy2').forEach(function (row) {
+    var ps = $$('.bp', row);
+    var pick = function (p) { ps.forEach(function (o) { o.classList.toggle('on', o === p); }); };
+    ps.forEach(function (p) {
+      p.addEventListener('mouseenter', function () { pick(p); });
+      p.addEventListener('focus', function () { pick(p); });
+      p.addEventListener('click', function () { pick(p); });
+    });
+  });
+
   if (!hasGsap) return;
   gsap.registerPlugin(ScrollTrigger);
 
@@ -244,14 +255,46 @@
     list.addEventListener('mouseleave', focusOff);
   }
 
-  /* ---------- counters ---------- */
+  /* ---------- counters: odometer digits roll up each time the stats scroll into view ---------- */
   $$('[data-count]').forEach(function (el) {
-    var to = parseFloat(el.dataset.count), obj = { v: 0 };
-    var suffix = el.querySelector('i'); var sfx = suffix ? suffix.outerHTML : '';
-    var write = function () { el.innerHTML = Math.round(obj.v) + sfx; };
-    if (reduce) { obj.v = to; write(); return; }
-    write();
-    whenIn(el, 'top 88%', function () { gsap.to(obj, { v: to, duration: 2.2, ease: 'power3.out', onUpdate: write }); });
+    if (reduce) return;                         // markup already holds the final number
+    var digits = String(parseInt(el.dataset.count, 10)).split('');
+    var sfx = el.querySelector('i'); sfx = sfx ? sfx.outerHTML : '';
+    el.setAttribute('aria-label', el.textContent);
+    el.innerHTML = digits.map(function (d) {
+      var strip = '';
+      for (var k = 0; k < 20; k++) strip += '<span>' + (k % 10) + '</span>';   // two full turns of the wheel
+      for (var m = 0; m <= +d; m++) strip += '<span>' + m + '</span>';           // then stop on the digit
+      return '<span class="odo" aria-hidden="true"><span class="odo__strip" data-d="' + d + '">' + strip + '</span></span>';
+    }).join('') + sfx;
+    var strips = $$('.odo__strip', el);
+    var roll = function () {
+      strips.forEach(function (s, i) {
+        var stop = 20 + (+s.dataset.d);
+        gsap.fromTo(s, { yPercent: 0 }, { yPercent: -100 * stop / (stop + 1), duration: 1.6 + (strips.length - 1 - i) * 0.35, ease: 'power3.out', overwrite: true });
+      });
+    };
+    gsap.set(strips, { yPercent: 0 });
+    ScrollTrigger.create({ trigger: el, start: 'top 90%', end: 'bottom 10%', onEnter: roll, onEnterBack: roll,
+      onRefresh: function (self) { if (self.isActive) roll(); } });
+  });
+
+  /* "Pan-India": letters shuffle and settle left to right as it comes into view */
+  $$('[data-scramble]').forEach(function (el) {
+    if (reduce) return;
+    var html = el.innerHTML, text = el.textContent, chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', raf = null;
+    var run = function () {
+      cancelAnimationFrame(raf);
+      var t0 = performance.now(), dur = 1300;
+      var tick = function (now) {
+        var p = Math.min(1, (now - t0) / dur), fixed = Math.floor(p * text.length), out = '';
+        for (var i = 0; i < text.length; i++) out += (i < fixed || text[i] === '-') ? text[i] : chars[(Math.random() * chars.length) | 0];
+        el.textContent = out;
+        if (p < 1) raf = requestAnimationFrame(tick); else el.innerHTML = html;
+      };
+      raf = requestAnimationFrame(tick);
+    };
+    ScrollTrigger.create({ trigger: el, start: 'top 90%', end: 'bottom 10%', onEnter: run, onEnterBack: run });
   });
 
   /* ---------- marquees ---------- */
