@@ -279,24 +279,6 @@
       onRefresh: function (self) { if (self.isActive) roll(); } });
   });
 
-  /* "Pan-India": letters shuffle and settle left to right as it comes into view */
-  $$('[data-scramble]').forEach(function (el) {
-    if (reduce) return;
-    var html = el.innerHTML, text = el.textContent, chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', raf = null;
-    var run = function () {
-      cancelAnimationFrame(raf);
-      var t0 = performance.now(), dur = 1300;
-      var tick = function (now) {
-        var p = Math.min(1, (now - t0) / dur), fixed = Math.floor(p * text.length), out = '';
-        for (var i = 0; i < text.length; i++) out += (i < fixed || text[i] === '-') ? text[i] : chars[(Math.random() * chars.length) | 0];
-        el.textContent = out;
-        if (p < 1) raf = requestAnimationFrame(tick); else el.innerHTML = html;
-      };
-      raf = requestAnimationFrame(tick);
-    };
-    ScrollTrigger.create({ trigger: el, start: 'top 90%', end: 'bottom 10%', onEnter: run, onEnterBack: run });
-  });
-
   /* ---------- marquees ---------- */
   if (!reduce) $$('.mq-track').forEach(function (tr, i) {
     var dir = tr.dataset.dir === 'r' ? 1 : -1;

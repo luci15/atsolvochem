@@ -289,7 +289,7 @@ home = f'''
 <div class="stat"><b data-count="20">20<i>+</i></b><span>Years supplying chemicals &amp; solvents</span></div>
 <div class="stat"><b data-count="{TOTAL}">{TOTAL}<i>+</i></b><span>Chemicals across five product lists</span></div>
 <div class="stat"><b data-count="5">5</b><span>Ports serving bulk orders</span></div>
-<div class="stat"><b class="sm" data-scramble>Pan<i>-</i>India</b><span>Logistics from our Bhiwandi warehouse</span></div>
+<div class="stat"><b class="sm">Pan<i>-</i>India</b><span>Logistics from our Bhiwandi warehouse</span></div>
 </div>
 {str_grid()}
 </div></section></div>
