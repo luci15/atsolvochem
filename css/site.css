@@ -808,6 +808,5 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 
 /* gallery 3D: frames follow the photos' own (portrait / square) shape; keep heads in frame */
 @media (min-width:1021px) and (prefers-reduced-motion:no-preference){
-  .g3-main{width:420px;aspect-ratio:3/4}
-  .g3-face img{object-position:center 22%}
+  .g3-main{width:640px;aspect-ratio:16/10}
 }

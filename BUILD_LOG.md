@@ -96,3 +96,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-24: home gallery rebuilt as a 3D scroll scene using the reference site's own keyframes (read from its compiled Framer code): stage starts scaled 0.7 offset (-300,-400) and slides in while the 3D space (perspective 800) zooms x2; then the 7 photo frames (each with a back face) spread from a centre cluster to a scattered collage while the whole plane flips 180deg on X and the space settles at x1.5; main photo at z150 scale .5. Scroll-linked, scrub 1 + Lenis. Desktop only (>1020px, motion allowed); photo columns otherwise. Fixed: section overflow:hidden broke position:sticky -> overflow:clip.
 
 - 2026-10-24: gallery 3D frames now use each photo's own shape (3:4 portrait, 1:1 square; main 3:4) with focus near the top, so faces are no longer cropped.
+
+- 2026-10-24: gallery 3D: frames back to the reference shapes (16:9 / 4:3 / 3:4, main 16:10); photos re-assigned (square group shots in landscape slots, portraits in portrait slots) and each crop aimed at where the faces sit (per-photo face height -> computed object-position), so shapes crop but faces stay in.
