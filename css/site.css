@@ -810,3 +810,9 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 @media (min-width:1021px) and (prefers-reduced-motion:no-preference){
   .g3-main{width:640px;aspect-ratio:16/10}
 }
+
+/* gallery: button sits under the photos; the 3D stage never blocks clicks */
+.gal-foot{display:flex;justify-content:center;padding:clamp(28px,4vw,48px) 28px 0;position:relative;z-index:3}
+.g3-scroll,.g3-scroll *{pointer-events:none}
+@media (min-width:1021px) and (prefers-reduced-motion:no-preference){.gal.g3-on .gal-foot{padding-top:0;margin-top:-6vh}}
+@media (min-width:1021px) and (prefers-reduced-motion:no-preference){.gal.g3-on{padding-bottom:clamp(60px,7vw,100px)}}

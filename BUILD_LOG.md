@@ -98,3 +98,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-24: gallery 3D frames now use each photo's own shape (3:4 portrait, 1:1 square; main 3:4) with focus near the top, so faces are no longer cropped.
 
 - 2026-10-24: gallery 3D: frames back to the reference shapes (16:9 / 4:3 / 3:4, main 16:10); photos re-assigned (square group shots in landscape slots, portraits in portrait slots) and each crop aimed at where the faces sit (per-photo face height -> computed object-position), so shapes crop but faces stay in.
+
+- 2026-10-24: "View gallery" button moved below the 3D gallery (centred) and made clickable: the 3D stage overlapped it, so the stage now ignores pointer events.

@@ -318,9 +318,10 @@ home = f'''
 </section>
 
 <section class="gal on-dark">
-<div class="gal-head"><div><p class="label">On the ground</p><h2 style="margin-top:22px">Meeting our <em>customers</em> &amp; partners.</h2></div><a class="btn btn--cream" href="gallery.html">View gallery {ARROW}</a></div>
+<div class="gal-head"><div><p class="label">On the ground</p><h2 style="margin-top:22px">Meeting our <em>customers</em> &amp; partners.</h2></div></div>
 <div class="gal-cols">{galcols}</div>
 <div class="g3-scroll" aria-hidden="true"><div class="g3-sticky"><div class="g3-space"><div class="g3-content">{g3_frames}{g3_main}</div></div></div></div>
+<div class="gal-foot"><a class="btn btn--cream" href="gallery.html">View gallery {ARROW}</a></div>
 
 </section>
 
