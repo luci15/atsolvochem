@@ -324,6 +324,29 @@
     return function () { ['--sup-x', '--sup-cw', '--sup-step', '--sup-vw'].forEach(function (k) { track.style.removeProperty(k); }); st.kill(); };
   });
 
+  // gallery 3D: stage slides in from top-left and zooms (x2), then the photo cluster spreads out while the whole
+  // plane flips 180deg on X and settles at x1.5 - scroll-linked with scrub smoothing
+  mm.add('(min-width: 1021px) and (prefers-reduced-motion: no-preference)', function () {
+    var gal = $('.gal'), sc = gal && $('.g3-scroll', gal);
+    if (!sc) return;
+    gal.classList.add('g3-on');
+    var sticky = $('.g3-sticky', sc), space = $('.g3-space', sc), content = $('.g3-content', sc), main = $('.g3-main', sc), frames = $$('.g3-img', sc);
+    gsap.set(space, { transformPerspective: 800, scale: 1 });
+    gsap.set(main, { xPercent: -50, yPercent: -50, z: 150, scale: 0.5 });
+    frames.forEach(function (f) {
+      var a = f.dataset.a;
+      gsap.set(f, { xPercent: a === 'c' ? -50 : 0, yPercent: a === 'n' ? 0 : -50, x: +f.dataset.x, y: +f.dataset.y, z: +f.dataset.z });
+    });
+    gsap.set(sticky, { scale: 0.7, x: -300, y: -400 });
+    var tl = gsap.timeline({ scrollTrigger: { trigger: sc, start: 'top bottom', end: 'bottom bottom', scrub: 1, invalidateOnRefresh: true } });
+    tl.to(sticky, { scale: 1, x: 0, y: 0, ease: 'none', duration: 1 }, 0)
+      .to(space, { scale: 2, ease: 'none', duration: 1 }, 0)
+      .to(content, { rotateX: 180, ease: 'none', duration: 1.8 }, 1)
+      .to(space, { scale: 1.5, ease: 'none', duration: 1.8 }, 1)
+      .to(frames, { x: 0, y: 0, ease: 'none', duration: 1.8 }, 1);
+    return function () { gal.classList.remove('g3-on'); tl.scrollTrigger && tl.scrollTrigger.kill(); tl.kill(); gsap.set([sticky, space, content, main].concat(frames), { clearProps: 'all' }); };
+  });
+
   /* ---------- desktop-only pinned / stacked experiences ---------- */
   mm.add('(min-width: 1021px) and (prefers-reduced-motion: no-preference)', function () {
     // parallax gallery columns

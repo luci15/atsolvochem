@@ -785,3 +785,23 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .bp.on:after{opacity:0;transform:rotate(90deg)}
 .bp:not(.on):hover:after{background:var(--ink);color:#fff}
 @media (max-width:900px){.bp:after{display:none}}
+
+/* ===== Gallery 3D: photos sit in a 3D space; on scroll the stage slides in, zooms, the cluster spreads and the
+   whole plane flips over on X (back faces carry the same photos). Desktop only; columns elsewhere. ===== */
+.g3-scroll{display:none}
+@media (min-width:1021px) and (prefers-reduced-motion:no-preference){
+  .gal{padding-bottom:0}
+  .gal.g3-on{overflow:clip}
+  .gal.g3-on .gal-cols{display:none}
+  .gal.g3-on .g3-scroll{display:block;position:relative;height:280vh;margin-top:-10vh}
+  .g3-sticky{position:sticky;top:0;height:102vh;display:flex;align-items:center;justify-content:center;overflow:hidden;will-change:transform}
+  .g3-space{transform-style:preserve-3d;will-change:transform}
+  .g3-content{position:relative;width:940px;height:616px;transform-style:preserve-3d;will-change:transform}
+  .g3-img,.g3-main{position:absolute;margin:0;transform-style:preserve-3d;will-change:transform}
+  .g3-main{top:50%;left:50%;width:640px;aspect-ratio:16/10}
+  .g3-face{position:absolute;inset:0;border-radius:8px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+  .g3-img .g3-face:first-child,.g3-main .g3-face:first-child{position:relative;display:block;height:100%}
+  .g3-back{transform:rotateX(180deg)}
+  .g3-face img{width:100%;height:100%;object-fit:cover;display:block}
+  .g3-main .g3-face{border-radius:12px}
+}

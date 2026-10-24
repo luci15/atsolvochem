@@ -202,6 +202,18 @@ mq = ''.join(logo(s, n) for s, n in PR)
 mq2 = ''.join(logo(s, n) for s, n in reversed(PR))
 cols = [[1, 4], [2, 5], [3, 6]]
 alts = {1: 'Team members at the A T Solvochem exhibition stall', 2: 'Visitors at the stall beside the product lists', 3: 'Meeting customers at the exhibition', 4: 'Team and visitor at the stall', 5: 'A T Solvochem at the exhibition', 6: 'A T Solvochem at the exhibition'}
+G3 = [  # (photo, css anchor, width px, aspect, start x, start y, z)
+    (2, 'top:55%;left:14%', 'c', 201, '16/9', 325, 0, 0),
+    (3, 'bottom:94px;right:631px', 'n', 193, '16/9', 246, -109, -20),
+    (4, 'top:74%;left:701px', 'y', 186, '16/9', -329, -109, -26),
+    (5, 'top:35%;left:85%', 'c', 155, '4/3', -325, 35, -19),
+    (6, 'top:26%;left:73%', 'c', 150, '3/4', -241, 120, 20),
+    (3, 'top:35%;left:27%', 'c', 136, '3/4', 234, 56, 45),
+    (4, 'top:71%;left:68%', 'c', 199, '3/4', -153, -110, 39)]
+def _g3_face(n):
+    return f'<img src="images/gallery/expo-{n}.webp" alt="" loading="lazy">'
+g3_frames = ''.join(f'<figure class="g3-img" data-a="{a}" data-x="{x}" data-y="{y}" data-z="{z}" style="{pos};width:{w}px;aspect-ratio:{ar}"><span class="g3-face">{_g3_face(n)}</span><span class="g3-face g3-back">{_g3_face(n)}</span></figure>' for n, pos, a, w, ar, x, y, z in G3)
+g3_main = f'<figure class="g3-main"><span class="g3-face">{_g3_face(1)}</span><span class="g3-face g3-back">{_g3_face(1)}</span></figure>'
 galcols = ''.join('<div class="gal-col">' + ''.join(f'<div class="shot"><img src="images/gallery/expo-{n}.webp" alt="{E(alts[n])}" loading="lazy"></div>' for n in c) + '</div>' for c in cols)
 
 SHOW_CATEGORY_TABLE = False  # the twelve-category tile table is hidden for now
@@ -299,6 +311,7 @@ home = f'''
 <section class="gal on-dark">
 <div class="gal-head"><div><p class="label">On the ground</p><h2 style="margin-top:22px">Meeting our <em>customers</em> &amp; partners.</h2></div><a class="btn btn--cream" href="gallery.html">View gallery {ARROW}</a></div>
 <div class="gal-cols">{galcols}</div>
+<div class="g3-scroll" aria-hidden="true"><div class="g3-sticky"><div class="g3-space"><div class="g3-content">{g3_frames}{g3_main}</div></div></div></div>
 
 </section>
 
