@@ -212,7 +212,8 @@ G3 = [  # (photo, css anchor, width px, aspect, start x, start y, z)
     (4, 'top:71%;left:68%', 'c', 199, '3/4', -153, -110, 39)]
 def _g3_face(n):
     return f'<img src="images/gallery/expo-{n}.webp" alt="" loading="lazy">'
-g3_frames = ''.join(f'<figure class="g3-img" data-a="{a}" data-x="{x}" data-y="{y}" data-z="{z}" style="{pos};width:{w}px;aspect-ratio:{ar}"><span class="g3-face">{_g3_face(n)}</span><span class="g3-face g3-back">{_g3_face(n)}</span></figure>' for n, pos, a, w, ar, x, y, z in G3)
+G3_RATIO = {1: '3/4', 2: '3/4', 3: '3/4', 4: '3/4', 5: '1/1', 6: '1/1'}  # each photo's own shape, so no faces get cropped
+g3_frames = ''.join(f'<figure class="g3-img" data-a="{a}" data-x="{x}" data-y="{y}" data-z="{z}" style="{pos};width:{w}px;aspect-ratio:{G3_RATIO[n]}"><span class="g3-face">{_g3_face(n)}</span><span class="g3-face g3-back">{_g3_face(n)}</span></figure>' for n, pos, a, w, ar, x, y, z in G3)
 g3_main = f'<figure class="g3-main"><span class="g3-face">{_g3_face(1)}</span><span class="g3-face g3-back">{_g3_face(1)}</span></figure>'
 galcols = ''.join('<div class="gal-col">' + ''.join(f'<div class="shot"><img src="images/gallery/expo-{n}.webp" alt="{E(alts[n])}" loading="lazy"></div>' for n in c) + '</div>' for c in cols)
 

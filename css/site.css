@@ -805,3 +805,9 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
   .g3-face img{width:100%;height:100%;object-fit:cover;display:block}
   .g3-main .g3-face{border-radius:12px}
 }
+
+/* gallery 3D: frames follow the photos' own (portrait / square) shape; keep heads in frame */
+@media (min-width:1021px) and (prefers-reduced-motion:no-preference){
+  .g3-main{width:420px;aspect-ratio:3/4}
+  .g3-face img{object-position:center 22%}
+}
