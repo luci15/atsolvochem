@@ -868,3 +868,9 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 @media (max-width:700px){.pcats{grid-template-columns:1fr}.pcard:last-child{grid-column:auto}.pothers-row{grid-template-columns:1fr}}
 
 [hidden]{display:none!important}
+
+/* products search bar: only the bar has a background, so the space above it never covers the page intro */
+.toolbar{background:transparent;border-bottom:0;-webkit-backdrop-filter:none;backdrop-filter:none}
+.toolbar .wrap{background:rgba(241,238,228,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.toolbar{top:84px;margin-top:0;padding-top:0;pointer-events:auto}
+@media (max-width:700px){.toolbar{margin-top:0}}

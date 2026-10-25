@@ -108,3 +108,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-25: Products split: products.html shows only the five category cards (photo, description, count) plus a search across all 557 chemicals (results tagged by category); each category has its own page products-<id>.html (breadcrumb, hero photo, count, in-page search, full list, links to the other four). All home links point to the category pages; old products.html#cat links redirect. Sitemap updated.
 
 - 2026-10-25: reverted the showcase/explorer products page (user preferred the previous one): back to the 5 category cards + search, with category pages.
+
+- 2026-10-25: products hero text was clipped: the search toolbar used margin-top:-84px, pulling the cream page body over the intro. Toolbar now sticks at top:84px with no negative margin; background only on the bar.
