@@ -1,3 +1,0 @@
-<!doctype html><meta charset=utf-8><style>html,body{margin:0;height:100%;overflow:hidden}iframe{border:0;width:100vw;height:100vh}</style>
-<iframe id=f src="aboutus.html"></iframe>
-<script>const q=new URLSearchParams(location.search);f.onload=()=>{setTimeout(()=>{const w=f.contentWindow,d=f.contentDocument;const sel=q.get('s'),off=+q.get('o')||0;let n=0;const step=()=>{const y=sel?d.querySelector(sel).getBoundingClientRect().top+w.scrollY+off:0;w.scrollTo(0,y);w.ScrollTrigger&&w.ScrollTrigger.update();if(++n<45)setTimeout(step,100)};step()},2200)}</script>
