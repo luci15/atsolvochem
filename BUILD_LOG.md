@@ -130,3 +130,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-25: About page vertical padding reduced by about 35-40% on every section.
 
 - 2026-10-25: principal logos: tile boxes removed everywhere (home marquee, about, principals grid); white backgrounds baked out of images/principals/*.webp (alpha) so logos sit straight on the cream page.
+
+- 2026-10-25: About features: scrolling words replaced by an expanding list - sticky heading left; 7 numbered rows right; hovered/focused/tapped row fills dark from the bottom and opens its one-line description. Descriptions from brochure facts.

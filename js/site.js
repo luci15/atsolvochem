@@ -97,6 +97,13 @@
 
   $$('.ft-top-btn').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); if (window.lenis) window.lenis.scrollTo(0); else window.scrollTo({ top: 0, behavior: 'smooth' }); }); });
 
+  // about features: hover / focus / tap a row to open it
+  (function () {
+    var rows = $$('.ab-fi'); if (!rows.length) return;
+    var pick = function (r) { rows.forEach(function (o) { o.classList.toggle('on', o === r); }); };
+    rows.forEach(function (r) { r.addEventListener('mouseenter', function () { pick(r); }); r.addEventListener('focus', function () { pick(r); }); r.addEventListener('click', function () { pick(r); }); });
+  })();
+
   if (!hasGsap) return;
   gsap.registerPlugin(ScrollTrigger);
 

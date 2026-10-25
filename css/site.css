@@ -1047,3 +1047,26 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .logo-tile{background:transparent;border:0;border-radius:0;box-shadow:none}
 .logo-tile img{max-height:68px;opacity:.85}
 .logos .logo-tile{height:96px}
+
+/* About features: expanding list (replaces the scrolling words) */
+.ab-feats{background:var(--cream);overflow:visible}
+.ab-feats-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(36px,6vw,100px);align-items:start}
+.ab-feats-l{position:sticky;top:120px;display:block;margin:0}
+.ab-feats-l h2{font-size:clamp(38px,4.6vw,70px);line-height:.98;margin:20px 0 18px}
+.ab-feats-p{color:var(--mute);max-width:36ch;margin-bottom:26px}
+.ab-fl{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.ab-fi{position:relative;display:grid;grid-template-columns:56px 1fr 44px;gap:10px;align-items:start;padding:22px 18px;border-bottom:1px solid var(--line);cursor:pointer;outline:0;overflow:hidden;isolation:isolate;transition:color .5s}
+.ab-fi:before{content:"";position:absolute;inset:0;z-index:-1;background:var(--ink);transform:scaleY(0);transform-origin:bottom;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+.ab-fi.on{color:#fff}.ab-fi.on:before{transform:scaleY(1)}
+.ab-fi-n{font:700 14px/1.9 var(--fb);letter-spacing:.14em;color:var(--red)}
+.ab-fi h3{font:700 clamp(24px,2.5vw,36px)/1.1 var(--fd);letter-spacing:-.02em;margin:0}
+.ab-fi-m{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s cubic-bezier(.4,0,.2,1)}
+.ab-fi.on .ab-fi-m{grid-template-rows:1fr}
+.ab-fi-m p{overflow:hidden;min-height:0;margin:0;color:#cfc9ba;font-size:16.5px;max-width:48ch;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .5s var(--ease)}
+.ab-fi.on .ab-fi-m p{margin-top:10px;opacity:1;transform:none;transition-delay:.15s}
+.ab-fi-ic{width:40px;height:40px;border-radius:50%;border:1.5px solid currentColor;display:grid;place-items:center;transition:transform .5s var(--ease),background-color .4s,border-color .4s}
+.ab-fi-ic svg{width:15px;height:15px}
+.ab-fi.on .ab-fi-ic{background:var(--red);border-color:var(--red);transform:rotate(45deg)}
+.ab-fi:focus-visible{box-shadow:inset 0 0 0 2px var(--red)}
+@media (max-width:1020px){.ab-feats-grid{grid-template-columns:1fr}.ab-feats-l{position:static}}
+@media (prefers-reduced-motion:reduce){.ab-fi,.ab-fi:before,.ab-fi-m,.ab-fi-m p{transition:none}}

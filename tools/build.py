@@ -348,6 +348,14 @@ write('index.html', page('index.html', 'A T Solvochem | Chemical & solvent impor
 feats = ['Top-notch quality', 'Regular availability of stock', 'Indent deals for bulk', 'High seas sales', 'Lab analysis report with each dispatch', 'Quality drums to protect material', 'Small packs on request']
 feat_row = lambda items: ''.join(f'<span class="ab-feat">{E(f)}</span><span class="ab-dot" aria-hidden="true"></span>' for f in items)
 ab_pr = ''.join(logo(sl, nm) for sl, nm in PR)
+FEAT_D = [('Top-notch quality', 'Material from recognised manufacturers, checked before it leaves us.'),
+          ('Regular availability of stock', 'Ready stock held at our Bhiwandi warehouse for quick dispatch.'),
+          ('Indent deals for bulk', 'Bulk requirements sourced to order and planned around your schedule.'),
+          ('High seas sales', 'Cargo bought while in transit — ask us for current offers.'),
+          ('Lab analysis report with each dispatch', 'Our quality controllers share a lab analysis report with every shipment.'),
+          ('Quality drums to protect material', 'Packed in quality drums so the material reaches you intact.'),
+          ('Small packs on request', 'Need a trial quantity? Small packs are available on request.')]
+feat_rows = ''.join(f'<li class="ab-fi{" on" if i == 0 else ""}" tabindex="0" data-r><span class="ab-fi-n">0{i + 1}</span><div class="ab-fi-b"><h3>{E(t)}</h3><div class="ab-fi-m"><p>{E(d)}</p></div></div><span class="ab-fi-ic" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 13L13 3M5 3h8v8"/></svg></span></li>' for i, (t, d) in enumerate(FEAT_D))
 about = f'''
 <section class="ab-hero"><div class="ab-hero-bg" aria-hidden="true"><img src="images/who/paint.jpg" alt="" data-par="0.25"></div><div class="ab-hero-shade" aria-hidden="true"></div>
 <div class="wrap ab-hero-in"><p class="label l ab-tag">About us</p>
@@ -376,9 +384,9 @@ about = f'''
 
 <section class="ab-strength"><div class="wrap"><div class="shead"><div><p class="label l" data-r>Our strength</p><h2 data-r>What you can <em>count on.</em></h2></div></div>{str_grid()}</div></section>
 
-<section class="ab-feats" aria-label="Our features"><p class="label ab-feats-l" data-r>Our features</p>
-<div class="mq"><div class="mq-track" data-dir="l">{feat_row(feats)}{feat_row(feats)}</div></div>
-<div class="mq"><div class="mq-track" data-dir="r">{feat_row(feats[::-1])}{feat_row(feats[::-1])}</div></div></section>
+<section class="ab-feats" aria-label="Our features"><div class="wrap ab-feats-grid">
+<div class="ab-feats-l"><p class="label" data-r>Our features</p><h2 data-r>Service that goes with <em>every drum.</em></h2><p class="ab-feats-p" data-r>Seven things you can expect from every order, big or small.</p><a class="btn btn--dark" href="contact.html" data-r>Start an enquiry {ARROW}</a></div>
+<ol class="ab-fl">{feat_rows}</ol></div></section>
 
 <section class="ab-ground"><div class="wrap"><div class="shead"><div><p class="label" data-r>On the ground</p><h2 data-r>Meeting our <em>customers</em> &amp; partners.</h2></div><p data-r>From industry exhibitions to the warehouse floor &mdash; relationships are built face to face.</p></div>
 <div class="ab-photos"><figure class="ab-ph ab-ph--1" data-clip><img src="images/gallery/expo-1.webp" alt="Team members at the A T Solvochem exhibition stall" data-par="-0.12" loading="lazy"></figure>
