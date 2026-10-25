@@ -375,42 +375,16 @@ def chem_li(n, cid=None):
 NOTE = f'''<div class="note"><p>Available in <strong>tanker, FCL, barrels and bag packing</strong>. Bulk orders are supplied from Kandla, Mundra, Hazira, JNPT and Aegis ports; warehouse stock is held at Bhiwandi. Don&rsquo;t see your grade? We import and source on request.</p><a class="btn btn--dark" href="contact.html">Ask the sales desk {ARROW}</a></div>'''
 
 pcards = ''.join(f'''<a class="pcard" href="products-{cid}.html" data-r><div class="pcard-img"><img src="images/who/{cid}.jpg" alt="" loading="lazy"></div><div class="pcard-body"><span class="pcard-n">0{i}</span><h2>{E(long)}</h2><p>{desc}</p><div class="pcard-foot"><span><b>{len(cats[cid])}</b> chemicals</span><span class="pcard-go">View products <i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></span></div></div></a>''' for i, (cid, _t, long, desc, img, short) in enumerate(CATS, 1))
-
-# category showcase (desktop: pinned, scroll moves through the five industries)
-show_media = ''.join(f'<img data-i="{i}" src="images/who/{c[0]}.jpg" alt=""{" class=\"on\"" if i == 0 else ""}>' for i, c in enumerate(CATS))
-show_text = ''.join(f'''<div class="psh-panel{" on" if i == 0 else ""}" data-i="{i}"><span class="psh-n">0{i + 1} / 0{len(CATS)}</span><h2>{E(c[2])}</h2><p>{c[3]}</p><div class="psh-chips">{"".join(f"<span>{E(x)}</span>" for x in cats[c[0]][:5])}</div><div class="psh-cta"><a class="btn btn--red" href="products-{c[0]}.html">View {len(cats[c[0]])} products {ARROW}</a><button class="psh-browse" type="button" data-cat="{c[0]}">Browse below &darr;</button></div></div>''' for i, c in enumerate(CATS))
-show_dots = ''.join(f'<button type="button" class="psh-dot{" on" if i == 0 else ""}" data-i="{i}" aria-label="{E(c[5])}"><span>{E(c[5])}</span></button>' for i, c in enumerate(CATS))
-
-# product explorer
-def pi_card(n, cid):
-    short = next(c[5] for c in CATS if c[0] == cid)
-    first = (n.lstrip('0123456789,-. ')[:1] or n[:1]).upper()
-    return f'''<li class="pi" data-cat="{cid}" data-l="{first}"><span class="pi-cat">{E(short)}</span><h3>{E(n)}</h3><div class="pi-act"><a href="contact.html?chem={E(re.sub(r"[^A-Za-z0-9]+", "+", n).strip("+"))}">Enquire</a><button type="button" class="pi-add" data-name="{E(n)}" aria-pressed="false"><span>Add to list</span></button></div></li>'''
-pi_items = ''.join(pi_card(n, cid) for cid, *_ in CATS for n in sorted(cats[cid], key=lambda x: x.lower()))
-chips = f'<button type="button" class="pchip" data-cat="all" aria-pressed="true">All <i>{TOTAL}</i></button>' + ''.join(f'<button type="button" class="pchip" data-cat="{c[0]}" aria-pressed="false">{E(c[5])} <i>{len(cats[c[0]])}</i></button>' for c in CATS)
-az = ''.join(f'<button type="button" data-l="{l}">{l}</button>' for l in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')
-
-prod = f'''
-<section class="psh" aria-label="Product categories"><div class="psh-pin"><div class="wrap psh-grid">
-<div class="psh-left"><p class="label" data-r>Products &middot; {TOTAL}+ chemicals</p><div class="psh-panels">{show_text}</div></div>
-<div class="psh-media">{show_media}</div>
-<nav class="psh-dots" aria-label="Industries">{show_dots}</nav>
-</div></div></section>
-<div class="psh-mobile wrap"><p class="label">Products</p><h1 class="psh-mtitle">{TOTAL}+ chemicals, <em>five industries.</em></h1><div class="pcats">{pcards}</div></div>
-
-<section class="pex" id="explore"><div class="wrap">
-<div class="pex-head"><div><p class="label" data-r>Product explorer</p><h2 data-r>Find your <em>chemical.</em></h2></div><p data-r>Filter by industry, jump by letter or search. Add several products to your list and send one enquiry for all of them.</p></div>
-<div class="pex-bar">
-<div class="search search--wide">{SEARCH_ICON}<input id="pq" type="search" placeholder="Search {TOTAL}+ chemicals…" aria-label="Search chemicals" autocomplete="off"></div>
-<div class="pchips" role="group" aria-label="Filter by industry">{chips}</div>
-<div class="paz" role="group" aria-label="Jump to letter">{az}</div>
+all_items = ''.join(chem_li(n, cid) for cid, *_ in CATS for n in cats[cid])
+prod = phead('Products', [f'{TOTAL}+ chemicals,', '<em>five industries.</em>'], 'Choose an industry to see its full product list, or search everything at once. Select any chemical to send us an enquiry for it.') + f'''
+<div class="page-body">
+<div class="toolbar"><div class="wrap"><div class="search search--wide">{SEARCH_ICON}<input id="q" type="search" placeholder="Search all {TOTAL}+ chemicals…" aria-label="Search all chemicals" autocomplete="off"></div><p class="search-hint">or pick an industry below</p></div></div>
+<div class="wrap">
+<div class="pcats">{pcards}</div>
+<div class="pall" hidden><p class="pall-count"><b id="pall-n">0</b> matching chemicals</p><ul class="chem">{all_items}</ul></div>
+<div class="empty"><p>No chemical matching &ldquo;<strong id="term"></strong>&rdquo; in our lists.</p><p style="margin-top:8px">We source many more grades on request &mdash; <a href="contact.html">send us an enquiry</a>.</p></div>
+{NOTE}</div>
 </div>
-<p class="pex-count"><b id="pex-n">{TOTAL}</b> products</p>
-<ul class="pgrid">{pi_items}</ul>
-<div class="empty"><p>No chemical matching &ldquo;<strong id="pex-term"></strong>&rdquo;.</p><p style="margin-top:8px">We source many more grades on request &mdash; <a href="contact.html">send us an enquiry</a>.</p></div>
-{NOTE}
-</div></section>
-<div class="pbasket" hidden><div class="pbasket-in"><span><b id="pb-n">0</b> products in your enquiry list</span><button type="button" class="pb-clear">Clear</button><a class="btn btn--red" id="pb-send" href="contact.html">Send enquiry {ARROW}</a></div></div>
 '''
 write('products.html', page('products.html', f'Products | {TOTAL}+ Chemicals & Solvents — A T Solvochem', 'Chemicals and solvents for fragrance & flavours, personal care, UV filters, pharma & API and paints & resins. Choose an industry or search all products.', prod))
 
