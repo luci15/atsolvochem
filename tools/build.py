@@ -394,20 +394,30 @@ write('products.html', page('products.html', f'Products | {TOTAL}+ Chemicals & S
 
 for cid, _t, long, desc, img, short in CATS:
     others = ''.join(f'<a class="pother" href="products-{c[0]}.html"><img src="images/who/{c[0]}.jpg" alt="" loading="lazy"><span>{E(c[5])}</span><i>{len(cats[c[0]])}</i></a>' for c in CATS if c[0] != cid)
-    items = ''.join(chem_li(n) for n in cats[cid])
+    groups = {}
+    for n in sorted(cats[cid], key=lambda x: x.lower()):
+        key = (re.sub(r'^[^A-Za-z]+', '', n)[:1] or '#').upper()
+        groups.setdefault(key, []).append(n)
+    letters = sorted(groups)
+    def chem_card(n):
+        q = E(re.sub(r"[^A-Za-z0-9]+", "+", n).strip("+"))
+        return f'<li class="cc" data-name="{E(n.lower())}"><h3>{E(n)}</h3><div class="cc-act"><a class="cc-enq" href="contact.html?chem={q}">Enquire <i>&rarr;</i></a><button type="button" class="cc-add" data-name="{E(n)}" aria-pressed="false" aria-label="Add {E(n)} to enquiry list"><span>+</span></button></div></li>'
+    items = ''.join(f'<section class="cgrp" id="g-{l}" data-l="{l}"><h2 class="cgrp-l"><span>{l}</span><i>{len(groups[l])}</i></h2><ul class="cgrid">{"".join(chem_card(n) for n in groups[l])}</ul></section>' for l in letters)
+    az_bar = ''.join(f'<a href="#g-{l}" data-l="{l}">{l}</a>' for l in letters)
     body = f'''<section class="phead pcat-head"><div class="wrap">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="products.html">Products</a><span>/</span><span aria-current="page">{E(short)}</span></nav>
 <div class="pcat-top"><div><h1 class="ph-line"><span class="ln"><span>{E(long)}</span></span></h1><p class="sub" data-r>{desc}</p><p class="pcat-count" data-r><b>{len(cats[cid])}</b> chemicals listed</p></div>
 <div class="pcat-img" data-r><img src="images/who/{cid}.jpg" alt=""></div></div>
 </div></section>
 <div class="page-body">
-<div class="toolbar"><div class="wrap"><div class="search search--wide">{SEARCH_ICON}<input id="q" type="search" placeholder="Search {E(short.lower())}…" aria-label="Search {E(short)}" autocomplete="off"></div><p class="search-hint"><b id="pcat-n">{len(cats[cid])}</b> shown</p></div></div>
+<div class="toolbar"><div class="wrap"><div class="search search--wide">{SEARCH_ICON}<input id="q" type="search" placeholder="Search {E(short.lower())}…" aria-label="Search {E(short)}" autocomplete="off"></div><nav class="caz" aria-label="Jump to letter">{az_bar}</nav><p class="search-hint"><b id="pcat-n">{len(cats[cid])}</b> shown</p></div></div>
 <div class="wrap">
-<ul class="chem pcat-list">{items}</ul>
+<div class="pcat-list">{items}</div>
 <div class="empty"><p>No chemical matching &ldquo;<strong id="term"></strong>&rdquo; in this list.</p><p style="margin-top:8px">Try <a href="products.html">searching all products</a>, or <a href="contact.html">send us an enquiry</a> &mdash; we source on request.</p></div>
 <div class="pothers"><p class="label">Other industries</p><div class="pothers-row">{others}</div></div>
 {NOTE}</div>
 </div>
+<div class="pbasket" hidden><div class="pbasket-in"><span><b id="pb-n">0</b> products in your enquiry list</span><button type="button" class="pb-clear">Clear</button><a class="btn btn--red" id="pb-send" href="contact.html">Send enquiry {ARROW}</a></div></div>
 '''
     write(f'products-{cid}.html', page(f'products-{cid}.html', f'{long} | A T Solvochem', f'{desc} {len(cats[cid])} chemicals from A T Solvochem — enquire online.', body, f'images/who/{cid}.jpg'))
 

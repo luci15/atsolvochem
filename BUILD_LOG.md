@@ -114,3 +114,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-25: cache-busting: css/js links carry ?v=<md5 of site.css+site.js> (ASSET_V in tools/build.py) so browsers never show stale styles after an update.
 
 - 2026-10-25: navbar links get a 6px gap so hover and active pills do not touch.
+
+- 2026-10-25: category pages revamped: chemicals grouped under big A-Z letter headings as cards (name, Enquire link, + add button); sticky bar with search, A-Z jump strip (letters with no match dimmed); enquiry list - add several chemicals, floating bar sends one enquiry with all names (sessionStorage). Landing page search unchanged.

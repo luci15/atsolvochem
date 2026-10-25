@@ -28,22 +28,50 @@
     if (['fragrance', 'care', 'uv', 'pharma', 'paint'].indexOf(oldCat) > -1) location.replace('products-' + oldCat + '.html');
   }
   // products landing: typing searches every chemical (category cards hide while a search is active)
-  var pall = $('.pall'), pq = $('#q');
-  if (pq && (pall || $('.pcat-list'))) {
-    var list = pall || $('.pcat-list'), items = $$('li', list), empty = $('.empty'), cards = $('.pcats'), term = $('#term');
-    var countEl = $('#pall-n') || $('#pcat-n');
-    var run = function () {
+  var pq = $('#q'), pall = $('.pall'), pgroups = $$('.cgrp');
+  if (pq && pall) {   // products landing: typing searches every chemical (cards hide while searching)
+    var allItems = $$('li', pall), pempty = $('.empty'), pcards = $('.pcats'), pterm = $('#term'), pn = $('#pall-n');
+    var runAll = function () {
       var t = pq.value.trim().toLowerCase(), n = 0;
-      items.forEach(function (li) { var hit = !t || li.textContent.toLowerCase().indexOf(t) > -1; li.hidden = !hit; if (hit) n++; });
-      if (pall) { pall.hidden = !t; if (cards) cards.hidden = !!t; }
-      if (countEl) countEl.textContent = n;
-      empty.classList.toggle('show', !!t && n === 0 || (!pall && n === 0));
-      if (term) term.textContent = pq.value.trim();
+      allItems.forEach(function (li) { var hit = !t || li.textContent.toLowerCase().indexOf(t) > -1; li.hidden = !hit; if (hit) n++; });
+      pall.hidden = !t; if (pcards) pcards.hidden = !!t;
+      if (pn) pn.textContent = n; pempty.classList.toggle('show', !!t && n === 0); if (pterm) pterm.textContent = pq.value.trim();
       if (hasGsap) ScrollTrigger.refresh();
     };
-    pq.addEventListener('input', run);
-    var qp = new URLSearchParams(location.search).get('q'); if (qp) { pq.value = qp; }
-    run();
+    pq.addEventListener('input', runAll);
+    var lq = new URLSearchParams(location.search).get('q'); if (lq) pq.value = lq;
+    runAll();
+  }
+  if (pq && pgroups.length) {   // category page: grouped A-Z cards, search, enquiry list
+    var cc = $$('.cc'), cn = $('#pcat-n'), cempty = $('.empty'), cterm = $('#term'), azl = $$('.caz a');
+    var runCat = function () {
+      var t = pq.value.trim().toLowerCase(), n = 0;
+      cc.forEach(function (c) { var hit = !t || c.dataset.name.indexOf(t) > -1; c.hidden = !hit; if (hit) n++; });
+      pgroups.forEach(function (g) { var any = $$('.cc:not([hidden])', g).length; g.hidden = !any; $('.cgrp-l i', g).textContent = any; });
+      azl.forEach(function (a) { var g = document.getElementById('g-' + a.dataset.l); a.classList.toggle('off', g.hidden); });
+      cn.textContent = n; cempty.classList.toggle('show', n === 0); cterm.textContent = pq.value.trim();
+      if (hasGsap) ScrollTrigger.refresh();
+    };
+    pq.addEventListener('input', runCat); runCat();
+    azl.forEach(function (a) { a.addEventListener('click', function (e) {
+      e.preventDefault(); var g = document.getElementById('g-' + a.dataset.l), y = g.getBoundingClientRect().top + window.scrollY - 190;
+      if (window.lenis) window.lenis.scrollTo(y); else window.scrollTo({ top: y, behavior: 'smooth' });
+    }); });
+    var basket = [], bar = $('.pbasket'), bn = $('#pb-n'), send = $('#pb-send');
+    try { basket = JSON.parse(sessionStorage.getItem('ats-basket') || '[]'); } catch (e) { basket = []; }
+    var save = function () { try { sessionStorage.setItem('ats-basket', JSON.stringify(basket)); } catch (e) {} };
+    var paintB = function () {
+      bar.hidden = basket.length === 0; bn.textContent = basket.length;
+      send.href = 'contact.html?chem=' + encodeURIComponent(basket.join(', '));
+      $$('.cc-add').forEach(function (b) { var on = basket.indexOf(b.dataset.name) > -1; b.setAttribute('aria-pressed', on); b.firstChild.textContent = on ? '\u2713' : '+'; b.parentNode.parentNode.classList.toggle('picked', on); });
+    };
+    $('.pcat-list').addEventListener('click', function (e) {
+      var b = e.target.closest('.cc-add'); if (!b) return;
+      var i = basket.indexOf(b.dataset.name); if (i > -1) basket.splice(i, 1); else basket.push(b.dataset.name);
+      save(); paintB();
+    });
+    $('.pb-clear').addEventListener('click', function () { basket = []; save(); paintB(); });
+    paintB();
   }
 
   // contact form: prefill from ?chem= and show result
