@@ -39,6 +39,10 @@ def tel(s):
     return s.replace(' ', '')
 
 
+import hashlib
+# cache-busting stamp: changes whenever site.css or site.js changes, so browsers always fetch the latest files
+ASSET_V = hashlib.md5(open(R + '/css/site.css', 'rb').read() + open(R + '/js/site.js', 'rb').read()).hexdigest()[:8]
+
 def page(fname, title, desc, body, og='images/industries/plant.jpg'):
     cur = 'products.html' if fname.startswith('products') else fname
     links = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if h == cur else ""}>{l}</a>' for h, l in NAV)
@@ -60,7 +64,7 @@ def page(fname, title, desc, body, og='images/industries/plant.jpg'):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/site.css?v={ASSET_V}">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -91,7 +95,7 @@ def page(fname, title, desc, body, og='images/industries/plant.jpg'):
 <script src="js/vendor/gsap.min.js"></script>
 <script src="js/vendor/ScrollTrigger.min.js"></script>
 <script src="js/vendor/lenis.min.js"></script>
-<script src="js/site.js"></script>
+<script src="js/site.js?v={ASSET_V}"></script>
 </body>
 </html>
 '''

@@ -110,3 +110,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-25: reverted the showcase/explorer products page (user preferred the previous one): back to the 5 category cards + search, with category pages.
 
 - 2026-10-25: products hero text was clipped: the search toolbar used margin-top:-84px, pulling the cream page body over the intro. Toolbar now sticks at top:84px with no negative margin; background only on the bar.
+
+- 2026-10-25: cache-busting: css/js links carry ?v=<md5 of site.css+site.js> (ASSET_V in tools/build.py) so browsers never show stale styles after an update.
