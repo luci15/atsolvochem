@@ -912,3 +912,16 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 @media (max-width:1100px){.cgrid{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:820px){.cgrid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:520px){.cgrid{grid-template-columns:1fr}.caz{display:none}.pbasket{width:calc(100% - 96px);left:16px;transform:none}.pbasket-in{padding-left:18px;gap:10px;font-size:14px}.pb-clear{display:none}}
+
+/* category page header: compact, so the chemicals start in the first screen */
+.pcat-head{padding:clamp(104px,9vw,124px) 0 clamp(20px,2.4vw,32px)}
+.crumbs{margin-bottom:14px}
+.pcat-top{grid-template-columns:1.5fr .5fr;gap:clamp(24px,4vw,56px);align-items:center}
+.pcat-head h1{font-size:clamp(34px,4vw,56px);line-height:1;max-width:none;margin-top:0}
+.pcat-head p.sub{margin-top:12px;font-size:17px;max-width:60ch}
+.pcat-count{margin-top:12px;font-size:15px}
+.pcat-count b{font-size:22px}
+.pcat-img{aspect-ratio:16/9;border-radius:18px;max-height:170px}
+.pcat-list{padding-top:12px}
+.cgrp{padding-top:14px}
+@media (max-width:820px){.pcat-top{grid-template-columns:1fr}.pcat-img{display:none}}

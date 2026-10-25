@@ -116,3 +116,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-25: navbar links get a 6px gap so hover and active pills do not touch.
 
 - 2026-10-25: category pages revamped: chemicals grouped under big A-Z letter headings as cards (name, Enquire link, + add button); sticky bar with search, A-Z jump strip (letters with no match dimmed); enquiry list - add several chemicals, floating bar sends one enquiry with all names (sessionStorage). Landing page search unchanged.
+
+- 2026-10-25: category page header compacted (title one line ~56px, small 16:9 photo, tighter paddings) so chemical cards start in the first screen.
