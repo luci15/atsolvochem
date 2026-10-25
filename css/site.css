@@ -1026,3 +1026,19 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .ft-cols{padding:clamp(22px,3vh,36px) 0 clamp(14px,2vh,22px)}
 .foot-mega{font-size:clamp(44px,8vw,128px);margin-bottom:-.05em}
 @media (max-height:860px){.foot-mega{display:none}.site-footer{padding-top:34px}.ft-top{padding-bottom:22px}}
+
+/* About page: tighter vertical rhythm */
+.ab-story{padding:clamp(48px,5.5vw,76px) 0}
+.ab-stats{padding:clamp(20px,2.4vw,32px) 0 clamp(30px,3.5vw,50px)}
+.ab-stack{padding:clamp(40px,4.5vw,64px) 0}
+.ab-strength{padding:clamp(48px,5.5vw,76px) 0}
+.ab-feats{padding:clamp(44px,5vw,70px) 0}
+.ab-feats-l{margin-bottom:22px}
+.ab-ground{padding:clamp(48px,5.5vw,76px) 0}
+.ab-prin{padding:clamp(48px,5.5vw,76px) 0 clamp(26px,3vw,40px)}
+.ab-prin .wrap{margin-bottom:26px}
+.ab-card{min-height:clamp(300px,44vh,400px)}
+.ab-card--a{margin-bottom:20px}
+.ab-body{margin-top:18px}
+.ab-hero-in{padding-bottom:clamp(60px,8vh,90px)}
+.ab-ground .shead,.ab-strength .shead{margin-bottom:28px}
