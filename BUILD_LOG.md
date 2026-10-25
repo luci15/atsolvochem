@@ -106,3 +106,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-24: red closing banner: square bottom corners, removing the light gaps where it meets the footer.
 
 - 2026-10-25: Products split: products.html shows only the five category cards (photo, description, count) plus a search across all 557 chemicals (results tagged by category); each category has its own page products-<id>.html (breadcrumb, hero photo, count, in-page search, full list, links to the other four). All home links point to the category pages; old products.html#cat links redirect. Sitemap updated.
+
+- 2026-10-25: products.html redesigned after bestvaluechem.com/product, improved: (1) pinned industry showcase - scroll steps through the 5 categories (text + photo crossfade, side dots with hover labels, View N products / Browse below); (2) product explorer - 557 product cards (category tag, Enquire, Add to list), industry chips with counts, A-Z jump (empty letters disabled), live search, sticky filter bar; (3) enquiry list - add several products, floating bar sends one enquiry with all names prefilled (sessionStorage). Mobile: category cards + explorer. Category pages unchanged.

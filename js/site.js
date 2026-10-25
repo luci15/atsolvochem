@@ -67,6 +67,52 @@
     });
   });
 
+  // product explorer: chips, A-Z, search, enquiry list
+  var pgrid = $('.pgrid');
+  if (pgrid) {
+    var cards = $$('.pi', pgrid), pq2 = $('#pq'), chipsEl = $$('.pchip'), azBtns = $$('.paz button'), pcat = 'all', pletter = '';
+    var pempty = $('.pex .empty'), pn = $('#pex-n'), pterm = $('#pex-term');
+    var have = {};
+    cards.forEach(function (c) { have[c.dataset.l] = 1; });
+    azBtns.forEach(function (b) { if (!have[b.dataset.l]) b.disabled = true; });
+    var filter = function () {
+      var t = pq2.value.trim().toLowerCase(), n = 0, letters = {};
+      cards.forEach(function (c) {
+        var ok = (pcat === 'all' || c.dataset.cat === pcat) && (!t || c.textContent.toLowerCase().indexOf(t) > -1);
+        if (ok) letters[c.dataset.l] = 1;
+        ok = ok && (!pletter || c.dataset.l === pletter);
+        c.hidden = !ok; if (ok) n++;
+      });
+      azBtns.forEach(function (b) { b.disabled = !letters[b.dataset.l]; b.setAttribute('aria-pressed', b.dataset.l === pletter); });
+      pn.textContent = n; pterm.textContent = pq2.value.trim(); pempty.classList.toggle('show', n === 0);
+      if (hasGsap) ScrollTrigger.refresh();
+    };
+    var setPcat = function (c) { pcat = c; pletter = ''; chipsEl.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.cat === c); }); filter(); };
+    chipsEl.forEach(function (b) { b.addEventListener('click', function () { setPcat(b.dataset.cat); }); });
+    azBtns.forEach(function (b) { b.addEventListener('click', function () { pletter = pletter === b.dataset.l ? '' : b.dataset.l; filter(); }); });
+    pq2.addEventListener('input', function () { pletter = ''; filter(); });
+    $$('.psh-browse').forEach(function (b) { b.addEventListener('click', function () { setPcat(b.dataset.cat); $('#explore').scrollIntoView({ behavior: 'smooth' }); }); });
+    var hq = new URLSearchParams(location.search).get('q'); if (hq) pq2.value = hq;
+    filter();
+
+    // enquiry list (kept for this visit in sessionStorage)
+    var basket = [], bar = $('.pbasket'), bn = $('#pb-n'), send = $('#pb-send');
+    try { basket = JSON.parse(sessionStorage.getItem('ats-basket') || '[]'); } catch (e) { basket = []; }
+    var save = function () { try { sessionStorage.setItem('ats-basket', JSON.stringify(basket)); } catch (e) {} };
+    var paint = function () {
+      bar.hidden = basket.length === 0; bn.textContent = basket.length;
+      send.href = 'contact.html?chem=' + encodeURIComponent(basket.join(', '));
+      $$('.pi-add').forEach(function (b) { var on = basket.indexOf(b.dataset.name) > -1; b.setAttribute('aria-pressed', on); b.firstChild.textContent = on ? 'Added' : 'Add to list'; });
+    };
+    pgrid.addEventListener('click', function (e) {
+      var b = e.target.closest('.pi-add'); if (!b) return;
+      var i = basket.indexOf(b.dataset.name); if (i > -1) basket.splice(i, 1); else basket.push(b.dataset.name);
+      save(); paint();
+    });
+    $('.pb-clear').addEventListener('click', function () { basket = []; save(); paint(); });
+    paint();
+  }
+
   if (!hasGsap) return;
   gsap.registerPlugin(ScrollTrigger);
 
@@ -318,6 +364,28 @@
       .to(space, { scale: 1.5, ease: 'none', duration: 1.8 }, 1)
       .to(frames, { x: 0, y: 0, ease: 'none', duration: 1.8 }, 1);
     return function () { gal.classList.remove('g3-on'); tl.scrollTrigger && tl.scrollTrigger.kill(); tl.kill(); gsap.set([sticky, space, content, main].concat(frames), { clearProps: 'all' }); };
+  });
+
+  // products showcase: pin and step through the five industries with scroll (dots jump)
+  mm.add('(min-width: 1021px) and (prefers-reduced-motion: no-preference)', function () {
+    var sh = $('.psh'); if (!sh) return;
+    sh.classList.add('psh-on');
+    var panels = $$('.psh-panel', sh), imgs = $$('.psh-media img', sh), dots = $$('.psh-dot', sh), n = panels.length, cur = 0;
+    var go = function (i) {
+      if (i === cur) return;
+      var dir = i > cur ? 1 : -1; cur = i;
+      panels.forEach(function (p, k) { p.classList.toggle('on', k === i); });
+      imgs.forEach(function (im, k) { im.classList.toggle('on', k === i); });
+      dots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
+      gsap.fromTo(panels[i].children, { y: 40 * dir, opacity: 0 }, { y: 0, opacity: 1, duration: .7, stagger: .06, ease: 'power3.out', overwrite: true });
+      gsap.fromTo(imgs[i], { scale: 1.12 }, { scale: 1, duration: 1.2, ease: 'power3.out', overwrite: true });
+    };
+    var st = ScrollTrigger.create({ trigger: sh, start: 'top top', end: function () { return '+=' + window.innerHeight * (n - 1) * 0.8; }, pin: true, anticipatePin: 1,
+      onUpdate: function (s) { go(Math.min(n - 1, Math.round(s.progress * (n - 1)))); } });
+    dots.forEach(function (d, k) { d.addEventListener('click', function () {
+      var y = st.start + (st.end - st.start) * k / (n - 1); if (lenis) lenis.scrollTo(y); else window.scrollTo({ top: y, behavior: 'smooth' });
+    }); });
+    return function () { sh.classList.remove('psh-on'); st.kill(); };
   });
 
   /* ---------- desktop-only pinned / stacked experiences ---------- */
