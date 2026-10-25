@@ -274,6 +274,23 @@
     list.addEventListener('mouseleave', focusOff);
   }
 
+  /* ---------- image clip reveal + parallax (About) ---------- */
+  if (!reduce) {
+    $$('[data-clip]').forEach(function (el) {
+      gsap.fromTo(el, { clipPath: 'inset(100% 0% 0% 0% round 22px)' }, { clipPath: 'inset(0% 0% 0% 0% round 22px)', duration: 1.5, ease: 'expo.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+    });
+    $$('[data-par]').forEach(function (img) {
+      var k = parseFloat(img.dataset.par) || 0.15, host = img.parentNode;
+      var amt = function () { return k * host.offsetHeight; };
+      gsap.fromTo(img, { y: function () { return -amt(); } }, { y: function () { return amt(); }, ease: 'none',
+        scrollTrigger: { trigger: host, start: 'top bottom', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
+    });
+    // hero: text drifts up and fades as the page scrolls past
+    var abh = $('.ab-hero-in');
+    if (abh) gsap.to(abh, { y: -70, opacity: 0.1, ease: 'none', scrollTrigger: { trigger: '.ab-hero', start: 'top top', end: 'bottom top', scrub: true } });
+  }
+
   /* ---------- counters: odometer digits roll up each time the stats scroll into view ---------- */
   $$('[data-count]').forEach(function (el) {
     if (reduce) return;                         // markup already holds the final number
@@ -346,6 +363,15 @@
       .to(space, { scale: 1.5, ease: 'none', duration: 1.8 }, 1)
       .to(frames, { x: 0, y: 0, ease: 'none', duration: 1.8 }, 1);
     return function () { gal.classList.remove('g3-on'); tl.scrollTrigger && tl.scrollTrigger.kill(); tl.kill(); gsap.set([sticky, space, content, main].concat(frames), { clearProps: 'all' }); };
+  });
+
+  // about: mission card gets pushed back as the vision card slides over it
+  mm.add('(min-width: 1021px) and (prefers-reduced-motion: no-preference)', function () {
+    var a = $('.ab-card--a'), b2 = $('.ab-card--b');
+    if (!a || !b2) return;
+    var tw = gsap.to(a, { scale: 0.92, y: -20, filter: 'brightness(.6)', ease: 'none',
+      scrollTrigger: { trigger: b2, start: 'top 90%', end: 'top 150px', scrub: true } });
+    return function () { tw.scrollTrigger && tw.scrollTrigger.kill(); tw.kill(); gsap.set(a, { clearProps: 'all' }); };
   });
 
   /* ---------- desktop-only pinned / stacked experiences ---------- */

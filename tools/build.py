@@ -341,29 +341,48 @@ home = f'''
 write('index.html', page('index.html', 'A T Solvochem | Chemical & solvent importer, distributor — Thane, Mumbai', 'A T Solvochem — a chemical & solvent hub. Importer, distributor and supplier of 550+ chemicals for fragrance, cosmetic, pharma, paint, resin and rubber industries. Thane, Mumbai.', home))
 
 # ---------------- ABOUT ----------------
-feats = ['Top-notch quality', 'Regular availability of stock', 'Indent deals for bulk requirements', 'High seas sales', 'Lab analysis report with each dispatch', 'Quality drums to protect material', 'Small packs on request']
-about = phead('About us', ['Two decades of', '<em>chemicals</em> &amp; solvents.'], 'One stop spot for all your chemical &amp; solvent requirements.') + f'''
+feats = ['Top-notch quality', 'Regular availability of stock', 'Indent deals for bulk', 'High seas sales', 'Lab analysis report with each dispatch', 'Quality drums to protect material', 'Small packs on request']
+feat_row = lambda items: ''.join(f'<span class="ab-feat">{E(f)}</span><span class="ab-dot" aria-hidden="true"></span>' for f in items)
+ab_pr = ''.join(logo(sl, nm) for sl, nm in PR)
+about = f'''
+<section class="ab-hero"><div class="ab-hero-bg" aria-hidden="true"><img src="images/who/paint.jpg" alt="" data-par="0.25"></div><div class="ab-hero-shade" aria-hidden="true"></div>
+<div class="wrap ab-hero-in"><p class="label l ab-tag">About us</p>
+<h1 class="ph-line ab-h1"><span class="ln"><span>Two decades of</span></span><span class="ln"><span><em>chemicals</em> &amp; solvents.</span></span></h1>
+<p class="ab-sub" data-r>One stop spot for all your chemical &amp; solvent requirements.</p></div>
+<div class="ab-scroll" aria-hidden="true"><span>Scroll</span><i></i></div></section>
+
 <div class="page-body">
-<section class="section"><div class="wrap split">
-<div class="prose"><p class="label" data-r>Who we are</p><h2 data-r>Trusted by manufacturers across <em>India.</em></h2>
-<p data-r>A.T. Solvochem is a leading importer, distributor and supplier of chemicals, petrochemicals and industrial polymers. Under the leadership of <strong>Mr. Parag Shah</strong>, the firm has completed two decades supplying chemicals and solvents &mdash; beginning by trading solvents and chemicals in a single market.</p>
-<p data-r>Years of dedication and hard work have made us a trusted supplier. We value our customer relationships and our work ethic: we strengthen old bonds and create new ones. Active networking has built relationships with leading manufacturers across the country, so we can be a one-stop shop for every industry.</p>
-<p data-r>We offer hydrocarbons, alcohols, glycols, ketones, esters, chlorinated solvents, fragrance chemicals, monomers and more.</p></div>
-<div data-r><div class="figure-rect"><img src="images/industries/plant.jpg" alt="Chemical plant at dusk" loading="lazy"></div></div>
+<section class="ab-story"><div class="wrap ab-story-grid">
+<div class="ab-story-l"><p class="label" data-r>Who we are</p><h2 data-r>Trusted by manufacturers across <em>India.</em></h2></div>
+<div class="ab-story-r"><p class="ab-big scrub">A.T. Solvochem is a leading importer, distributor and supplier of chemicals, petrochemicals and industrial polymers. Under the leadership of Mr. Parag Shah, the firm has completed two decades supplying chemicals and solvents &mdash; beginning by trading solvents and chemicals in a single market.</p>
+<p class="ab-body" data-r>Years of dedication and hard work have made us a trusted supplier. We value our customer relationships and our work ethic: we strengthen old bonds and create new ones. Active networking has built relationships with leading manufacturers across the country, so we can be a one-stop shop for every industry.</p>
+<p class="ab-body" data-r>We offer hydrocarbons, alcohols, glycols, ketones, esters, chlorinated solvents, fragrance chemicals, monomers and more.</p></div>
 </div></section>
 
-<section class="section section--w"><div class="wrap">
-<div class="mv">
-<div data-r><p class="label">Our mission</p><h3>What we <em>believe</em></h3><p>To predict and meet the rising needs of our clients in the chemicals marketplace through high and consistent manoeuvrability and quality &mdash; enabling every client requirement with efficiency, backed by customer and logistical support that puts us at the forefront of this competitive business.</p></div>
-<div data-r><p class="label">Our vision</p><h3>Where we want to <em>reach</em></h3><p>To be the most trustworthy and reliable chemical vendor in India &mdash; serving the maximum number of customers with quality products and efficient services all over the country.</p></div>
-</div></div></section>
+<section class="ab-stats on-dark"><div class="wrap"><div class="stats">
+<div class="stat"><b data-count="20">20<i>+</i></b><span>Years supplying chemicals &amp; solvents</span></div>
+<div class="stat"><b data-count="{TOTAL}">{TOTAL}<i>+</i></b><span>Chemicals across five product lists</span></div>
+<div class="stat"><b data-count="5">5</b><span>Ports serving bulk orders</span></div>
+<div class="stat"><b class="sm">Pan<i>-</i>India</b><span>Logistics from our Bhiwandi warehouse</span></div></div></div></section>
 
-<section class="section section--dark"><div class="wrap"><div class="shead"><div><p class="label l" data-r>Our strength</p><h2 data-r>What you can <em>count on.</em></h2></div></div>{str_grid()}</div></section>
-
-<section class="section"><div class="wrap">
-<div class="shead"><div><p class="label" data-r>Our features</p><h2 data-r>Service that goes with <em>every drum.</em></h2></div></div>
-<ul class="feat">{''.join(f'<li data-r>{f}</li>' for f in feats)}</ul>
+<section class="ab-stack"><div class="wrap">
+<div class="ab-card ab-card--a"><p class="label l">Our mission</p><h3>What we <em>believe</em></h3><p>To predict and meet the rising needs of our clients in the chemicals marketplace through high and consistent manoeuvrability and quality &mdash; enabling every client requirement with efficiency, backed by customer and logistical support that puts us at the forefront of this competitive business.</p><span class="ab-card-n" aria-hidden="true">01</span></div>
+<div class="ab-card ab-card--b"><p class="label l">Our vision</p><h3>Where we want to <em>reach</em></h3><p>To be the most trustworthy and reliable chemical vendor in India &mdash; serving the maximum number of customers with quality products and efficient services all over the country.</p><span class="ab-card-n" aria-hidden="true">02</span></div>
 </div></section>
+
+<section class="ab-strength"><div class="wrap"><div class="shead"><div><p class="label l" data-r>Our strength</p><h2 data-r>What you can <em>count on.</em></h2></div></div>{str_grid()}</div></section>
+
+<section class="ab-feats" aria-label="Our features"><p class="label ab-feats-l" data-r>Our features</p>
+<div class="mq"><div class="mq-track" data-dir="l">{feat_row(feats)}{feat_row(feats)}</div></div>
+<div class="mq"><div class="mq-track" data-dir="r">{feat_row(feats[::-1])}{feat_row(feats[::-1])}</div></div></section>
+
+<section class="ab-ground"><div class="wrap"><div class="shead"><div><p class="label" data-r>On the ground</p><h2 data-r>Meeting our <em>customers</em> &amp; partners.</h2></div><p data-r>From industry exhibitions to the warehouse floor &mdash; relationships are built face to face.</p></div>
+<div class="ab-photos"><figure class="ab-ph ab-ph--1" data-clip><img src="images/gallery/expo-1.webp" alt="Team members at the A T Solvochem exhibition stall" data-par="-0.12" loading="lazy"></figure>
+<figure class="ab-ph ab-ph--2" data-clip><img src="images/gallery/expo-3.webp" alt="Meeting customers at the exhibition" data-par="-0.14" loading="lazy"></figure>
+<figure class="ab-ph ab-ph--3" data-clip><img src="images/gallery/expo-5.webp" alt="A T Solvochem at the exhibition" data-par="-0.08" loading="lazy"></figure></div></div></section>
+
+<section class="ab-prin"><div class="wrap"><p class="label" data-r>Our principals</p><h2 data-r>Backed by respected <em>manufacturers.</em></h2></div>
+<div class="mq"><div class="mq-track" data-dir="l">{ab_pr}{ab_pr}</div></div></section>
 {closer('Let&rsquo;s talk about <em>your requirement.</em>', 'Tell us what you need — we&rsquo;ll respond with availability and pricing.')}
 </div>
 '''

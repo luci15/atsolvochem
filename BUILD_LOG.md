@@ -122,3 +122,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-25: category header resized to a middle size (title up to 80px two lines, photo 16:10 about 520px wide).
 
 - 2026-10-25: inner page header top padding reduced (about 100-118px, was 130-180px) on products, about, principals, gallery, careers, contact.
+
+- 2026-10-25: About page rebuilt with scroll animation throughout: full-height hero (parallax plant photo, line-reveal headline, text drifts away on scroll); story with sticky heading + word-by-word scrubbed paragraph; odometer stats band; mission/vision stacked cards (vision slides over, mission scales back); strengths cards; two opposite-direction feature marquees (solid + outlined); On the ground photos with clip-path reveals and parallax at different speeds; principals logo marquee; red closer. Content only from brochure facts.
