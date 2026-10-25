@@ -40,7 +40,8 @@ def tel(s):
 
 
 def page(fname, title, desc, body, og='images/industries/plant.jpg'):
-    links = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if h == fname else ""}>{l}</a>' for h, l in NAV)
+    cur = 'products.html' if fname.startswith('products') else fname
+    links = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if h == cur else ""}>{l}</a>' for h, l in NAV)
     foot_links = ''.join(f'<li><a href="{h}">{l}</a></li>' for h, l in NAV + [('contact.html', 'Contact')])
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -142,22 +143,22 @@ acc_items = ''
 for i, (cid, title, _long, desc, img, short) in enumerate(CATS, 1):
     chips = ''.join(f'<span>{E(c)}</span>' for c in cats[cid][:6])
     acc_items += f"""<details{' open' if i == 1 else ''} data-i="{i-1}"><summary><span class="no">00{i}</span><span class="tt">{title}</span><span class="pl" aria-hidden="true"></span></summary>
-<div class="bd"><div class="bd-in"><p>{desc}</p><div class="chips">{chips}<span>+ {len(cats[cid]) - 6} more</span></div><a class="btn btn--dark" href="products.html#{cid}">View all {len(cats[cid])} chemicals {ARROW}</a></div></div></details>"""
+<div class="bd"><div class="bd-in"><p>{desc}</p><div class="chips">{chips}<span>+ {len(cats[cid]) - 6} more</span></div><a class="btn btn--dark" href="products-{cid}.html">View all {len(cats[cid])} chemicals {ARROW}</a></div></div></details>"""
 acc_art = ''.join(f'<img src="images/industries/{c[4]}" alt="" loading="lazy">' for c in CATS)
 
 # 12 product categories shown as a tile table (from the original site). Each tile links to the closest
 # category on products.html (#id), or to the full searchable list where there is no dedicated category.
-PT = [('Ff', 'Fragrances &amp; flavours', 'products.html#fragrance'),
-      ('Ch', 'Cosmetic, healthcare &amp; aerosol', 'products.html#care'),
-      ('Ap', 'API, formulation &amp; speciality chemicals', 'products.html#pharma'),
-      ('Pr', 'Paints, polymers, resins &amp; dyestuff', 'products.html#paint'),
+PT = [('Ff', 'Fragrances &amp; flavours', 'products-fragrance.html'),
+      ('Ch', 'Cosmetic, healthcare &amp; aerosol', 'products-care.html'),
+      ('Ap', 'API, formulation &amp; speciality chemicals', 'products-pharma.html'),
+      ('Pr', 'Paints, polymers, resins &amp; dyestuff', 'products-paint.html'),
       ('Fd', 'Food &amp; fertilizer', 'products.html'),
-      ('Tx', 'Textile auxiliaries, monomers &amp; adhesives', 'products.html#paint'),
+      ('Tx', 'Textile auxiliaries, monomers &amp; adhesives', 'products-paint.html'),
       ('Mt', 'Plant &amp; machine maintenance', 'products.html'),
       ('Wt', 'Water treatment', 'products.html'),
       ('Mc', 'Miscellaneous chemicals', 'products.html'),
-      ('Rb', 'PVC &amp; rubber', 'products.html#paint'),
-      ('Eo', 'Essential oils', 'products.html#fragrance'),
+      ('Rb', 'PVC &amp; rubber', 'products-paint.html'),
+      ('Eo', 'Essential oils', 'products-fragrance.html'),
       ('Gl', 'General imported &amp; Indian product list', 'products.html')]
 PT_ARROW = '<svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg>'
 pt_tiles = ''.join(f'<a class="pt" href="{h}" data-r><span class="n">{i:02d}</span><span class="s">{s}</span><span class="t">{t}</span>{PT_ARROW}</a>' for i, (s, t, h) in enumerate(PT, 1))
@@ -231,11 +232,11 @@ CAT_TABLE_SECTION = (f'''<section class="sec sec--w"><div class="wrap">
 <div class="ptable">{pt_tiles}</div>
 </div></section>''' if SHOW_CATEGORY_TABLE else '')
 
-WWO = [('fragrance', 'Fragrance &amp; flavours', 'products.html#fragrance'),
-       ('care', 'Personal care', 'products.html#care'),
-       ('uv', 'UV filters', 'products.html#uv'),
-       ('pharma', 'Pharma &amp; API', 'products.html#pharma'),
-       ('paint', 'Paints &amp; resins', 'products.html#paint')]
+WWO = [('fragrance', 'Fragrance &amp; flavours', 'products-fragrance.html'),
+       ('care', 'Personal care', 'products-care.html'),
+       ('uv', 'UV filters', 'products-uv.html'),
+       ('pharma', 'Pharma &amp; API', 'products-pharma.html'),
+       ('paint', 'Paints &amp; resins', 'products-paint.html')]
 wwo_imgs = ''.join(f'<img{" class=\"on\"" if n == 0 else ""} data-k="{k}" src="images/who/{k}.jpg" alt="" loading="lazy">' for n, (k, _t, _h) in enumerate(WWO))
 wwo_items = ''.join(f'<li data-r><a href="{h}" data-k="{k}">{t}</a></li>' for k, t, h in WWO)
 
@@ -365,20 +366,46 @@ about = phead('About us', ['Two decades of', '<em>chemicals</em> &amp; solvents.
 write('aboutus.html', page('aboutus.html', 'About A T Solvochem | Chemical & solvent supplier, Thane', 'Two decades of supplying chemicals and solvents across India. Mission, vision and strengths of A T Solvochem, led by Mr. Parag Shah.', about))
 
 # ---------------- PRODUCTS ----------------
-tabs = ''.join(f'<button class="tab" data-cat="{c[0]}" aria-pressed="{"true" if i == 0 else "false"}">{c[5]}<span>{len(cats[c[0]])}</span></button>' for i, c in enumerate(CATS))
-blocks = ''
-for cid, _t, long, desc, img, short in CATS:
-    lis = ''.join(f'<li><a href="contact.html?chem={E(re.sub(r"[^A-Za-z0-9]+", "+", n).strip("+"))}">{E(n)}</a></li>' for n in cats[cid])
-    blocks += f'<section class="catblock" id="{cid}"><div class="cathead"><div class="cat-img"><img src="images/industries/{img}" alt="" loading="lazy"></div><div><h2>{E(long)}</h2><p>{desc} <strong class="count">{len(cats[cid])}</strong> chemicals listed.</p></div></div><ul class="chem">{lis}</ul></section>'
-prod = phead('Products', [f'{TOTAL}+ chemicals,', '<em>ready to enquire.</em>'], 'Search the list or browse by industry. Select any chemical to send us an enquiry for it.') + f'''
+# products.html shows only the five categories (plus a search across everything);
+# each category has its own page, products-<id>.html, listing its chemicals.
+SEARCH_ICON = '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>'
+def chem_li(n, cid=None):
+    tag = f'<span class="pall-cat">{E(next(c[5] for c in CATS if c[0] == cid))}</span>' if cid else ''
+    return f'<li><a href="contact.html?chem={E(re.sub(r"[^A-Za-z0-9]+", "+", n).strip("+"))}">{E(n)}{tag}</a></li>'
+NOTE = f'''<div class="note"><p>Available in <strong>tanker, FCL, barrels and bag packing</strong>. Bulk orders are supplied from Kandla, Mundra, Hazira, JNPT and Aegis ports; warehouse stock is held at Bhiwandi. Don&rsquo;t see your grade? We import and source on request.</p><a class="btn btn--dark" href="contact.html">Ask the sales desk {ARROW}</a></div>'''
+
+pcards = ''.join(f'''<a class="pcard" href="products-{cid}.html" data-r><div class="pcard-img"><img src="images/who/{cid}.jpg" alt="" loading="lazy"></div><div class="pcard-body"><span class="pcard-n">0{i}</span><h2>{E(long)}</h2><p>{desc}</p><div class="pcard-foot"><span><b>{len(cats[cid])}</b> chemicals</span><span class="pcard-go">View products <i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></span></div></div></a>''' for i, (cid, _t, long, desc, img, short) in enumerate(CATS, 1))
+all_items = ''.join(chem_li(n, cid) for cid, *_ in CATS for n in cats[cid])
+prod = phead('Products', [f'{TOTAL}+ chemicals,', '<em>five industries.</em>'], 'Choose an industry to see its full product list, or search everything at once. Select any chemical to send us an enquiry for it.') + f'''
 <div class="page-body">
-<div class="toolbar"><div class="wrap"><div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="Search chemicals…" aria-label="Search chemicals" autocomplete="off"></div><div class="tabs" role="group" aria-label="Filter by industry">{tabs}</div></div></div>
-<div class="wrap">{blocks}
+<div class="toolbar"><div class="wrap"><div class="search search--wide">{SEARCH_ICON}<input id="q" type="search" placeholder="Search all {TOTAL}+ chemicals…" aria-label="Search all chemicals" autocomplete="off"></div><p class="search-hint">or pick an industry below</p></div></div>
+<div class="wrap">
+<div class="pcats">{pcards}</div>
+<div class="pall" hidden><p class="pall-count"><b id="pall-n">0</b> matching chemicals</p><ul class="chem">{all_items}</ul></div>
 <div class="empty"><p>No chemical matching &ldquo;<strong id="term"></strong>&rdquo; in our lists.</p><p style="margin-top:8px">We source many more grades on request &mdash; <a href="contact.html">send us an enquiry</a>.</p></div>
-<div class="note"><p>Available in <strong>tanker, FCL, barrels and bag packing</strong>. Bulk orders are supplied from Kandla, Mundra, Hazira, JNPT and Aegis ports; warehouse stock is held at Bhiwandi. Don&rsquo;t see your grade? We import and source on request.</p><a class="btn btn--dark" href="contact.html">Ask the sales desk {ARROW}</a></div></div>
+{NOTE}</div>
 </div>
 '''
-write('products.html', page('products.html', f'Products | {TOTAL}+ Chemicals & Solvents — A T Solvochem', 'Browse chemicals and solvents for fragrance, cosmetics, UV filters, pharma/API, paints, resins, adhesives and dyestuff. Enquire online with A T Solvochem, Thane.', prod))
+write('products.html', page('products.html', f'Products | {TOTAL}+ Chemicals & Solvents — A T Solvochem', 'Chemicals and solvents for fragrance & flavours, personal care, UV filters, pharma & API and paints & resins. Choose an industry or search all products.', prod))
+
+for cid, _t, long, desc, img, short in CATS:
+    others = ''.join(f'<a class="pother" href="products-{c[0]}.html"><img src="images/who/{c[0]}.jpg" alt="" loading="lazy"><span>{E(c[5])}</span><i>{len(cats[c[0]])}</i></a>' for c in CATS if c[0] != cid)
+    items = ''.join(chem_li(n) for n in cats[cid])
+    body = f'''<section class="phead pcat-head"><div class="wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="products.html">Products</a><span>/</span><span aria-current="page">{E(short)}</span></nav>
+<div class="pcat-top"><div><h1 class="ph-line"><span class="ln"><span>{E(long)}</span></span></h1><p class="sub" data-r>{desc}</p><p class="pcat-count" data-r><b>{len(cats[cid])}</b> chemicals listed</p></div>
+<div class="pcat-img" data-r><img src="images/who/{cid}.jpg" alt=""></div></div>
+</div></section>
+<div class="page-body">
+<div class="toolbar"><div class="wrap"><div class="search search--wide">{SEARCH_ICON}<input id="q" type="search" placeholder="Search {E(short.lower())}…" aria-label="Search {E(short)}" autocomplete="off"></div><p class="search-hint"><b id="pcat-n">{len(cats[cid])}</b> shown</p></div></div>
+<div class="wrap">
+<ul class="chem pcat-list">{items}</ul>
+<div class="empty"><p>No chemical matching &ldquo;<strong id="term"></strong>&rdquo; in this list.</p><p style="margin-top:8px">Try <a href="products.html">searching all products</a>, or <a href="contact.html">send us an enquiry</a> &mdash; we source on request.</p></div>
+<div class="pothers"><p class="label">Other industries</p><div class="pothers-row">{others}</div></div>
+{NOTE}</div>
+</div>
+'''
+    write(f'products-{cid}.html', page(f'products-{cid}.html', f'{long} | A T Solvochem', f'{desc} {len(cats[cid])} chemicals from A T Solvochem — enquire online.', body, f'images/who/{cid}.jpg'))
 
 # ---------------- PRINCIPALS ----------------
 pr = phead('Principals', ['Partners behind', '<em>our supply.</em>'], 'We work with leading manufacturers in India and overseas, so the material we supply is backed by names the industry trusts.') + f'''
@@ -448,6 +475,6 @@ write('contact.html', page('contact.html', 'Contact A T Solvochem | Thane, Mumba
 
 write('404.html', page('404.html', 'Page not found | A T Solvochem', 'Page not found.', phead('404', ['Page', '<em>not found.</em>'], 'The page you are looking for has moved or does not exist.') + f'<div class="page-body"><section class="section" style="padding-top:0"><div class="wrap"><a class="btn btn--red" href="index.html">Back to home {ARROW}</a></div></section></div>'))
 write('robots.txt', 'User-agent: *\nAllow: /\nSitemap: https://www.atsolvochem.com/sitemap.xml\n')
-urls = ['', 'aboutus.html', 'products.html', 'principals.html', 'gallery.html', 'careers.html', 'contact.html']
+urls = ['', 'aboutus.html', 'products.html'] + [f'products-{c[0]}.html' for c in CATS] + [ 'principals.html', 'gallery.html', 'careers.html', 'contact.html']
 write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'<url><loc>https://www.atsolvochem.com/{u}</loc></url>\n' for u in urls) + '</urlset>\n')
 print('built', TOTAL)

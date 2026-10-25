@@ -104,3 +104,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-24: removed the letter scramble on "Pan-India"; only the numeric stats roll.
 
 - 2026-10-24: red closing banner: square bottom corners, removing the light gaps where it meets the footer.
+
+- 2026-10-25: Products split: products.html shows only the five category cards (photo, description, count) plus a search across all 557 chemicals (results tagged by category); each category has its own page products-<id>.html (breadcrumb, hero photo, count, in-page search, full list, links to the other four). All home links point to the category pages; old products.html#cat links redirect. Sitemap updated.

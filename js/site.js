@@ -22,37 +22,28 @@
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   });
 
-  // product search + category filter
-  var blocks = $$('.catblock');
-  if (blocks.length) {
-    var q = $('#q'), tabs = $$('.tab'), empty = $('.empty'), cat = tabs.length ? tabs[0].dataset.cat : blocks[0].id;
-    var apply = function () {
-      var term = q.value.trim().toLowerCase(), shown = 0;
-      blocks.forEach(function (b) {
-        var inCat = term || b.id === cat, n = 0;
-        $$('li', b).forEach(function (li) {
-          var hit = !term || li.textContent.toLowerCase().indexOf(term) > -1;
-          li.hidden = !hit; if (hit) n++;
-        });
-        b.hidden = !inCat || n === 0; if (!b.hidden) shown += n;
-        var c = $('.count', b); if (c) c.textContent = n;
-      });
-      empty.classList.toggle('show', shown === 0);
-      var t = $('#term'); if (t) t.textContent = q.value.trim();
+  // products: old links like products.html#pharma now open that category's page
+  if (/\/products\.html$/.test(location.pathname)) {
+    var oldCat = location.hash.slice(1);
+    if (['fragrance', 'care', 'uv', 'pharma', 'paint'].indexOf(oldCat) > -1) location.replace('products-' + oldCat + '.html');
+  }
+  // products landing: typing searches every chemical (category cards hide while a search is active)
+  var pall = $('.pall'), pq = $('#q');
+  if (pq && (pall || $('.pcat-list'))) {
+    var list = pall || $('.pcat-list'), items = $$('li', list), empty = $('.empty'), cards = $('.pcats'), term = $('#term');
+    var countEl = $('#pall-n') || $('#pcat-n');
+    var run = function () {
+      var t = pq.value.trim().toLowerCase(), n = 0;
+      items.forEach(function (li) { var hit = !t || li.textContent.toLowerCase().indexOf(t) > -1; li.hidden = !hit; if (hit) n++; });
+      if (pall) { pall.hidden = !t; if (cards) cards.hidden = !!t; }
+      if (countEl) countEl.textContent = n;
+      empty.classList.toggle('show', !!t && n === 0 || (!pall && n === 0));
+      if (term) term.textContent = pq.value.trim();
       if (hasGsap) ScrollTrigger.refresh();
     };
-    var setCat = function (c) {
-      cat = c;
-      tabs.forEach(function (t) { t.setAttribute('aria-pressed', t.dataset.cat === c); });
-      apply();
-    };
-    tabs.forEach(function (t) { t.addEventListener('click', function () {
-      setCat(t.dataset.cat); history.replaceState(null, '', '#' + t.dataset.cat);
-    }); });
-    q.addEventListener('input', apply);
-    var qp = new URLSearchParams(location.search).get('q'); if (qp) q.value = qp;
-    var h = location.hash.slice(1);
-    if (h && blocks.some(function (b) { return b.id === h; })) setCat(h); else apply();
+    pq.addEventListener('input', run);
+    var qp = new URLSearchParams(location.search).get('q'); if (qp) { pq.value = qp; }
+    run();
   }
 
   // contact form: prefill from ?chem= and show result
