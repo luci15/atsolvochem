@@ -120,3 +120,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-25: category page header compacted (title one line ~56px, small 16:9 photo, tighter paddings) so chemical cards start in the first screen.
 
 - 2026-10-25: category header resized to a middle size (title up to 80px two lines, photo 16:10 about 520px wide).
+
+- 2026-10-25: inner page header top padding reduced (about 100-118px, was 130-180px) on products, about, principals, gallery, careers, contact.
