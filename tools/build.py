@@ -46,6 +46,7 @@ ASSET_V = hashlib.md5(open(R + '/css/site.css', 'rb').read() + open(R + '/js/sit
 def page(fname, title, desc, body, og='images/industries/plant.jpg'):
     cur = 'products.html' if fname.startswith('products') else fname
     links = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if h == cur else ""}>{l}</a>' for h, l in NAV)
+    foot_prod = ''.join(f'<li><a href="products-{c[0]}.html">{c[5]}</a></li>' for c in CATS)
     foot_links = ''.join(f'<li><a href="{h}">{l}</a></li>' for h, l in NAV + [('contact.html', 'Contact')])
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -77,19 +78,22 @@ def page(fname, title, desc, body, og='images/industries/plant.jpg'):
 {body}
 </main>
 <footer class="site-footer">
-<div class="wrap fgrid4">
-<div class="foot-brand"><a class="brand" href="index.html"><img src="images/mark.png" alt="" width="38" height="34"><span><b>A T Solvochem</b><small>A Chemicals &amp; Solvents Hub</small></span></a><p>A chemical &amp; solvent hub — one stop spot for all your chemical and solvent requirements, for over two decades.</p></div>
+<div class="wrap">
+<div class="ft-top"><div class="ft-lead"><p class="ft-eyebrow">Have a requirement?</p><a class="ft-mail" href="mailto:{MAIL1}">{MAIL1}<i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg></i></a></div>
+<div class="ft-cta"><a class="btn btn--red" href="contact.html">Contact us {ARROW}</a><a class="ft-wa" href="https://wa.me/{WA}" target="_blank" rel="noopener">WhatsApp us</a></div></div>
+<div class="ft-cols">
+<div class="foot-brand"><a class="brand" href="index.html"><img src="images/mark.png" alt="" width="38" height="34"><span><b>A T Solvochem</b><small>A Chemicals &amp; Solvents Hub</small></span></a><p>Importer, distributor and supplier of chemicals and solvents &mdash; for over two decades.</p><a class="ft-fb" href="https://www.facebook.com/AtSolvochem" target="_blank" rel="noopener">Facebook &nearr;</a></div>
 <div><h4>Explore</h4><ul>{foot_links}</ul></div>
-<div><h4>Visit</h4><address>{E(ADDR)}</address></div>
-<div><h4>Contact</h4><ul>
+<div><h4>Products</h4><ul>{foot_prod}</ul></div>
+<div><h4>Visit</h4><address>{E(ADDR)}</address><a class="ft-map" href="https://www.google.com/maps?q=Jaydeep+Emphasis+Wagle+Industrial+Estate+Thane" target="_blank" rel="noopener">Open in Maps &nearr;</a></div>
+<div><h4>Call &amp; write</h4><ul>
 <li><a href="tel:{tel(PHONE_O1)}">{PHONE_O1}</a></li>
 <li><a href="tel:{tel(PHONE_O2)}">{PHONE_O2}</a></li>
 <li><a href="tel:{tel(MOB1)}">{MOB1}</a></li>
-<li><a href="mailto:{MAIL1}">{MAIL1}</a></li>
 <li><a href="mailto:{MAIL2}">{MAIL2}</a></li></ul></div>
-</div>
+</div></div>
 <div class="foot-mega" aria-hidden="true">A T Solvochem</div>
-<div class="foot-bottom"><div class="wrap"><span>&copy; <span id="year">2026</span> A.T. Solvochem. All rights reserved.</span><span>Mumbai, India</span></div></div>
+<div class="foot-bottom"><div class="wrap"><span>&copy; <span id="year">2026</span> A.T. Solvochem. All rights reserved.</span><span>Mumbai, India</span><a class="ft-top-btn" href="#top" aria-label="Back to top">Back to top <i>&uarr;</i></a></div></div>
 </footer>
 <a class="wa" href="https://wa.me/{WA}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">{WAICON}</a>
 <script src="js/vendor/gsap.min.js"></script>

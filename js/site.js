@@ -95,13 +95,15 @@
     });
   });
 
+  $$('.ft-top-btn').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); if (window.lenis) window.lenis.scrollTo(0); else window.scrollTo({ top: 0, behavior: 'smooth' }); }); });
+
   if (!hasGsap) return;
   gsap.registerPlugin(ScrollTrigger);
 
   /* ---------- smooth scroll ---------- */
   var lenis = null;
   if (!reduce && typeof Lenis !== 'undefined') {
-    lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 0.95 });
+    lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 0.95 }); window.lenis = lenis;
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
     gsap.ticker.lagSmoothing(0);
@@ -383,10 +385,11 @@
 
     // footer uncovered beneath the page
     var ft = $('.site-footer');
-    if (ft && $('.closer')) {
+    if (ft && $('.closer') && ft.offsetHeight <= window.innerHeight * 0.94) {   // reveal-under-page only if the footer fits the screen
       document.documentElement.classList.add('fx-footer');
       var m = $('main'); var setH = function () { m.style.marginBottom = ft.offsetHeight + 'px'; };
       setH(); window.addEventListener('resize', setH);
+      if (window.ResizeObserver) new ResizeObserver(function () { setH(); ScrollTrigger.refresh(); }).observe(ft);   // footer height changes when fonts load
       // keep the fixed footer hidden until the closing banner is on screen (nothing can bleed through pinned sections)
       ft.style.visibility = 'hidden';
       var ftSt = ScrollTrigger.create({ trigger: '.closer', start: 'top bottom', end: 'max',
