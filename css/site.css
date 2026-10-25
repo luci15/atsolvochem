@@ -1042,3 +1042,8 @@ form.enq{background:var(--white);border-radius:var(--r);padding:42px}
 .ab-body{margin-top:18px}
 .ab-hero-in{padding-bottom:clamp(60px,8vh,90px)}
 .ab-ground .shead,.ab-strength .shead{margin-bottom:28px}
+
+/* principal logos: no boxes - logos sit straight on the page (multiply makes their white backgrounds vanish) */
+.logo-tile{background:transparent;border:0;border-radius:0;box-shadow:none}
+.logo-tile img{max-height:68px;opacity:.85}
+.logos .logo-tile{height:96px}

@@ -128,3 +128,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-25: footer v2: big email headline with sliding red underline + rotating arrow, Contact us / WhatsApp, five columns (brand + Facebook, Explore, Products -> category pages, Visit + Open in Maps, Call & write), giant faint wordmark (hidden on short screens), bottom bar with Back to top. Link hover: red dot + slide. Fixed reveal-under-page footer now measures itself with ResizeObserver (it was clipped when fonts changed its height) and is skipped if taller than the screen.
 
 - 2026-10-25: About page vertical padding reduced by about 35-40% on every section.
+
+- 2026-10-25: principal logos: tile boxes removed everywhere (home marquee, about, principals grid); white backgrounds baked out of images/principals/*.webp (alpha) so logos sit straight on the cream page.
