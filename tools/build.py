@@ -22,14 +22,14 @@ CATS = [
     ('uv', 'UV <em>filters</em>', 'UV Filters', 'Organic UV filters and solubilisers for sunscreens and sun-care formulations.', 'lab.jpg', 'UV filters'),
     ('pharma', 'Pharma &amp; <em>API</em>', 'Pharma, API & Formulations', 'Solvents, reagents and intermediates for pharmaceutical, API and speciality-chemical manufacturing.', 'pharma.jpg', 'Pharma & API'),
     ('paint', 'Paints, resins &amp; <em>adhesives</em>', 'Paints, Resins, Adhesives & Dyestuff', 'Monomers, resins, solvents, plasticizers and intermediates for paint, coating, adhesive, rubber and construction industries.', 'plant.jpg', 'Paints & resins'),
+    ('bulk', 'Bulk <em>solvents</em> &amp; chemicals', 'Bulk Solvents & Chemicals', 'Core solvents, glycols, acids and monomers &mdash; available in tanker, FCL and barrels.', 'bulk.jpg', 'Bulk supply'),
 ]
 TOTAL = sum(len(v) for v in cats.values())
 
-PHONE_O1, PHONE_O2 = '+91 22 4924 9199', '+91 22 2580 5200'
-MOB1, MOB2 = '+91 75206 62615', '+91 92235 32512'
-WA = '919820662615'
+MOB1 = '+91 75206 62615'   # the only phone number shown on the site
+WA = '917520662615'
 MAIL1, MAIL2 = 'sales.atsolvochem@gmail.com', 'atsolvochem@gmail.com'
-ADDR = '412, 4th Floor, Jaydeep Emphasis, Plot No. A-9, MIDC, Wagle Ind. Estate, near Mulund Checknaka Toll Plaza, Thane (W) 400604'
+ADDR = '412, 4th Floor, Jaydeep Emphasis, Plot No. A-9, MIDC, Wagle Ind. Estate, Thane (W) 400604'
 ARROW = '<i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i>'
 WAICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.48-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.04 21.5a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.55.93.95-3.46-.22-.36a9.4 9.4 0 0 1-1.44-5.01c0-5.2 4.24-9.44 9.45-9.44 2.52 0 4.9.98 6.68 2.77a9.37 9.37 0 0 1 2.76 6.68c0 5.2-4.24 9.4-9.45 9.4M20.5 3.5A11.3 11.3 0 0 0 12.04.1C5.8.1.73 5.17.73 11.4c0 2 .52 3.94 1.52 5.66L.62 23.4l6.5-1.7a11.3 11.3 0 0 0 5.4 1.38h.01c6.24 0 11.3-5.07 11.3-11.3 0-3.02-1.18-5.86-3.33-8"/></svg>'
 NAV = [('index.html', 'Home'), ('aboutus.html', 'About'), ('products.html', 'Products'), ('principals.html', 'Principals'), ('gallery.html', 'Gallery'), ('careers.html', 'Careers')]
@@ -87,8 +87,6 @@ def page(fname, title, desc, body, og='images/industries/plant.jpg'):
 <div><h4>Products</h4><ul>{foot_prod}</ul></div>
 <div><h4>Visit</h4><address>{E(ADDR)}</address><a class="ft-map" href="https://www.google.com/maps?q=Jaydeep+Emphasis+Wagle+Industrial+Estate+Thane" target="_blank" rel="noopener">Open in Maps &nearr;</a></div>
 <div><h4>Call &amp; write</h4><ul>
-<li><a href="tel:{tel(PHONE_O1)}">{PHONE_O1}</a></li>
-<li><a href="tel:{tel(PHONE_O2)}">{PHONE_O2}</a></li>
 <li><a href="tel:{tel(MOB1)}">{MOB1}</a></li>
 <li><a href="mailto:{MAIL2}">{MAIL2}</a></li></ul></div>
 </div></div>
@@ -244,7 +242,8 @@ WWO = [('fragrance', 'Fragrance &amp; flavours', 'products-fragrance.html'),
        ('care', 'Personal care', 'products-care.html'),
        ('uv', 'UV filters', 'products-uv.html'),
        ('pharma', 'Pharma &amp; API', 'products-pharma.html'),
-       ('paint', 'Paints &amp; resins', 'products-paint.html')]
+       ('paint', 'Paints &amp; resins', 'products-paint.html'),
+       ('bulk', 'Bulk supply', 'products-bulk.html')]
 wwo_imgs = ''.join(f'<img{" class=\"on\"" if n == 0 else ""} data-k="{k}" src="images/who/{k}.jpg" alt="" loading="lazy">' for n, (k, _t, _h) in enumerate(WWO))
 wwo_items = ''.join(f'<li data-r><a href="{h}" data-k="{k}">{t}</a></li>' for k, t, h in WWO)
 
@@ -284,7 +283,7 @@ home = f'''
 <div class="wwo-bg" aria-hidden="true">{wwo_imgs}<span class="wwo-shade"></span></div>
 <div class="wwo-in"><p class="label l" data-r>Who we work with</p>
 <ul class="wwo-list">{wwo_items}</ul>
-<p class="wwo-note" data-r>Five industries, one dependable supplier &mdash; and we source beyond the lists on request.</p></div>
+<p class="wwo-note" data-r>Six product lines, one dependable supplier &mdash; and we source beyond the lists on request.</p></div>
 </section>
 
 {CAT_TABLE_SECTION}
@@ -296,7 +295,7 @@ home = f'''
 <div class="tick"><span>Lab analysis report with each dispatch</span><span>Regular stock</span><span>Indent deals for bulk</span><span>Small packs on request</span></div>
 <div class="stats">
 <div class="stat"><b data-count="20">20<i>+</i></b><span>Years supplying chemicals &amp; solvents</span></div>
-<div class="stat"><b data-count="{TOTAL}">{TOTAL}<i>+</i></b><span>Chemicals across five product lists</span></div>
+<div class="stat"><b data-count="{TOTAL}">{TOTAL}<i>+</i></b><span>Chemicals across six product lists</span></div>
 <div class="stat"><b data-count="5">5</b><span>Ports serving bulk orders</span></div>
 <div class="stat"><b class="sm">Pan<i>-</i>India</b><span>Logistics from our Bhiwandi warehouse</span></div>
 </div>
@@ -365,7 +364,7 @@ about = f'''
 
 <div class="page-body">
 <section class="ab-story"><div class="wrap ab-story-grid">
-<div class="ab-story-l"><p class="label" data-r>Who we are</p><h2 data-r>Trusted by manufacturers across <em>India.</em></h2></div>
+<div class="ab-story-l"><p class="label" data-r>Who we are</p><h2 data-r>Trusted by manufacturers across <em>India.</em></h2><figure class="ab-portrait" data-clip><img src="images/about-portrait.jpg" alt="A T Solvochem at ChemExpo India" data-par="-0.1" loading="lazy"></figure></div>
 <div class="ab-story-r"><p class="ab-big scrub">A.T. Solvochem is a leading importer, distributor and supplier of chemicals, petrochemicals and industrial polymers. Under the leadership of Mr. Parag Shah, the firm has completed two decades supplying chemicals and solvents &mdash; beginning by trading solvents and chemicals in a single market.</p>
 <p class="ab-body" data-r>Years of dedication and hard work have made us a trusted supplier. We value our customer relationships and our work ethic: we strengthen old bonds and create new ones. Active networking has built relationships with leading manufacturers across the country, so we can be a one-stop shop for every industry.</p>
 <p class="ab-body" data-r>We offer hydrocarbons, alcohols, glycols, ketones, esters, chlorinated solvents, fragrance chemicals, monomers and more.</p></div>
@@ -373,7 +372,7 @@ about = f'''
 
 <section class="ab-stats on-dark"><div class="wrap"><div class="stats">
 <div class="stat"><b data-count="20">20<i>+</i></b><span>Years supplying chemicals &amp; solvents</span></div>
-<div class="stat"><b data-count="{TOTAL}">{TOTAL}<i>+</i></b><span>Chemicals across five product lists</span></div>
+<div class="stat"><b data-count="{TOTAL}">{TOTAL}<i>+</i></b><span>Chemicals across six product lists</span></div>
 <div class="stat"><b data-count="5">5</b><span>Ports serving bulk orders</span></div>
 <div class="stat"><b class="sm">Pan<i>-</i>India</b><span>Logistics from our Bhiwandi warehouse</span></div></div></div></section>
 
@@ -411,7 +410,7 @@ NOTE = f'''<div class="note"><p>Available in <strong>tanker, FCL, barrels and ba
 
 pcards = ''.join(f'''<a class="pcard" href="products-{cid}.html" data-r><div class="pcard-img"><img src="images/who/{cid}.jpg" alt="" loading="lazy"></div><div class="pcard-body"><span class="pcard-n">0{i}</span><h2>{E(long)}</h2><p>{desc}</p><div class="pcard-foot"><span><b>{len(cats[cid])}</b> chemicals</span><span class="pcard-go">View products <i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></span></div></div></a>''' for i, (cid, _t, long, desc, img, short) in enumerate(CATS, 1))
 all_items = ''.join(chem_li(n, cid) for cid, *_ in CATS for n in cats[cid])
-prod = phead('Products', [f'{TOTAL}+ chemicals,', '<em>five industries.</em>'], 'Choose an industry to see its full product list, or search everything at once. Select any chemical to send us an enquiry for it.') + f'''
+prod = phead('Products', [f'{TOTAL}+ chemicals,', '<em>six product lines.</em>'], 'Choose an industry to see its full product list, or search everything at once. Select any chemical to send us an enquiry for it.') + f'''
 <div class="page-body">
 <div class="toolbar"><div class="wrap"><div class="search search--wide">{SEARCH_ICON}<input id="q" type="search" placeholder="Search all {TOTAL}+ chemicals…" aria-label="Search all chemicals" autocomplete="off"></div><p class="search-hint">or pick an industry below</p></div></div>
 <div class="wrap">
@@ -484,7 +483,7 @@ car = phead('Careers', ['Build your career', 'in <em>chemicals.</em>'], 'A T Sol
 <section class="section section--w"><div class="wrap">
 <div class="mv">
 <div data-r><p class="label">How to apply</p><h3>Send us your <em>CV</em></h3><p>We do not list fixed openings online. Email your CV with the role you are interested in, and we will get back to you when a position matches your profile.</p><p style="margin-top:22px"><a class="btn btn--dark" href="mailto:{CAREER_MAIL}?subject=Career%20enquiry%20%E2%80%94%20A%20T%20Solvochem">Email your CV {ARROW}</a></p></div>
-<div data-r><p class="label">Prefer to talk?</p><h3>Call or <em>WhatsApp</em></h3><p>Reach the office on <a href="tel:{tel(PHONE_O2)}">{PHONE_O2}</a>, or message us on WhatsApp and we will point you to the right person.</p><p style="margin-top:22px"><a class="btn btn--text" href="https://wa.me/{WA}" target="_blank" rel="noopener">WhatsApp us &rarr;</a></p></div>
+<div data-r><p class="label">Prefer to talk?</p><h3>Call or <em>WhatsApp</em></h3><p>Reach the office on <a href="tel:{tel(MOB1)}">{MOB1}</a>, or message us on WhatsApp and we will point you to the right person.</p><p style="margin-top:22px"><a class="btn btn--text" href="https://wa.me/{WA}" target="_blank" rel="noopener">WhatsApp us &rarr;</a></p></div>
 </div></div></section>
 </div>
 """
@@ -495,9 +494,9 @@ con = phead('Contact', ['Talk to the', '<em>sales desk.</em>'], 'Share the chemi
 <div class="page-body"><section class="section" style="padding-top:20px"><div class="wrap">
 <div class="contact">
 <div class="info">
-<div class="info-item" data-r><h3>Call</h3><a href="tel:{tel(PHONE_O1)}">{PHONE_O1}</a><a href="tel:{tel(PHONE_O2)}">{PHONE_O2}</a><a href="tel:{tel(MOB1)}">{MOB1}</a><a href="tel:{tel(MOB2)}">{MOB2}</a></div>
+<div class="info-item" data-r><h3>Call</h3><a href="tel:{tel(MOB1)}">{MOB1}</a></div>
 <div class="info-item" data-r><h3>Email</h3><a href="mailto:{MAIL1}">{MAIL1}</a><a href="mailto:{MAIL2}">{MAIL2}</a></div>
-<div class="info-item" data-r><h3>WhatsApp</h3><a href="https://wa.me/{WA}" target="_blank" rel="noopener">+91 98206 62615</a><small>Quick quotes and availability</small></div>
+<div class="info-item" data-r><h3>WhatsApp</h3><a href="https://wa.me/{WA}" target="_blank" rel="noopener">{MOB1}</a><small>Quick quotes and availability</small></div>
 <div class="info-item" data-r><h3>Address</h3><p>{E(ADDR)}</p></div>
 </div>
 <form class="enq" action="email1.php" method="post" data-r>

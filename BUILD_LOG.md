@@ -132,3 +132,5 @@ Placeholders until the client supplies real photos.
 - 2026-10-25: principal logos: tile boxes removed everywhere (home marquee, about, principals grid); white backgrounds baked out of images/principals/*.webp (alpha) so logos sit straight on the cream page.
 
 - 2026-10-25: About features: scrolling words replaced by an expanding list - sticky heading left; 7 numbered rows right; hovered/focused/tapped row fills dark from the bottom and opens its one-line description. Descriptions from brochure facts.
+
+- 2026-11-02: client edits: phone only +91 75206 62615 (WhatsApp too); address without Mulund Checknaka; product-page count pills hidden; photos for personal care / pharma / paints replaced with client images; About page portrait added (client photo); new 6th category Bulk Solvents & Chemicals (23 items, tanker/FCL/barrels) with its own page, Who-we-work-with entry and 580 total. Six cards on the products landing (3 per row).
